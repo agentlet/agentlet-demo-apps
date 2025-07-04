@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Desk & Ticketing - Nexus Corp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">⬢ Nexus Corp</div>
+                <div class="app-title">Help Desk & Ticketing System</div>
+            </div>
+            <div class="header-right">
+                <div class="notification-badge">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-count">3</span>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">IT Support</span>
+                    <span class="user-role">Help Desk Agent</span>
+                </div>
+                <button class="back-btn" onclick="window.location.href='../'">← Back to Portal</button>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-item active" data-tab="dashboard">
+                <div class="nav-icon">📊</div>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-tab="tickets">
+                <div class="nav-icon">🎫</div>
+                <span>Tickets</span>
+                <span class="badge">12</span>
+            </div>
+            <div class="nav-item" data-tab="knowledge">
+                <div class="nav-icon">📚</div>
+                <span>Knowledge Base</span>
+            </div>
+            <div class="nav-item" data-tab="users">
+                <div class="nav-icon">👥</div>
+                <span>User Management</span>
+            </div>
+            <div class="nav-item" data-tab="reports">
+                <div class="nav-icon">📈</div>
+                <span>Reports</span>
+            </div>
+            <div class="nav-item" data-tab="settings">
+                <div class="nav-icon">⚙️</div>
+                <span>Settings</span>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="tab-content active" id="dashboard">
+                <div class="page-header">
+                    <h1>Help Desk Dashboard</h1>
+                    <div class="quick-actions">
+                        <button class="btn btn-primary" onclick="createTicket()">New Ticket</button>
+                        <button class="btn btn-secondary" onclick="refreshDashboard()">Refresh</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card urgent">
+                        <div class="stat-icon">🚨</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Urgent Tickets</div>
+                        <div class="stat-trend">+1 today</div>
+                    </div>
+                    <div class="stat-card open">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Open Tickets</div>
+                        <div class="stat-trend">-2 today</div>
+                    </div>
+                    <div class="stat-card pending">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Pending Response</div>
+                        <div class="stat-trend">+3 today</div>
+                    </div>
+                    <div class="stat-card resolved">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value">156</div>
+                        <div class="stat-label">Resolved This Month</div>
+                        <div class="stat-trend">+12%</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="recent-tickets">
+                        <div class="card-header">
+                            <h3>Recent Tickets</h3>
+                            <button class="btn btn-link" onclick="router.navigate('#tickets')">View All</button>
+                        </div>
+                        <div class="ticket-list" id="recent-tickets"></div>
+                    </div>
+
+                    <div class="agent-performance">
+                        <div class="card-header">
+                            <h3>Agent Performance</h3>
+                        </div>
+                        <div class="performance-list" id="agent-performance"></div>
+                    </div>
+
+                    <div class="priority-breakdown">
+                        <div class="card-header">
+                            <h3>Priority Breakdown</h3>
+                        </div>
+                        <canvas id="priority-chart"></canvas>
+                    </div>
+
+                    <div class="response-times">
+                        <div class="card-header">
+                            <h3>Response Times</h3>
+                        </div>
+                        <canvas id="response-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tickets">
+                <div class="page-header">
+                    <h1>Ticket Management</h1>
+                    <div class="ticket-actions">
+                        <button class="btn btn-primary" onclick="createTicket()">Create Ticket</button>
+                        <button class="btn btn-secondary" onclick="bulkUpdate()">Bulk Update</button>
+                    </div>
+                </div>
+
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="status-filter">
+                            <option value="">All Statuses</option>
+                            <option value="open">Open</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="pending">Pending</option>
+                            <option value="resolved">Resolved</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Priority:</label>
+                        <select id="priority-filter">
+                            <option value="">All Priorities</option>
+                            <option value="low">Low</option>
+                            <option value="normal">Normal</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Agent:</label>
+                        <select id="agent-filter">
+                            <option value="">All Agents</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="jane-smith">Jane Smith</option>
+                            <option value="mike-wilson">Mike Wilson</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <input type="text" id="search-tickets" placeholder="Search tickets...">
+                    </div>
+                </div>
+
+                <div class="tickets-table">
+                    <table id="tickets-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all"></th>
+                                <th>ID</th>
+                                <th>Subject</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Requester</th>
+                                <th>Agent</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tickets-tbody"></tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" id="tickets-pagination"></div>
+            </div>
+
+            <div class="tab-content" id="knowledge">
+                <div class="page-header">
+                    <h1>Knowledge Base</h1>
+                    <div class="kb-actions">
+                        <button class="btn btn-primary" onclick="createArticle()">New Article</button>
+                        <button class="btn btn-secondary" onclick="importArticles()">Import</button>
+                    </div>
+                </div>
+
+                <div class="kb-search">
+                    <input type="text" id="kb-search" placeholder="Search knowledge base...">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <div class="kb-categories">
+                    <div class="category-card" onclick="filterKB('hardware')">
+                        <div class="category-icon">💻</div>
+                        <h3>Hardware Issues</h3>
+                        <p>45 articles</p>
+                    </div>
+                    <div class="category-card" onclick="filterKB('software')">
+                        <div class="category-icon">⚙️</div>
+                        <h3>Software Problems</h3>
+                        <p>67 articles</p>
+                    </div>
+                    <div class="category-card" onclick="filterKB('network')">
+                        <div class="category-icon">🌐</div>
+                        <h3>Network & Connectivity</h3>
+                        <p>32 articles</p>
+                    </div>
+                    <div class="category-card" onclick="filterKB('security')">
+                        <div class="category-icon">🔒</div>
+                        <h3>Security</h3>
+                        <p>28 articles</p>
+                    </div>
+                </div>
+
+                <div class="kb-articles">
+                    <div class="articles-list" id="kb-articles"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="users">
+                <div class="page-header">
+                    <h1>User Management</h1>
+                    <div class="user-actions">
+                        <button class="btn btn-primary" onclick="addUser()">Add User</button>
+                        <button class="btn btn-secondary" onclick="exportUsers()">Export</button>
+                    </div>
+                </div>
+
+                <div class="user-stats">
+                    <div class="user-stat">
+                        <div class="stat-number">247</div>
+                        <div class="stat-text">Total Users</div>
+                    </div>
+                    <div class="user-stat">
+                        <div class="stat-number">189</div>
+                        <div class="stat-text">Active This Month</div>
+                    </div>
+                    <div class="user-stat">
+                        <div class="stat-number">12</div>
+                        <div class="stat-text">New Users</div>
+                    </div>
+                </div>
+
+                <div class="users-table">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Role</th>
+                                <th>Tickets Created</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports">
+                <div class="page-header">
+                    <h1>Reports & Analytics</h1>
+                    <div class="report-actions">
+                        <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                        <button class="btn btn-secondary" onclick="scheduleReport()">Schedule</button>
+                    </div>
+                </div>
+
+                <div class="report-filters">
+                    <select id="report-period">
+                        <option value="week">Last Week</option>
+                        <option value="month" selected>Last Month</option>
+                        <option value="quarter">Last Quarter</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                    <select id="report-type">
+                        <option value="summary">Summary Report</option>
+                        <option value="detailed">Detailed Report</option>
+                        <option value="performance">Performance Report</option>
+                    </select>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3>Ticket Volume Trends</h3>
+                        </div>
+                        <canvas id="volume-chart"></canvas>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3>Resolution Time Analysis</h3>
+                        </div>
+                        <canvas id="resolution-chart"></canvas>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3>Customer Satisfaction</h3>
+                        </div>
+                        <div class="satisfaction-score">
+                            <div class="score-value">4.6</div>
+                            <div class="score-label">Average Rating</div>
+                            <div class="score-trend">+0.3 this month</div>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3>Top Issues</h3>
+                        </div>
+                        <div class="issues-list" id="top-issues"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="settings">
+                <div class="page-header">
+                    <h1>System Settings</h1>
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+                </div>
+
+                <div class="settings-sections">
+                    <div class="settings-section">
+                        <h3>General Settings</h3>
+                        <div class="setting-row">
+                            <label>Default Priority</label>
+                            <select id="default-priority">
+                                <option value="low">Low</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label>Auto-assign Tickets</label>
+                            <input type="checkbox" id="auto-assign" checked>
+                        </div>
+                        <div class="setting-row">
+                            <label>Email Notifications</label>
+                            <input type="checkbox" id="email-notifications" checked>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>SLA Settings</h3>
+                        <div class="setting-row">
+                            <label>Urgent Response Time (hours)</label>
+                            <input type="number" id="urgent-sla" value="1">
+                        </div>
+                        <div class="setting-row">
+                            <label>High Response Time (hours)</label>
+                            <input type="number" id="high-sla" value="4">
+                        </div>
+                        <div class="setting-row">
+                            <label>Normal Response Time (hours)</label>
+                            <input type="number" id="normal-sla" value="24">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Ticket Creation Modal -->
+    <div id="ticket-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Ticket</h2>
+                <span class="close" onclick="closeModal('ticket-modal')">&times;</span>
+            </div>
+            <form id="ticket-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Subject *</label>
+                        <input type="text" id="ticket-subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="ticket-priority">
+                            <option value="low">Low</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Requester Email *</label>
+                        <input type="email" id="ticket-requester" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="ticket-category">
+                            <option value="hardware">Hardware</option>
+                            <option value="software">Software</option>
+                            <option value="network">Network</option>
+                            <option value="security">Security</option>
+                            <option value="access">Access Request</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="ticket-description" rows="5" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('ticket-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Ticket</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

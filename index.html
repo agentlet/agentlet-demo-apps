@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Corp - Business Applications Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .logo::before {
+            content: "⬢ ";
+            color: #3498db;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        .welcome p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .app-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .app-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .app-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .app-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .status.available {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.coming-soon {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .footer {
+            background: #ecf0f1;
+            padding: 20px 40px;
+            text-align: center;
+            color: #7f8c8d;
+            border-top: 1px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">Nexus Corp</div>
+            <div class="subtitle">Business Applications Portal</div>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome">
+                <h2>Welcome to Your Business Hub</h2>
+                <p>Access all your essential business applications from one centralized location.</p>
+            </div>
+
+            <div class="apps-grid">
+                <a href="crm/index.html" class="app-card">
+                    <div class="app-icon">👥</div>
+                    <div class="app-title">Customer Relationship Management</div>
+                    <div class="app-description">
+                        Manage customer information, track interactions, and monitor sales opportunities. 
+                        Complete customer lifecycle management in one place.
+                    </div>
+                    <span class="status available">Available</span>
+                </a>
+
+                <a href="erp/index.html" class="app-card">
+                    <div class="app-icon">📊</div>
+                    <div class="app-title">Enterprise Resource Planning</div>
+                    <div class="app-description">
+                        Integrated business processes including inventory, accounting, and human resources. 
+                        Streamline operations across departments.
+                    </div>
+                    <span class="status available">Available</span>
+                </a>
+
+                <a href="bi/index.html" class="app-card">
+                    <div class="app-icon">📈</div>
+                    <div class="app-title">Business Intelligence</div>
+                    <div class="app-description">
+                        Advanced analytics and reporting dashboard. Generate insights from your data 
+                        with interactive charts and KPI monitoring.
+                    </div>
+                    <span class="status available">Available</span>
+                </a>
+
+                <a href="helpdesk/index.html" class="app-card">
+                    <div class="app-icon">🎫</div>
+                    <div class="app-title">Help Desk & Ticketing</div>
+                    <div class="app-description">
+                        IT support ticket management system. Track issues, assign tasks, and monitor 
+                        resolution times with automated workflows.
+                    </div>
+                    <span class="status available">Available</span>
+                </a>
+
+                <a href="hr/index.html" class="app-card">
+                    <div class="app-icon">👤</div>
+                    <div class="app-title">Human Resources</div>
+                    <div class="app-description">
+                        Employee management, payroll processing, and performance tracking. 
+                        Complete HR solution for workforce management.
+                    </div>
+                    <span class="status available">Available</span>
+                </a>
+
+                <a href="projects/index.html" class="app-card">
+                    <div class="app-icon">📋</div>
+                    <div class="app-title">Project Management</div>
+                    <div class="app-description">
+                        Plan, execute, and monitor projects with Gantt charts, task assignments, 
+                        and team collaboration tools.
+                    </div>
+                    <span class="status available">Available</span>
+                </a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Nexus Corp. All rights reserved. | Internal Use Only</p>
+        </footer>
+    </div>
+</body>
+</html>

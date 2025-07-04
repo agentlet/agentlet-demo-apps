@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP System - Nexus Corp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">⬢ Nexus Corp</div>
+                <div class="app-title">Enterprise Resource Planning</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-name">Admin User</span>
+                    <span class="user-role">System Administrator</span>
+                </div>
+                <button class="back-btn" onclick="window.location.href='../'">← Back to Portal</button>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-item active" data-tab="dashboard">
+                <div class="nav-icon">📊</div>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-tab="inventory">
+                <div class="nav-icon">📦</div>
+                <span>Inventory</span>
+            </div>
+            <div class="nav-item" data-tab="accounting">
+                <div class="nav-icon">💰</div>
+                <span>Accounting</span>
+            </div>
+            <div class="nav-item" data-tab="hr">
+                <div class="nav-icon">👥</div>
+                <span>HR Management</span>
+            </div>
+            <div class="nav-item" data-tab="procurement">
+                <div class="nav-icon">🛒</div>
+                <span>Procurement</span>
+            </div>
+            <div class="nav-item" data-tab="reports">
+                <div class="nav-icon">📈</div>
+                <span>Reports</span>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="tab-content active" id="dashboard">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <div class="date-info">Last Updated: <span id="last-updated"></span></div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-value">$2,845,320</div>
+                        <div class="metric-label">Total Revenue</div>
+                        <div class="metric-change positive">+12.5%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📦</div>
+                        <div class="metric-value">1,247</div>
+                        <div class="metric-label">Inventory Items</div>
+                        <div class="metric-change negative">-3.2%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-value">156</div>
+                        <div class="metric-label">Active Employees</div>
+                        <div class="metric-change positive">+2.8%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📋</div>
+                        <div class="metric-value">23</div>
+                        <div class="metric-label">Pending Orders</div>
+                        <div class="metric-change neutral">0%</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="chart-container">
+                        <h3>Revenue Trend</h3>
+                        <canvas id="revenue-chart"></canvas>
+                    </div>
+                    <div class="activity-feed">
+                        <h3>Recent Activities</h3>
+                        <div class="activity-list" id="activity-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="inventory">
+                <div class="page-header">
+                    <h1>Inventory Management</h1>
+                    <button class="btn btn-primary" onclick="openAddItemModal()">Add New Item</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="inventory-search" placeholder="Search inventory items...">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="office">Office Supplies</option>
+                        <option value="raw-materials">Raw Materials</option>
+                    </select>
+                </div>
+
+                <div class="inventory-table">
+                    <table id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Item Code</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Stock Level</th>
+                                <th>Unit Price</th>
+                                <th>Total Value</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="accounting">
+                <div class="page-header">
+                    <h1>Accounting</h1>
+                    <button class="btn btn-primary" onclick="openTransactionModal()">New Transaction</button>
+                </div>
+                
+                <div class="accounting-overview">
+                    <div class="balance-card">
+                        <h3>Assets</h3>
+                        <div class="balance-amount">$4,892,340</div>
+                    </div>
+                    <div class="balance-card">
+                        <h3>Liabilities</h3>
+                        <div class="balance-amount">$1,247,890</div>
+                    </div>
+                    <div class="balance-card">
+                        <h3>Equity</h3>
+                        <div class="balance-amount">$3,644,450</div>
+                    </div>
+                </div>
+
+                <div class="transactions-section">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-list" id="transaction-list"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="hr">
+                <div class="page-header">
+                    <h1>Human Resources</h1>
+                    <button class="btn btn-primary" onclick="openEmployeeModal()">Add Employee</button>
+                </div>
+                
+                <div class="hr-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">Total Employees</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">New Hires (This Month)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Open Positions</div>
+                    </div>
+                </div>
+
+                <div class="employee-table">
+                    <table id="employee-table">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Position</th>
+                                <th>Hire Date</th>
+                                <th>Salary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employee-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="procurement">
+                <div class="page-header">
+                    <h1>Procurement</h1>
+                    <button class="btn btn-primary" onclick="openPurchaseOrderModal()">New Purchase Order</button>
+                </div>
+                
+                <div class="procurement-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">$847,230</div>
+                        <div class="stat-label">Monthly Spend</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">23</div>
+                        <div class="stat-label">Pending Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">47</div>
+                        <div class="stat-label">Active Suppliers</div>
+                    </div>
+                </div>
+
+                <div class="purchase-orders">
+                    <h3>Recent Purchase Orders</h3>
+                    <div class="purchase-order-list" id="purchase-order-list"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports">
+                <div class="page-header">
+                    <h1>Reports</h1>
+                    <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                </div>
+                
+                <div class="report-categories">
+                    <div class="report-card" onclick="selectReport('financial')">
+                        <div class="report-icon">💰</div>
+                        <h3>Financial Reports</h3>
+                        <p>Balance sheet, P&L, cash flow</p>
+                    </div>
+                    <div class="report-card" onclick="selectReport('inventory')">
+                        <div class="report-icon">📦</div>
+                        <h3>Inventory Reports</h3>
+                        <p>Stock levels, turnover, valuation</p>
+                    </div>
+                    <div class="report-card" onclick="selectReport('hr')">
+                        <div class="report-icon">👥</div>
+                        <h3>HR Reports</h3>
+                        <p>Headcount, payroll, performance</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

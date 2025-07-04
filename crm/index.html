@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus CRM - Customer Relationship Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <a href="../" class="back-link">← Back to Portal</a>
+                <div class="app-title">
+                    <span class="logo">⬢</span>
+                    <span>Nexus CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-name">John Smith</span>
+                    <span class="user-role">Sales Manager</span>
+                </div>
+            </div>
+        </header>
+
+        <nav class="app-nav">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="dashboard">
+                    <span class="tab-icon">📊</span>
+                    Dashboard
+                </button>
+                <button class="nav-tab" data-tab="customers">
+                    <span class="tab-icon">👥</span>
+                    Customers
+                </button>
+                <button class="nav-tab" data-tab="opportunities">
+                    <span class="tab-icon">💼</span>
+                    Opportunities
+                </button>
+                <button class="nav-tab" data-tab="activities">
+                    <span class="tab-icon">📅</span>
+                    Activities
+                </button>
+                <button class="nav-tab" data-tab="reports">
+                    <span class="tab-icon">📈</span>
+                    Reports
+                </button>
+            </div>
+        </nav>
+
+        <main class="app-main">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard">
+                <div class="dashboard">
+                    <h2>Sales Dashboard</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">247</div>
+                            <div class="stat-label">Total Customers</div>
+                            <div class="stat-change positive">+12 this month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">$1.2M</div>
+                            <div class="stat-label">Pipeline Value</div>
+                            <div class="stat-change positive">+15.3%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">23</div>
+                            <div class="stat-label">Active Opportunities</div>
+                            <div class="stat-change neutral">+2 this week</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">78%</div>
+                            <div class="stat-label">Conversion Rate</div>
+                            <div class="stat-change positive">+3.2%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-sections">
+                        <div class="recent-activities">
+                            <h3>Recent Activities</h3>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <span class="activity-icon">📞</span>
+                                    <div class="activity-details">
+                                        <strong>Call with Acme Corp</strong>
+                                        <span>Discussed Q4 requirements - Follow up needed</span>
+                                        <small>2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-icon">✅</span>
+                                    <div class="activity-details">
+                                        <strong>Deal Closed: TechStart Inc</strong>
+                                        <span>$45,000 annual contract signed</span>
+                                        <small>Yesterday</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="activity-icon">📧</span>
+                                    <div class="activity-details">
+                                        <strong>Proposal Sent: Global Systems</strong>
+                                        <span>Enterprise package proposal delivered</span>
+                                        <small>2 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="upcoming-tasks">
+                            <h3>Upcoming Tasks</h3>
+                            <div class="task-list">
+                                <div class="task-item">
+                                    <div class="task-priority high"></div>
+                                    <div class="task-details">
+                                        <strong>Follow up with Acme Corp</strong>
+                                        <small>Today, 3:00 PM</small>
+                                    </div>
+                                </div>
+                                <div class="task-item">
+                                    <div class="task-priority medium"></div>
+                                    <div class="task-details">
+                                        <strong>Prepare Q4 sales report</strong>
+                                        <small>Tomorrow, 10:00 AM</small>
+                                    </div>
+                                </div>
+                                <div class="task-item">
+                                    <div class="task-priority low"></div>
+                                    <div class="task-details">
+                                        <strong>Team meeting preparation</strong>
+                                        <small>Friday, 9:00 AM</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Tab -->
+            <div class="tab-content" id="customers">
+                <div class="customers-section">
+                    <div class="section-header">
+                        <h2>Customer Management</h2>
+                        <button class="btn-primary" onclick="showAddCustomerForm()">+ Add Customer</button>
+                    </div>
+                    
+                    <div class="filters-bar">
+                        <input type="text" id="customer-search" placeholder="Search customers..." class="search-input">
+                        <select class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="prospect">Prospect</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="">All Industries</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="finance">Finance</option>
+                            <option value="manufacturing">Manufacturing</option>
+                        </select>
+                    </div>
+
+                    <div class="customers-table-container">
+                        <table class="customers-table">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Contact Person</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Industry</th>
+                                    <th>Status</th>
+                                    <th>Last Contact</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-tbody">
+                                <!-- Customer data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- Pagination Controls -->
+                        <div class="pagination-container">
+                            <div class="pagination-info">
+                                <span id="pagination-info-text">Showing 1-10 of 30 customers</span>
+                            </div>
+                            <div class="pagination-controls">
+                                <button id="prev-page" class="pagination-btn" disabled>
+                                    <span>← Previous</span>
+                                </button>
+                                <div class="pagination-numbers" id="pagination-numbers">
+                                    <!-- Page numbers will be populated by JavaScript -->
+                                </div>
+                                <button id="next-page" class="pagination-btn">
+                                    <span>Next →</span>
+                                </button>
+                            </div>
+                            <div class="pagination-size">
+                                <label for="page-size-select">Rows per page:</label>
+                                <select id="page-size-select" class="pagination-select">
+                                    <option value="10" selected>10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opportunities Tab -->
+            <div class="tab-content" id="opportunities">
+                <div class="opportunities-section">
+                    <div class="section-header">
+                        <h2>Sales Opportunities</h2>
+                        <button class="btn-primary" onclick="showAddOpportunityForm()">+ Add Opportunity</button>
+                    </div>
+                    
+                    <div class="opportunity-pipeline">
+                        <div class="pipeline-stage">
+                            <h3>Prospecting</h3>
+                            <div class="stage-value">$245K</div>
+                            <div class="opportunity-cards" id="prospecting-cards">
+                                <!-- Opportunity cards will be populated here -->
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h3>Qualification</h3>
+                            <div class="stage-value">$380K</div>
+                            <div class="opportunity-cards" id="qualification-cards">
+                                <!-- Opportunity cards will be populated here -->
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h3>Proposal</h3>
+                            <div class="stage-value">$520K</div>
+                            <div class="opportunity-cards" id="proposal-cards">
+                                <!-- Opportunity cards will be populated here -->
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h3>Closed Won</h3>
+                            <div class="stage-value">$125K</div>
+                            <div class="opportunity-cards" id="closed-won-cards">
+                                <!-- Opportunity cards will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activities Tab -->
+            <div class="tab-content" id="activities">
+                <div class="activities-section">
+                    <h2>Activities & Communications</h2>
+                    <div class="activities-content">
+                        <div class="activity-form">
+                            <h3>Log New Activity</h3>
+                            <form class="form-grid">
+                                <div class="form-group">
+                                    <label>Activity Type</label>
+                                    <select class="form-control">
+                                        <option>Phone Call</option>
+                                        <option>Email</option>
+                                        <option>Meeting</option>
+                                        <option>Proposal</option>
+                                        <option>Follow-up</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Customer</label>
+                                    <select class="form-control">
+                                        <option>Select Customer...</option>
+                                        <option>Acme Corporation</option>
+                                        <option>TechStart Inc</option>
+                                        <option>Global Systems</option>
+                                    </select>
+                                </div>
+                                <div class="form-group span-2">
+                                    <label>Subject</label>
+                                    <input type="text" class="form-control" placeholder="Activity subject...">
+                                </div>
+                                <div class="form-group span-2">
+                                    <label>Notes</label>
+                                    <textarea class="form-control" rows="3" placeholder="Activity details and notes..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Follow-up Required</label>
+                                    <select class="form-control">
+                                        <option>No</option>
+                                        <option>Yes</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions span-2">
+                                    <button type="submit" class="btn-primary">Save Activity</button>
+                                    <button type="button" class="btn-secondary">Clear Form</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div class="tab-content" id="reports">
+                <div class="reports-section">
+                    <h2>Sales Reports & Analytics</h2>
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h3>Monthly Sales Summary</h3>
+                            <p>Comprehensive overview of sales performance for the current month</p>
+                            <button class="btn-secondary">Generate Report</button>
+                        </div>
+                        <div class="report-card">
+                            <h3>Customer Analysis</h3>
+                            <p>Detailed analysis of customer behavior and segmentation</p>
+                            <button class="btn-secondary">Generate Report</button>
+                        </div>
+                        <div class="report-card">
+                            <h3>Pipeline Forecast</h3>
+                            <p>Sales pipeline forecast and probability analysis</p>
+                            <button class="btn-secondary">Generate Report</button>
+                        </div>
+                        <div class="report-card">
+                            <h3>Activity Report</h3>
+                            <p>Summary of all sales activities and communication history</p>
+                            <button class="btn-secondary">Generate Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Form Modal -->
+    <div id="customer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Customer</h3>
+                <span class="close" onclick="closeModal('customer-modal')">&times;</span>
+            </div>
+            <form class="customer-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Company Name *</label>
+                        <input type="text" name="company" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Industry</label>
+                        <select name="industry" class="form-control">
+                            <option value="Technology">Technology</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Person *</label>
+                        <input type="text" name="contact" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input type="text" name="jobTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" name="phone" class="form-control">
+                    </div>
+                    <div class="form-group span-2">
+                        <label>Address</label>
+                        <textarea name="address" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Annual Revenue</label>
+                        <input type="text" name="revenue" class="form-control" placeholder="$0">
+                    </div>
+                    <div class="form-group">
+                        <label>Employee Count</label>
+                        <input type="number" name="employees" class="form-control">
+                    </div>
+                    <div class="form-group span-2">
+                        <label>Notes</label>
+                        <textarea name="notes" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Customer</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('customer-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Resources - Nexus Corp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">⬢ Nexus Corp</div>
+                <div class="app-title">Human Resources Management</div>
+            </div>
+            <div class="header-right">
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">247</span>
+                        <span class="stat-label">Employees</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">New Hires</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">HR Manager</span>
+                    <span class="user-role">Human Resources</span>
+                </div>
+                <button class="back-btn" onclick="window.location.href='../'">← Back to Portal</button>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-item active" data-tab="dashboard">
+                <div class="nav-icon">📊</div>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-tab="employees">
+                <div class="nav-icon">👥</div>
+                <span>Employees</span>
+                <span class="badge">247</span>
+            </div>
+            <div class="nav-item" data-tab="recruitment">
+                <div class="nav-icon">🎯</div>
+                <span>Recruitment</span>
+            </div>
+            <div class="nav-item" data-tab="performance">
+                <div class="nav-icon">📈</div>
+                <span>Performance</span>
+            </div>
+            <div class="nav-item" data-tab="payroll">
+                <div class="nav-icon">💰</div>
+                <span>Payroll</span>
+            </div>
+            <div class="nav-item" data-tab="benefits">
+                <div class="nav-icon">🏥</div>
+                <span>Benefits</span>
+            </div>
+            <div class="nav-item" data-tab="reports">
+                <div class="nav-icon">📋</div>
+                <span>Reports</span>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="tab-content active" id="dashboard">
+                <div class="page-header">
+                    <h1>HR Dashboard</h1>
+                    <div class="dashboard-actions">
+                        <button class="btn btn-primary" onclick="addEmployee()">Add Employee</button>
+                        <button class="btn btn-secondary" onclick="generateReport()">Generate Report</button>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card employees">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-value">247</div>
+                        <div class="metric-label">Total Employees</div>
+                        <div class="metric-change positive">+12 this month</div>
+                    </div>
+                    <div class="metric-card turnover">
+                        <div class="metric-icon">🔄</div>
+                        <div class="metric-value">8.5%</div>
+                        <div class="metric-label">Turnover Rate</div>
+                        <div class="metric-change negative">-2.1% this quarter</div>
+                    </div>
+                    <div class="metric-card satisfaction">
+                        <div class="metric-icon">😊</div>
+                        <div class="metric-value">4.2</div>
+                        <div class="metric-label">Employee Satisfaction</div>
+                        <div class="metric-change positive">+0.3 this quarter</div>
+                    </div>
+                    <div class="metric-card positions">
+                        <div class="metric-icon">🎯</div>
+                        <div class="metric-value">15</div>
+                        <div class="metric-label">Open Positions</div>
+                        <div class="metric-change neutral">5 in review</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="recent-hires">
+                        <div class="card-header">
+                            <h3>Recent Hires</h3>
+                            <button class="btn btn-link" onclick="router.navigate('#employees')">View All</button>
+                        </div>
+                        <div class="hire-list" id="recent-hires"></div>
+                    </div>
+
+                    <div class="department-breakdown">
+                        <div class="card-header">
+                            <h3>Department Breakdown</h3>
+                        </div>
+                        <canvas id="department-chart"></canvas>
+                    </div>
+
+                    <div class="upcoming-reviews">
+                        <div class="card-header">
+                            <h3>Upcoming Reviews</h3>
+                        </div>
+                        <div class="review-list" id="upcoming-reviews"></div>
+                    </div>
+
+                    <div class="attendance-overview">
+                        <div class="card-header">
+                            <h3>Attendance Overview</h3>
+                        </div>
+                        <canvas id="attendance-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="employees">
+                <div class="page-header">
+                    <h1>Employee Management</h1>
+                    <div class="employee-actions">
+                        <button class="btn btn-primary" onclick="addEmployee()">Add Employee</button>
+                        <button class="btn btn-secondary" onclick="bulkImport()">Bulk Import</button>
+                        <button class="btn btn-secondary" onclick="exportEmployees()">Export</button>
+                    </div>
+                </div>
+
+                <div class="employee-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">247</div>
+                        <div class="stat-text">Total Employees</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">89%</div>
+                        <div class="stat-text">Retention Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4.2</div>
+                        <div class="stat-text">Avg Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-text">New This Month</div>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <label>Department:</label>
+                        <select id="dept-filter">
+                            <option value="">All Departments</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="sales">Sales</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="hr">Human Resources</option>
+                            <option value="finance">Finance</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="status-filter">
+                            <option value="">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="on-leave">On Leave</option>
+                            <option value="terminated">Terminated</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Location:</label>
+                        <select id="location-filter">
+                            <option value="">All Locations</option>
+                            <option value="san-francisco">San Francisco</option>
+                            <option value="new-york">New York</option>
+                            <option value="chicago">Chicago</option>
+                            <option value="remote">Remote</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <input type="text" id="employee-search" placeholder="Search employees...">
+                    </div>
+                </div>
+
+                <div class="employees-table">
+                    <table id="employees-table">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Employee ID</th>
+                                <th>Department</th>
+                                <th>Position</th>
+                                <th>Hire Date</th>
+                                <th>Status</th>
+                                <th>Salary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employees-tbody"></tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" id="employees-pagination"></div>
+            </div>
+
+            <div class="tab-content" id="recruitment">
+                <div class="page-header">
+                    <h1>Recruitment & Hiring</h1>
+                    <div class="recruitment-actions">
+                        <button class="btn btn-primary" onclick="createJobPosting()">Create Job Posting</button>
+                        <button class="btn btn-secondary" onclick="bulkActions()">Bulk Actions</button>
+                    </div>
+                </div>
+
+                <div class="recruitment-pipeline">
+                    <div class="pipeline-stage">
+                        <h3>Applied <span class="stage-count">45</span></h3>
+                        <div class="candidate-list" id="applied-candidates"></div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <h3>Screening <span class="stage-count">12</span></h3>
+                        <div class="candidate-list" id="screening-candidates"></div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <h3>Interview <span class="stage-count">8</span></h3>
+                        <div class="candidate-list" id="interview-candidates"></div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <h3>Offer <span class="stage-count">3</span></h3>
+                        <div class="candidate-list" id="offer-candidates"></div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <h3>Hired <span class="stage-count">2</span></h3>
+                        <div class="candidate-list" id="hired-candidates"></div>
+                    </div>
+                </div>
+
+                <div class="job-postings">
+                    <h3>Active Job Postings</h3>
+                    <div class="posting-list" id="job-postings"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="performance">
+                <div class="page-header">
+                    <h1>Performance Management</h1>
+                    <div class="performance-actions">
+                        <button class="btn btn-primary" onclick="scheduleReview()">Schedule Review</button>
+                        <button class="btn btn-secondary" onclick="performanceReports()">View Reports</button>
+                    </div>
+                </div>
+
+                <div class="performance-overview">
+                    <div class="perf-metric">
+                        <div class="perf-icon">⭐</div>
+                        <div class="perf-value">4.2</div>
+                        <div class="perf-label">Average Rating</div>
+                    </div>
+                    <div class="perf-metric">
+                        <div class="perf-icon">📅</div>
+                        <div class="perf-value">23</div>
+                        <div class="perf-label">Reviews Due</div>
+                    </div>
+                    <div class="perf-metric">
+                        <div class="perf-icon">🎯</div>
+                        <div class="perf-value">78%</div>
+                        <div class="perf-label">Goals Met</div>
+                    </div>
+                    <div class="perf-metric">
+                        <div class="perf-icon">📈</div>
+                        <div class="perf-value">156</div>
+                        <div class="perf-label">Completed Reviews</div>
+                    </div>
+                </div>
+
+                <div class="performance-grid">
+                    <div class="review-calendar">
+                        <h3>Review Calendar</h3>
+                        <div class="calendar-view" id="review-calendar"></div>
+                    </div>
+
+                    <div class="top-performers">
+                        <h3>Top Performers</h3>
+                        <div class="performer-list" id="top-performers"></div>
+                    </div>
+
+                    <div class="goals-tracking">
+                        <h3>Goals Tracking</h3>
+                        <canvas id="goals-chart"></canvas>
+                    </div>
+
+                    <div class="feedback-summary">
+                        <h3>360° Feedback Summary</h3>
+                        <div class="feedback-stats" id="feedback-stats"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="payroll">
+                <div class="page-header">
+                    <h1>Payroll Management</h1>
+                    <div class="payroll-actions">
+                        <button class="btn btn-primary" onclick="processPayroll()">Process Payroll</button>
+                        <button class="btn btn-secondary" onclick="payrollReports()">Payroll Reports</button>
+                    </div>
+                </div>
+
+                <div class="payroll-summary">
+                    <div class="payroll-card">
+                        <h3>Monthly Payroll</h3>
+                        <div class="amount">$1,456,780</div>
+                        <div class="period">January 2024</div>
+                    </div>
+                    <div class="payroll-card">
+                        <h3>Tax Withholdings</h3>
+                        <div class="amount">$392,450</div>
+                        <div class="period">YTD 2024</div>
+                    </div>
+                    <div class="payroll-card">
+                        <h3>Benefits Cost</h3>
+                        <div class="amount">$234,120</div>
+                        <div class="period">Monthly</div>
+                    </div>
+                </div>
+
+                <div class="payroll-details">
+                    <div class="payroll-breakdown">
+                        <h3>Payroll Breakdown</h3>
+                        <canvas id="payroll-chart"></canvas>
+                    </div>
+
+                    <div class="salary-bands">
+                        <h3>Salary Bands by Department</h3>
+                        <div class="bands-list" id="salary-bands"></div>
+                    </div>
+
+                    <div class="payroll-calendar">
+                        <h3>Payroll Calendar</h3>
+                        <div class="calendar-events" id="payroll-calendar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="benefits">
+                <div class="page-header">
+                    <h1>Benefits Administration</h1>
+                    <div class="benefits-actions">
+                        <button class="btn btn-primary" onclick="enrollEmployee()">Enroll Employee</button>
+                        <button class="btn btn-secondary" onclick="benefitsReports()">Benefits Reports</button>
+                    </div>
+                </div>
+
+                <div class="benefits-overview">
+                    <div class="benefit-stat">
+                        <div class="stat-icon">🏥</div>
+                        <div class="stat-value">89%</div>
+                        <div class="stat-label">Health Insurance</div>
+                    </div>
+                    <div class="benefit-stat">
+                        <div class="stat-icon">🦷</div>
+                        <div class="stat-value">76%</div>
+                        <div class="stat-label">Dental Coverage</div>
+                    </div>
+                    <div class="benefit-stat">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-value">82%</div>
+                        <div class="stat-label">Vision Insurance</div>
+                    </div>
+                    <div class="benefit-stat">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value">65%</div>
+                        <div class="stat-label">401(k) Participation</div>
+                    </div>
+                </div>
+
+                <div class="benefits-plans">
+                    <div class="plan-category">
+                        <h3>Health Insurance Plans</h3>
+                        <div class="plan-list" id="health-plans"></div>
+                    </div>
+
+                    <div class="plan-category">
+                        <h3>Retirement Plans</h3>
+                        <div class="plan-list" id="retirement-plans"></div>
+                    </div>
+
+                    <div class="plan-category">
+                        <h3>Additional Benefits</h3>
+                        <div class="plan-list" id="additional-benefits"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports">
+                <div class="page-header">
+                    <h1>HR Reports & Analytics</h1>
+                    <div class="report-actions">
+                        <button class="btn btn-primary" onclick="generateCustomReport()">Custom Report</button>
+                        <button class="btn btn-secondary" onclick="scheduleReport()">Schedule Report</button>
+                    </div>
+                </div>
+
+                <div class="report-categories">
+                    <div class="report-card" onclick="viewReport('workforce')">
+                        <div class="report-icon">👥</div>
+                        <h3>Workforce Analytics</h3>
+                        <p>Employee demographics, turnover, and headcount analysis</p>
+                    </div>
+                    <div class="report-card" onclick="viewReport('compensation')">
+                        <div class="report-icon">💰</div>
+                        <h3>Compensation Analysis</h3>
+                        <p>Salary benchmarking, pay equity, and cost analysis</p>
+                    </div>
+                    <div class="report-card" onclick="viewReport('performance')">
+                        <div class="report-icon">📈</div>
+                        <h3>Performance Reports</h3>
+                        <p>Review cycles, ratings distribution, and goal tracking</p>
+                    </div>
+                    <div class="report-card" onclick="viewReport('recruitment')">
+                        <div class="report-icon">🎯</div>
+                        <h3>Recruitment Metrics</h3>
+                        <p>Time to hire, source effectiveness, and pipeline analysis</p>
+                    </div>
+                </div>
+
+                <div class="recent-reports">
+                    <h3>Recent Reports</h3>
+                    <div class="reports-list" id="recent-reports"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Employee Modal -->
+    <div id="employee-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Employee</h2>
+                <span class="close" onclick="closeModal('employee-modal')">&times;</span>
+            </div>
+            <form id="employee-form">
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Employment Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="department" required>
+                                <option value="">Select Department</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="sales">Sales</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="hr">Human Resources</option>
+                                <option value="finance">Finance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Position *</label>
+                            <input type="text" id="position" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Hire Date *</label>
+                            <input type="date" id="hire-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Salary *</label>
+                            <input type="number" id="salary" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('employee-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

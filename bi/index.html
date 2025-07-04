@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Intelligence Dashboard - Nexus Corp</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">⬢ Nexus Corp</div>
+                <div class="app-title">Business Intelligence Dashboard</div>
+            </div>
+            <div class="header-right">
+                <div class="date-range">
+                    <select id="date-range">
+                        <option value="7">Last 7 days</option>
+                        <option value="30" selected>Last 30 days</option>
+                        <option value="90">Last 90 days</option>
+                        <option value="365">Last year</option>
+                    </select>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Business Analyst</span>
+                    <span class="user-role">Analytics Team</span>
+                </div>
+                <button class="back-btn" onclick="window.location.href='../'">← Back to Portal</button>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-item active" data-tab="overview">
+                <div class="nav-icon">📊</div>
+                <span>Overview</span>
+            </div>
+            <div class="nav-item" data-tab="sales">
+                <div class="nav-icon">💰</div>
+                <span>Sales Analytics</span>
+            </div>
+            <div class="nav-item" data-tab="operations">
+                <div class="nav-icon">⚙️</div>
+                <span>Operations</span>
+            </div>
+            <div class="nav-item" data-tab="customers">
+                <div class="nav-icon">👥</div>
+                <span>Customer Insights</span>
+            </div>
+            <div class="nav-item" data-tab="financial">
+                <div class="nav-icon">📈</div>
+                <span>Financial</span>
+            </div>
+            <div class="nav-item" data-tab="reports">
+                <div class="nav-icon">📋</div>
+                <span>Reports</span>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="tab-content active" id="overview">
+                <div class="page-header">
+                    <h1>Business Overview</h1>
+                    <div class="kpi-actions">
+                        <button class="btn btn-secondary" onclick="exportData()">Export Data</button>
+                        <button class="btn btn-primary" onclick="refreshData()">Refresh</button>
+                    </div>
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-value">$2.8M</div>
+                        <div class="kpi-label">Total Revenue</div>
+                        <div class="kpi-change positive">+15.2%</div>
+                        <div class="kpi-trend">↗️</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">📦</div>
+                        <div class="kpi-value">1,247</div>
+                        <div class="kpi-label">Orders</div>
+                        <div class="kpi-change positive">+8.7%</div>
+                        <div class="kpi-trend">↗️</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">👥</div>
+                        <div class="kpi-value">18,924</div>
+                        <div class="kpi-label">Active Customers</div>
+                        <div class="kpi-change positive">+3.4%</div>
+                        <div class="kpi-trend">↗️</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">🎯</div>
+                        <div class="kpi-value">67%</div>
+                        <div class="kpi-label">Conversion Rate</div>
+                        <div class="kpi-change negative">-2.1%</div>
+                        <div class="kpi-trend">↘️</div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Revenue Trend</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" data-period="daily">Daily</button>
+                                <button class="chart-btn" data-period="weekly">Weekly</button>
+                                <button class="chart-btn" data-period="monthly">Monthly</button>
+                            </div>
+                        </div>
+                        <canvas id="revenue-chart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Sales by Category</h3>
+                        </div>
+                        <canvas id="category-chart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Customer Acquisition</h3>
+                        </div>
+                        <canvas id="acquisition-chart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Performance Metrics</h3>
+                        </div>
+                        <canvas id="performance-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="sales">
+                <div class="page-header">
+                    <h1>Sales Analytics</h1>
+                    <div class="filters">
+                        <select id="region-filter">
+                            <option value="all">All Regions</option>
+                            <option value="north">North America</option>
+                            <option value="europe">Europe</option>
+                            <option value="asia">Asia Pacific</option>
+                        </select>
+                        <select id="product-filter">
+                            <option value="all">All Products</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="software">Software</option>
+                            <option value="services">Services</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sales-metrics">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>Sales Performance</h3>
+                        </div>
+                        <div class="metric-value">$847,320</div>
+                        <div class="metric-comparison">
+                            <span class="previous">Previous: $789,450</span>
+                            <span class="change positive">+7.3%</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>Average Deal Size</h3>
+                        </div>
+                        <div class="metric-value">$12,450</div>
+                        <div class="metric-comparison">
+                            <span class="previous">Previous: $11,890</span>
+                            <span class="change positive">+4.7%</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>Sales Cycle</h3>
+                        </div>
+                        <div class="metric-value">45 days</div>
+                        <div class="metric-comparison">
+                            <span class="previous">Previous: 52 days</span>
+                            <span class="change positive">-13.5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sales-charts">
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h3>Sales Pipeline</h3>
+                        </div>
+                        <canvas id="pipeline-chart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Top Performers</h3>
+                        </div>
+                        <div class="performer-list" id="top-performers"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="operations">
+                <div class="page-header">
+                    <h1>Operations Dashboard</h1>
+                    <div class="status-indicators">
+                        <div class="status-item">
+                            <div class="status-dot green"></div>
+                            <span>Systems Online</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot yellow"></div>
+                            <span>Inventory Low</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot green"></div>
+                            <span>Production Normal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="operations-grid">
+                    <div class="ops-card">
+                        <h3>Inventory Status</h3>
+                        <div class="ops-metric">
+                            <div class="ops-value">87%</div>
+                            <div class="ops-label">Stock Level</div>
+                        </div>
+                        <canvas id="inventory-chart"></canvas>
+                    </div>
+
+                    <div class="ops-card">
+                        <h3>Production Efficiency</h3>
+                        <div class="ops-metric">
+                            <div class="ops-value">94.2%</div>
+                            <div class="ops-label">Efficiency Rate</div>
+                        </div>
+                        <canvas id="efficiency-chart"></canvas>
+                    </div>
+
+                    <div class="ops-card">
+                        <h3>Order Fulfillment</h3>
+                        <div class="ops-metric">
+                            <div class="ops-value">2.3 days</div>
+                            <div class="ops-label">Avg. Processing Time</div>
+                        </div>
+                        <canvas id="fulfillment-chart"></canvas>
+                    </div>
+
+                    <div class="ops-card">
+                        <h3>Quality Metrics</h3>
+                        <div class="ops-metric">
+                            <div class="ops-value">99.1%</div>
+                            <div class="ops-label">Quality Score</div>
+                        </div>
+                        <canvas id="quality-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="customers">
+                <div class="page-header">
+                    <h1>Customer Insights</h1>
+                    <div class="segment-filters">
+                        <button class="segment-btn active" data-segment="all">All Customers</button>
+                        <button class="segment-btn" data-segment="new">New Customers</button>
+                        <button class="segment-btn" data-segment="returning">Returning</button>
+                        <button class="segment-btn" data-segment="vip">VIP</button>
+                    </div>
+                </div>
+
+                <div class="customer-metrics">
+                    <div class="customer-card">
+                        <div class="customer-icon">👥</div>
+                        <div class="customer-stats">
+                            <div class="stat-value">18,924</div>
+                            <div class="stat-label">Total Customers</div>
+                            <div class="stat-change positive">+1,247 this month</div>
+                        </div>
+                    </div>
+
+                    <div class="customer-card">
+                        <div class="customer-icon">💎</div>
+                        <div class="customer-stats">
+                            <div class="stat-value">$2,340</div>
+                            <div class="stat-label">Avg. Customer Value</div>
+                            <div class="stat-change positive">+$340 from last month</div>
+                        </div>
+                    </div>
+
+                    <div class="customer-card">
+                        <div class="customer-icon">🔄</div>
+                        <div class="customer-stats">
+                            <div class="stat-value">72%</div>
+                            <div class="stat-label">Retention Rate</div>
+                            <div class="stat-change negative">-3% from last month</div>
+                        </div>
+                    </div>
+
+                    <div class="customer-card">
+                        <div class="customer-icon">⭐</div>
+                        <div class="customer-stats">
+                            <div class="stat-value">4.6</div>
+                            <div class="stat-label">Satisfaction Score</div>
+                            <div class="stat-change positive">+0.2 from last month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customer-charts">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Customer Segmentation</h3>
+                        </div>
+                        <canvas id="segmentation-chart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Customer Lifetime Value</h3>
+                        </div>
+                        <canvas id="ltv-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="financial">
+                <div class="page-header">
+                    <h1>Financial Dashboard</h1>
+                    <div class="financial-period">
+                        <select id="financial-period">
+                            <option value="monthly">Monthly View</option>
+                            <option value="quarterly">Quarterly View</option>
+                            <option value="yearly">Yearly View</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="financial-summary">
+                    <div class="summary-card">
+                        <h3>Revenue</h3>
+                        <div class="summary-value">$2,845,320</div>
+                        <div class="summary-change positive">+12.5%</div>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Expenses</h3>
+                        <div class="summary-value">$1,847,920</div>
+                        <div class="summary-change negative">+8.3%</div>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Net Income</h3>
+                        <div class="summary-value">$997,400</div>
+                        <div class="summary-change positive">+18.7%</div>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Profit Margin</h3>
+                        <div class="summary-value">35.1%</div>
+                        <div class="summary-change positive">+2.1%</div>
+                    </div>
+                </div>
+
+                <div class="financial-charts">
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h3>Revenue vs Expenses</h3>
+                        </div>
+                        <canvas id="revenue-expense-chart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Cash Flow</h3>
+                        </div>
+                        <canvas id="cashflow-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports">
+                <div class="page-header">
+                    <h1>Reports & Analytics</h1>
+                    <button class="btn btn-primary" onclick="generateReport()">Generate Custom Report</button>
+                </div>
+
+                <div class="report-grid">
+                    <div class="report-card" onclick="viewReport('executive')">
+                        <div class="report-icon">👨‍💼</div>
+                        <h3>Executive Summary</h3>
+                        <p>High-level overview of business performance</p>
+                        <div class="report-meta">
+                            <span>Last updated: 2 hours ago</span>
+                            <span class="report-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="report-card" onclick="viewReport('sales')">
+                        <div class="report-icon">📈</div>
+                        <h3>Sales Performance</h3>
+                        <p>Detailed sales analysis and trends</p>
+                        <div class="report-meta">
+                            <span>Last updated: 4 hours ago</span>
+                            <span class="report-type">Excel</span>
+                        </div>
+                    </div>
+
+                    <div class="report-card" onclick="viewReport('customer')">
+                        <div class="report-icon">👥</div>
+                        <h3>Customer Analysis</h3>
+                        <p>Customer behavior and segmentation insights</p>
+                        <div class="report-meta">
+                            <span>Last updated: 6 hours ago</span>
+                            <span class="report-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="report-card" onclick="viewReport('financial')">
+                        <div class="report-icon">💰</div>
+                        <h3>Financial Report</h3>
+                        <p>Financial statements and analysis</p>
+                        <div class="report-meta">
+                            <span>Last updated: 1 day ago</span>
+                            <span class="report-type">Excel</span>
+                        </div>
+                    </div>
+
+                    <div class="report-card" onclick="viewReport('operations')">
+                        <div class="report-icon">⚙️</div>
+                        <h3>Operations Report</h3>
+                        <p>Operational efficiency and metrics</p>
+                        <div class="report-meta">
+                            <span>Last updated: 1 day ago</span>
+                            <span class="report-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="report-card" onclick="viewReport('forecast')">
+                        <div class="report-icon">🔮</div>
+                        <h3>Forecast Analysis</h3>
+                        <p>Predictive analytics and projections</p>
+                        <div class="report-meta">
+                            <span>Last updated: 2 days ago</span>
+                            <span class="report-type">Excel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
