@@ -1,0 +1,28 @@
+# <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+
+# Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert
+# Scope: optional, indicates the module/component affected
+# Subject: imperative mood, no period, max 50 chars
+# Body: optional, explain what and why (not how)
+# Footer: optional, for breaking changes and issue references
+
+# Examples:
+# feat(auth): add OAuth2 integration
+# fix(api): resolve null pointer exception in user service
+# docs: update installation instructions
+# style(ui): fix button alignment on mobile
+# refactor(database): extract connection pooling logic
+# test(auth): add unit tests for login validation
+# chore(deps): update dependencies to latest versions
+# perf(search): optimize query performance with indexing
+# ci(github): add automated testing workflow
+# build(webpack): update configuration for production
+# revert: revert "feat(auth): add OAuth2 integration"
+#
+# BREAKING CHANGE: <description>
+# Closes #123
+# Fixes #456
