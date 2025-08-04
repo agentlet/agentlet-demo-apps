@@ -80,6 +80,7 @@ The portal is designed to accommodate additional business applications:
 - Help Desk & Ticketing System
 - Human Resources Management
 - Project Management Tools
+- **Expenses (`expenses/`)**: Invoice and expense approval system with document download and validation workflows
 
 ## Company Branding
 
@@ -96,6 +97,14 @@ The portal is designed to accommodate additional business applications:
 - Safari 12+
 - Edge 79+
 
-## License
+## Credits
+
+This repository is maintained by **Fabien Vinas** as part of the [Agentlet ecosystem](https://github.com/agentlet).
+
+### Data Sources
+
+The **Expenses** web app example makes use of sample receipt files from [Jens Walter's receipts repository](https://github.com/JensWalter/my-receipts). These provide realistic receipt and invoice samples for demonstration purposes.
+
+## License  
 
 This project is for demonstration purposes. Feel free to use and modify for your own projects.
