@@ -1,61 +1,61 @@
 // CRM Application JavaScript
 
-// Sample data - Extended customer list for pagination demo
+// Sample data - extended customer list for pagination demo
 let customers = [
     {
         id: 1,
-        company: "Acme Corporation",
-        contact: "John Davis",
-        email: "john.davis@acme.com",
-        phone: "+1 (555) 123-4567",
+        company: "Harlow Dynamics",
+        contact: "Anil Menon",
+        email: "a.menon@harlowdynamics.com",
+        phone: "+1 (415) 555-0142",
         industry: "Technology",
         status: "active",
-        lastContact: "2024-06-28",
+        lastContact: "2026-09-24",
         jobTitle: "CTO",
         address: "123 Tech Street, San Francisco, CA 94102",
         revenue: "$5,000,000",
         employees: 150,
-        notes: "Key decision maker for enterprise software purchases. Very interested in our Q4 offerings."
+        notes: "Key decision maker for enterprise software purchases. Interested in our Q4 offerings."
     },
     {
         id: 2,
-        company: "TechStart Inc",
-        contact: "Sarah Wilson",
-        email: "sarah.wilson@techstart.com",
-        phone: "+1 (555) 987-6543",
+        company: "Brightwater Software",
+        contact: "Camille Fournier",
+        email: "c.fournier@brightwatersoftware.com",
+        phone: "+1 (512) 555-0187",
         industry: "Technology",
         status: "active",
-        lastContact: "2024-06-30",
+        lastContact: "2026-09-28",
         jobTitle: "VP of Operations",
         address: "456 Innovation Ave, Austin, TX 78701",
         revenue: "$1,200,000",
         employees: 45,
-        notes: "Startup with rapid growth. Recently closed Series A funding."
+        notes: "Fast-growing software company. Closed a Series A round in the spring."
     },
     {
         id: 3,
-        company: "Global Systems",
-        contact: "Michael Chen",
-        email: "m.chen@globalsystems.com",
-        phone: "+1 (555) 456-7890",
+        company: "Kestrel Industrial Systems",
+        contact: "Marcus Oyelaran",
+        email: "m.oyelaran@kestrelindustrial.com",
+        phone: "+1 (313) 555-0164",
         industry: "Manufacturing",
         status: "prospect",
-        lastContact: "2024-06-25",
+        lastContact: "2026-09-18",
         jobTitle: "Director of IT",
         address: "789 Industrial Blvd, Detroit, MI 48201",
         revenue: "$15,000,000",
         employees: 500,
-        notes: "Large manufacturing company looking to modernize their IT infrastructure."
+        notes: "Large manufacturer looking to modernize its IT infrastructure."
     },
     {
         id: 4,
-        company: "HealthCare Solutions",
-        contact: "Dr. Emily Rodriguez",
-        email: "e.rodriguez@healthcaresol.com",
-        phone: "+1 (555) 321-0987",
+        company: "Marlow Health Partners",
+        contact: "Dr. Elena Vasquez",
+        email: "e.vasquez@marlowhealth.com",
+        phone: "+1 (617) 555-0129",
         industry: "Healthcare",
         status: "active",
-        lastContact: "2024-06-29",
+        lastContact: "2026-09-26",
         jobTitle: "Chief Medical Officer",
         address: "321 Medical Center Dr, Boston, MA 02101",
         revenue: "$8,500,000",
@@ -64,58 +64,58 @@ let customers = [
     },
     {
         id: 5,
-        company: "Finance First",
-        contact: "Robert Thompson",
-        email: "r.thompson@financefirst.com",
-        phone: "+1 (555) 654-3210",
+        company: "Pinnacle Ledger Group",
+        contact: "Robert Eriksson",
+        email: "r.eriksson@pinnacleledger.com",
+        phone: "+1 (212) 555-0176",
         industry: "Finance",
         status: "inactive",
-        lastContact: "2024-05-15",
+        lastContact: "2026-05-14",
         jobTitle: "CFO",
         address: "987 Wall Street, New York, NY 10005",
         revenue: "$25,000,000",
         employees: 300,
-        notes: "Previous client. Contract expired last month. Good relationship maintained."
+        notes: "Previous client. Contract expired in April. Good relationship maintained."
     },
     {
         id: 6,
-        company: "InnovateTech Solutions",
-        contact: "Lisa Zhang",
-        email: "l.zhang@innovatetech.com",
-        phone: "+1 (555) 789-0123",
+        company: "Lumen Analytics",
+        contact: "Wen Zhao",
+        email: "w.zhao@lumenanalytics.com",
+        phone: "+1 (206) 555-0153",
         industry: "Technology",
         status: "active",
-        lastContact: "2024-07-01",
+        lastContact: "2026-09-30",
         jobTitle: "CEO",
         address: "890 Innovation Way, Seattle, WA 98101",
         revenue: "$3,200,000",
         employees: 75,
-        notes: "AI startup looking for enterprise integration tools."
+        notes: "Analytics startup looking for enterprise integration tools."
     },
     {
         id: 7,
-        company: "Metro Construction",
-        contact: "David Martinez",
-        email: "d.martinez@metroconstruction.com",
-        phone: "+1 (555) 234-5678",
+        company: "Ridgeline Construction",
+        contact: "Diego Santana",
+        email: "d.santana@ridgelineconstruction.com",
+        phone: "+1 (602) 555-0118",
         industry: "Construction",
         status: "prospect",
-        lastContact: "2024-06-20",
+        lastContact: "2026-09-12",
         jobTitle: "Project Manager",
         address: "567 Builder Ave, Phoenix, AZ 85001",
         revenue: "$12,000,000",
         employees: 250,
-        notes: "Large construction firm interested in project management software."
+        notes: "Construction firm interested in project management software."
     },
     {
         id: 8,
-        company: "EduLearn Academy",
-        contact: "Professor Amanda White",
-        email: "a.white@edulearn.edu",
-        phone: "+1 (555) 345-6789",
+        company: "Calder Valley College",
+        contact: "Professor Adaeze Eze",
+        email: "a.eze@caldervalley.edu",
+        phone: "+1 (312) 555-0139",
         industry: "Education",
         status: "active",
-        lastContact: "2024-06-27",
+        lastContact: "2026-09-21",
         jobTitle: "Academic Director",
         address: "432 Education Blvd, Chicago, IL 60601",
         revenue: "$2,800,000",
@@ -124,43 +124,43 @@ let customers = [
     },
     {
         id: 9,
-        company: "GreenEnergy Corp",
-        contact: "Mark Johnson",
-        email: "m.johnson@greenenergy.com",
-        phone: "+1 (555) 456-7890",
+        company: "Solstice Renewables",
+        contact: "Tobias Lindqvist",
+        email: "t.lindqvist@solsticerenewables.com",
+        phone: "+1 (303) 555-0192",
         industry: "Energy",
         status: "active",
-        lastContact: "2024-06-26",
+        lastContact: "2026-09-19",
         jobTitle: "Operations Director",
         address: "123 Solar St, Denver, CO 80201",
         revenue: "$18,500,000",
         employees: 400,
-        notes: "Renewable energy company expanding their digital infrastructure."
+        notes: "Renewable energy company expanding its digital infrastructure."
     },
     {
         id: 10,
-        company: "RetailMax",
-        contact: "Jennifer Brown",
-        email: "j.brown@retailmax.com",
-        phone: "+1 (555) 567-8901",
+        company: "Bellmont Retail Group",
+        contact: "Priyanka Nair",
+        email: "p.nair@bellmontretail.com",
+        phone: "+1 (404) 555-0145",
         industry: "Retail",
         status: "prospect",
-        lastContact: "2024-06-22",
+        lastContact: "2026-09-14",
         jobTitle: "IT Director",
         address: "789 Commerce Dr, Atlanta, GA 30301",
         revenue: "$45,000,000",
         employees: 1200,
-        notes: "Large retail chain considering e-commerce platform upgrade."
+        notes: "Retail chain considering an e-commerce platform upgrade."
     },
     {
         id: 11,
-        company: "BioTech Innovations",
-        contact: "Dr. Kevin Lee",
-        email: "k.lee@biotechinnovations.com",
-        phone: "+1 (555) 678-9012",
+        company: "Verity Biosciences",
+        contact: "Dr. Kenji Watanabe",
+        email: "k.watanabe@veritybio.com",
+        phone: "+1 (619) 555-0171",
         industry: "Biotechnology",
         status: "active",
-        lastContact: "2024-07-02",
+        lastContact: "2026-09-30",
         jobTitle: "Research Director",
         address: "456 Science Park, San Diego, CA 92101",
         revenue: "$7,300,000",
@@ -169,28 +169,28 @@ let customers = [
     },
     {
         id: 12,
-        company: "LogiFlow Transport",
-        contact: "Maria Garcia",
-        email: "m.garcia@logiflow.com",
-        phone: "+1 (555) 789-0123",
+        company: "Northgate Freight",
+        contact: "Lucia Fernandez",
+        email: "l.fernandez@northgatefreight.com",
+        phone: "+1 (214) 555-0134",
         industry: "Transportation",
         status: "inactive",
-        lastContact: "2024-05-10",
+        lastContact: "2026-04-22",
         jobTitle: "Fleet Manager",
         address: "321 Transport Way, Dallas, TX 75201",
         revenue: "$22,000,000",
         employees: 800,
-        notes: "Logistics company with expired contract. Potential for renewal."
+        notes: "Logistics company with an expired contract. Potential for renewal."
     },
     {
         id: 13,
-        company: "Digital Marketing Pro",
-        contact: "Alex Kim",
-        email: "a.kim@digitalmarketingpro.com",
-        phone: "+1 (555) 890-1234",
+        company: "Copperleaf Media",
+        contact: "Min-jun Park",
+        email: "m.park@copperleafmedia.com",
+        phone: "+1 (323) 555-0188",
         industry: "Marketing",
         status: "active",
-        lastContact: "2024-06-29",
+        lastContact: "2026-09-25",
         jobTitle: "Creative Director",
         address: "654 Marketing Blvd, Los Angeles, CA 90210",
         revenue: "$4,100,000",
@@ -199,28 +199,28 @@ let customers = [
     },
     {
         id: 14,
-        company: "MediCare Plus",
-        contact: "Dr. Susan Taylor",
-        email: "s.taylor@medicareplus.com",
-        phone: "+1 (555) 901-2345",
+        company: "Elmwood Care Network",
+        contact: "Dr. Naledi Dlamini",
+        email: "n.dlamini@elmwoodcare.com",
+        phone: "+1 (305) 555-0126",
         industry: "Healthcare",
         status: "prospect",
-        lastContact: "2024-06-24",
+        lastContact: "2026-09-16",
         jobTitle: "Chief Information Officer",
         address: "987 Health Ave, Miami, FL 33101",
         revenue: "$31,000,000",
         employees: 750,
-        notes: "Large healthcare provider evaluating EMR systems."
+        notes: "Healthcare provider evaluating EMR systems."
     },
     {
         id: 15,
-        company: "SmartHome Technologies",
-        contact: "Ryan Cooper",
-        email: "r.cooper@smarthometech.com",
-        phone: "+1 (555) 012-3456",
+        company: "Hearthstone Smart Living",
+        contact: "Callum MacLeod",
+        email: "c.macleod@hearthstonesmart.com",
+        phone: "+1 (503) 555-0163",
         industry: "Technology",
         status: "active",
-        lastContact: "2024-07-01",
+        lastContact: "2026-09-29",
         jobTitle: "Product Manager",
         address: "159 Innovation Dr, Portland, OR 97201",
         revenue: "$6,800,000",
@@ -229,13 +229,13 @@ let customers = [
     },
     {
         id: 16,
-        company: "Capital Investments",
-        contact: "Thomas Wilson",
-        email: "t.wilson@capitalinvestments.com",
-        phone: "+1 (555) 123-4567",
+        company: "Alder Capital Partners",
+        contact: "Sebastian Koch",
+        email: "s.koch@aldercapital.com",
+        phone: "+1 (212) 555-0197",
         industry: "Finance",
         status: "active",
-        lastContact: "2024-06-28",
+        lastContact: "2026-09-23",
         jobTitle: "Investment Manager",
         address: "753 Financial St, New York, NY 10004",
         revenue: "$89,000,000",
@@ -244,13 +244,13 @@ let customers = [
     },
     {
         id: 17,
-        company: "AgroTech Farms",
-        contact: "Hannah Miller",
-        email: "h.miller@agrotechfarms.com",
-        phone: "+1 (555) 234-5678",
+        company: "Fallowfield Agri",
+        contact: "Greta Johansson",
+        email: "g.johansson@fallowfieldagri.com",
+        phone: "+1 (515) 555-0121",
         industry: "Agriculture",
         status: "prospect",
-        lastContact: "2024-06-21",
+        lastContact: "2026-09-10",
         jobTitle: "Farm Operations Manager",
         address: "852 Rural Route, Des Moines, IA 50301",
         revenue: "$9,500,000",
@@ -259,13 +259,13 @@ let customers = [
     },
     {
         id: 18,
-        company: "CloudFirst Solutions",
-        contact: "Daniel Rodriguez",
-        email: "d.rodriguez@cloudfirst.com",
-        phone: "+1 (555) 345-6789",
+        company: "Stratus Cloud Services",
+        contact: "Rohan Kapoor",
+        email: "r.kapoor@stratuscloud.com",
+        phone: "+1 (512) 555-0159",
         industry: "Technology",
         status: "active",
-        lastContact: "2024-06-30",
+        lastContact: "2026-09-27",
         jobTitle: "Solutions Architect",
         address: "741 Cloud Ave, Austin, TX 78702",
         revenue: "$14,200,000",
@@ -274,28 +274,28 @@ let customers = [
     },
     {
         id: 19,
-        company: "Fashion Forward",
-        contact: "Isabella Jones",
-        email: "i.jones@fashionforward.com",
-        phone: "+1 (555) 456-7890",
+        company: "Maison Verde Apparel",
+        contact: "Ines Beaumont",
+        email: "i.beaumont@maisonverde.com",
+        phone: "+1 (323) 555-0112",
         industry: "Fashion",
         status: "inactive",
-        lastContact: "2024-04-15",
+        lastContact: "2026-03-18",
         jobTitle: "Brand Manager",
         address: "963 Style St, Los Angeles, CA 90028",
         revenue: "$12,800,000",
         employees: 280,
-        notes: "Fashion retailer with lapsed subscription. Strong brand recognition."
+        notes: "Fashion retailer with a lapsed subscription. Strong brand recognition."
     },
     {
         id: 20,
-        company: "TechConsult Group",
-        contact: "William Davis",
-        email: "w.davis@techconsult.com",
-        phone: "+1 (555) 567-8901",
+        company: "Tarn & Ridley Consulting",
+        contact: "Kofi Asante",
+        email: "k.asante@tarnridley.com",
+        phone: "+1 (202) 555-0148",
         industry: "Consulting",
         status: "active",
-        lastContact: "2024-07-02",
+        lastContact: "2026-09-30",
         jobTitle: "Senior Consultant",
         address: "258 Consulting Way, Washington, DC 20001",
         revenue: "$8,900,000",
@@ -304,13 +304,13 @@ let customers = [
     },
     {
         id: 21,
-        company: "FoodService Masters",
-        contact: "Rachel Green",
-        email: "r.green@foodservicemasters.com",
-        phone: "+1 (555) 678-9012",
+        company: "Larder & Co Foodservice",
+        contact: "Beatrix Novak",
+        email: "b.novak@larderandco.com",
+        phone: "+1 (504) 555-0183",
         industry: "Food Service",
         status: "prospect",
-        lastContact: "2024-06-23",
+        lastContact: "2026-09-15",
         jobTitle: "Operations Coordinator",
         address: "147 Culinary Blvd, New Orleans, LA 70112",
         revenue: "$16,700,000",
@@ -319,13 +319,13 @@ let customers = [
     },
     {
         id: 22,
-        company: "SecureNet Cyber",
-        contact: "Christopher Lee",
-        email: "c.lee@securenetcyber.com",
-        phone: "+1 (555) 789-0123",
+        company: "Ironbark Cyber",
+        contact: "Tariq Rahman",
+        email: "t.rahman@ironbarkcyber.com",
+        phone: "+1 (703) 555-0136",
         industry: "Cybersecurity",
         status: "active",
-        lastContact: "2024-06-27",
+        lastContact: "2026-09-22",
         jobTitle: "Security Analyst",
         address: "369 Security Dr, Arlington, VA 22201",
         revenue: "$11,400,000",
@@ -334,13 +334,13 @@ let customers = [
     },
     {
         id: 23,
-        company: "EcoSustain Industries",
-        contact: "Samantha Clark",
-        email: "s.clark@ecosustain.com",
-        phone: "+1 (555) 890-1234",
+        company: "Greenfield Environmental",
+        contact: "Mirela Popescu",
+        email: "m.popescu@greenfieldenv.com",
+        phone: "+1 (503) 555-0174",
         industry: "Environmental",
         status: "active",
-        lastContact: "2024-06-25",
+        lastContact: "2026-09-20",
         jobTitle: "Environmental Director",
         address: "741 Green Way, Portland, OR 97205",
         revenue: "$5,600,000",
@@ -349,13 +349,13 @@ let customers = [
     },
     {
         id: 24,
-        company: "RealEstate Pro",
-        contact: "Matthew Turner",
-        email: "m.turner@realestatepro.com",
-        phone: "+1 (555) 901-2345",
+        company: "Parkside Property Group",
+        contact: "Oskar Lindgren",
+        email: "o.lindgren@parksidepg.com",
+        phone: "+1 (702) 555-0152",
         industry: "Real Estate",
         status: "prospect",
-        lastContact: "2024-06-19",
+        lastContact: "2026-09-08",
         jobTitle: "Property Manager",
         address: "852 Property Ave, Las Vegas, NV 89101",
         revenue: "$28,300,000",
@@ -364,13 +364,13 @@ let customers = [
     },
     {
         id: 25,
-        company: "AutoTech Solutions",
-        contact: "Jessica Wang",
-        email: "j.wang@autotechsolutions.com",
-        phone: "+1 (555) 012-3456",
+        company: "Torque Automotive Systems",
+        contact: "Shirin Moradi",
+        email: "s.moradi@torqueautomotive.com",
+        phone: "+1 (313) 555-0107",
         industry: "Automotive",
         status: "active",
-        lastContact: "2024-07-01",
+        lastContact: "2026-09-29",
         jobTitle: "Technical Lead",
         address: "159 Motor Way, Detroit, MI 48226",
         revenue: "$19,800,000",
@@ -379,28 +379,28 @@ let customers = [
     },
     {
         id: 26,
-        company: "LegalEagle Law",
-        contact: "Benjamin Adams",
-        email: "b.adams@legaleagle.com",
-        phone: "+1 (555) 123-4567",
+        company: "Hartwell & Associates LLP",
+        contact: "Emmanuel Okonkwo",
+        email: "e.okonkwo@hartwelllaw.com",
+        phone: "+1 (312) 555-0191",
         industry: "Legal",
         status: "inactive",
-        lastContact: "2024-03-20",
+        lastContact: "2026-02-26",
         jobTitle: "Managing Partner",
         address: "753 Justice Blvd, Chicago, IL 60604",
         revenue: "$7,200,000",
         employees: 85,
-        notes: "Law firm with expired case management software license."
+        notes: "Law firm with an expired case management software license."
     },
     {
         id: 27,
-        company: "SportsTech Analytics",
-        contact: "Nicole Phillips",
-        email: "n.phillips@sportstech.com",
-        phone: "+1 (555) 234-5678",
+        company: "Fieldhouse Analytics",
+        contact: "Valentina Rossi",
+        email: "v.rossi@fieldhouseanalytics.com",
+        phone: "+1 (407) 555-0168",
         industry: "Sports",
         status: "active",
-        lastContact: "2024-06-26",
+        lastContact: "2026-09-21",
         jobTitle: "Data Scientist",
         address: "486 Athletic Ave, Orlando, FL 32801",
         revenue: "$3,900,000",
@@ -409,28 +409,28 @@ let customers = [
     },
     {
         id: 28,
-        company: "MusicStream Pro",
-        contact: "Jordan Miller",
-        email: "j.miller@musicstreampro.com",
-        phone: "+1 (555) 345-6789",
+        company: "Harbor Lane Audio",
+        contact: "Kaito Nakamura",
+        email: "k.nakamura@harborlaneaudio.com",
+        phone: "+1 (615) 555-0144",
         industry: "Entertainment",
         status: "prospect",
-        lastContact: "2024-06-18",
+        lastContact: "2026-09-07",
         jobTitle: "Platform Engineer",
         address: "372 Music Row, Nashville, TN 37203",
         revenue: "$24,600,000",
         employees: 460,
-        notes: "Music streaming platform evaluating content management systems."
+        notes: "Audio streaming platform evaluating content management systems."
     },
     {
         id: 29,
-        company: "TravelMax Adventures",
-        contact: "Sofia Rodriguez",
-        email: "s.rodriguez@travelmax.com",
-        phone: "+1 (555) 456-7890",
+        company: "Meridian Journeys",
+        contact: "Ximena Castillo",
+        email: "x.castillo@meridianjourneys.com",
+        phone: "+1 (305) 555-0159",
         industry: "Travel",
         status: "active",
-        lastContact: "2024-06-24",
+        lastContact: "2026-09-17",
         jobTitle: "Travel Coordinator",
         address: "691 Adventure Blvd, Miami, FL 33126",
         revenue: "$13,500,000",
@@ -439,48 +439,48 @@ let customers = [
     },
     {
         id: 30,
-        company: "QuantumData Labs",
-        contact: "Dr. Andrew Chen",
-        email: "a.chen@quantumdata.com",
-        phone: "+1 (555) 567-8901",
+        company: "Quillon Research Labs",
+        contact: "Dr. Ravi Subramanian",
+        email: "r.subramanian@quillonlabs.com",
+        phone: "+1 (617) 555-0186",
         industry: "Research",
         status: "active",
-        lastContact: "2024-07-02",
+        lastContact: "2026-09-30",
         jobTitle: "Principal Researcher",
         address: "128 Quantum St, Cambridge, MA 02139",
         revenue: "$4,700,000",
         employees: 55,
-        notes: "Quantum computing research lab requiring specialized data analysis tools."
+        notes: "Research lab requiring specialized data analysis tools."
     }
 ];
 
 let opportunities = [
     {
         id: 1,
-        company: "Acme Corporation",
-        title: "Enterprise Software License",
+        company: "Harlow Dynamics",
+        title: "Enterprise software license",
         value: "$125,000",
         stage: "proposal",
         probability: "75%",
-        closeDate: "2024-08-15"
+        closeDate: "2026-11-13"
     },
     {
         id: 2,
-        company: "TechStart Inc",
-        title: "Cloud Migration Services",
+        company: "Brightwater Software",
+        title: "Cloud migration services",
         value: "$85,000",
         stage: "qualification",
         probability: "60%",
-        closeDate: "2024-09-30"
+        closeDate: "2026-12-04"
     },
     {
         id: 3,
-        company: "Global Systems",
-        title: "IT Infrastructure Upgrade",
+        company: "Kestrel Industrial Systems",
+        title: "IT infrastructure upgrade",
         value: "$350,000",
         stage: "prospecting",
         probability: "25%",
-        closeDate: "2024-12-01"
+        closeDate: "2026-12-18"
     }
 ];
 
@@ -573,9 +573,12 @@ function switchTab(tabId) {
         tabContent.classList.add('active');
         
         // Update page title
-        document.title = `${tabButton.textContent.trim()} - CRM System - Nexus Corp`;
+        document.title = `${tabButton.textContent.trim()} | CRM | Westbrook Industries`;
     }
 }
+
+// Status badge tones (status colours are used for status only)
+const statusTone = { active: 'tone-success', inactive: 'tone-neutral', prospect: 'tone-info' };
 
 // Customer table rendering with pagination
 function renderCustomersTable() {
@@ -596,11 +599,11 @@ function renderCustomersTable() {
             <td>${customer.email}</td>
             <td>${customer.phone}</td>
             <td>${customer.industry}</td>
-            <td><span class="status-badge ${customer.status}">${customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}</span></td>
+            <td><span class="status-badge ${customer.status} ${statusTone[customer.status] || 'tone-neutral'}">${customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}</span></td>
             <td>${formatDate(customer.lastContact)}</td>
-            <td>
-                <button class="btn-secondary" onclick="editCustomer(${customer.id})" style="margin-right: 5px; padding: 5px 10px; font-size: 0.8em;">Edit</button>
-                <button class="btn-secondary" onclick="viewCustomer(${customer.id})" style="padding: 5px 10px; font-size: 0.8em;">View</button>
+            <td class="row-actions">
+                <button class="btn-secondary btn-small" onclick="editCustomer(${customer.id})">Edit</button>
+                <button class="btn-secondary btn-small" onclick="viewCustomer(${customer.id})">View</button>
             </td>
         `;
         customersTableBody.appendChild(row);
@@ -626,10 +629,10 @@ function renderOpportunityPipeline() {
             const card = document.createElement('div');
             card.className = 'opportunity-card';
             card.innerHTML = `
-                <div style="font-weight: 600; margin-bottom: 5px;">${opp.title}</div>
-                <div style="color: #7f8c8d; font-size: 0.9em; margin-bottom: 5px;">${opp.company}</div>
-                <div style="font-weight: bold; color: #27ae60;">${opp.value}</div>
-                <div style="font-size: 0.8em; color: #95a5a6; margin-top: 5px;">Close: ${formatDate(opp.closeDate)}</div>
+                <div class="opp-title">${opp.title}</div>
+                <div class="opp-company">${opp.company}</div>
+                <div class="opp-value num">${opp.value}</div>
+                <div class="opp-close">Close: ${formatDate(opp.closeDate)}</div>
             `;
             container.appendChild(card);
         });
@@ -728,14 +731,14 @@ function editCustomer(customerId) {
     const customer = customers.find(c => c.id === customerId);
     if (customer) {
         // In a real application, this would populate the form with customer data
-        alert(`Edit Customer: ${customer.company}\n\nThis would open an edit form with the customer's current information.`);
+        alert(`Edit customer: ${customer.company}\n\nThis would open an edit form with the customer's current information.`);
     }
 }
 
 function viewCustomer(customerId) {
     const customer = customers.find(c => c.id === customerId);
     if (customer) {
-        alert(`Customer Details: ${customer.company}\n\nContact: ${customer.contact}\nEmail: ${customer.email}\nPhone: ${customer.phone}\nIndustry: ${customer.industry}\nStatus: ${customer.status}\nRevenue: ${customer.revenue}\nEmployees: ${customer.employees}\n\nNotes: ${customer.notes}`);
+        alert(`Customer details: ${customer.company}\n\nContact: ${customer.contact}\nEmail: ${customer.email}\nPhone: ${customer.phone}\nIndustry: ${customer.industry}\nStatus: ${customer.status}\nRevenue: ${customer.revenue}\nEmployees: ${customer.employees}\n\nNotes: ${customer.notes}`);
     }
 }
 
@@ -745,7 +748,8 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
+        timeZone: 'UTC'
     });
 }
 
@@ -974,4 +978,4 @@ function goToPage(page) {
     }
 }
 
-console.log('Nexus CRM System initialized successfully!');
+console.log('CRM initialized');
