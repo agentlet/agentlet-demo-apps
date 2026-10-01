@@ -3,48 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP System - Nexus Corp</title>
+    <title>Dashboard | ERP | Westbrook Industries</title>
+    <link rel="stylesheet" href="../shared/theme.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="header-left">
-                <div class="logo">⬢ Nexus Corp</div>
-                <div class="app-title">Enterprise Resource Planning</div>
+                <div class="logo">Westbrook</div>
+                <div class="app-title">ERP</div>
             </div>
             <div class="header-right">
                 <div class="user-info">
-                    <span class="user-name">Admin User</span>
-                    <span class="user-role">System Administrator</span>
+                    <span class="user-name">Tomás Herrera</span>
+                    <span class="user-role">Operations manager</span>
                 </div>
-                <button class="back-btn" onclick="window.location.href='../'">← Back to Portal</button>
+                <button class="back-btn" onclick="window.location.href='../'"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg> Portal</button>
             </div>
         </header>
 
         <nav class="sidebar">
             <div class="nav-item active" data-tab="dashboard">
-                <div class="nav-icon">📊</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></div>
                 <span>Dashboard</span>
             </div>
             <div class="nav-item" data-tab="inventory">
-                <div class="nav-icon">📦</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg></div>
                 <span>Inventory</span>
             </div>
             <div class="nav-item" data-tab="accounting">
-                <div class="nav-icon">💰</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></div>
                 <span>Accounting</span>
             </div>
             <div class="nav-item" data-tab="hr">
-                <div class="nav-icon">👥</div>
-                <span>HR Management</span>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></div>
+                <span>HR management</span>
             </div>
             <div class="nav-item" data-tab="procurement">
-                <div class="nav-icon">🛒</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div>
                 <span>Procurement</span>
             </div>
             <div class="nav-item" data-tab="reports">
-                <div class="nav-icon">📈</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
                 <span>Reports</span>
             </div>
         </nav>
@@ -53,43 +54,39 @@
             <div class="tab-content active" id="dashboard">
                 <div class="page-header">
                     <h1>Dashboard</h1>
-                    <div class="date-info">Last Updated: <span id="last-updated"></span></div>
+                    <div class="date-info">Last updated: <span id="last-updated"></span></div>
                 </div>
-                
+
                 <div class="metrics-grid">
                     <div class="metric-card">
-                        <div class="metric-icon">💰</div>
                         <div class="metric-value">$2,845,320</div>
-                        <div class="metric-label">Total Revenue</div>
+                        <div class="metric-label">Total revenue</div>
                         <div class="metric-change positive">+12.5%</div>
                     </div>
                     <div class="metric-card">
-                        <div class="metric-icon">📦</div>
                         <div class="metric-value">1,247</div>
-                        <div class="metric-label">Inventory Items</div>
+                        <div class="metric-label">Inventory items</div>
                         <div class="metric-change negative">-3.2%</div>
                     </div>
                     <div class="metric-card">
-                        <div class="metric-icon">👥</div>
                         <div class="metric-value">156</div>
-                        <div class="metric-label">Active Employees</div>
+                        <div class="metric-label">Active employees</div>
                         <div class="metric-change positive">+2.8%</div>
                     </div>
                     <div class="metric-card">
-                        <div class="metric-icon">📋</div>
                         <div class="metric-value">23</div>
-                        <div class="metric-label">Pending Orders</div>
-                        <div class="metric-change neutral">0%</div>
+                        <div class="metric-label">Pending orders</div>
+                        <div class="metric-change neutral">0.0%</div>
                     </div>
                 </div>
 
                 <div class="dashboard-grid">
                     <div class="chart-container">
-                        <h3>Revenue Trend</h3>
+                        <h3>Revenue trend</h3>
                         <canvas id="revenue-chart"></canvas>
                     </div>
                     <div class="activity-feed">
-                        <h3>Recent Activities</h3>
+                        <h3>Recent activities</h3>
                         <div class="activity-list" id="activity-list"></div>
                     </div>
                 </div>
@@ -97,17 +94,17 @@
 
             <div class="tab-content" id="inventory">
                 <div class="page-header">
-                    <h1>Inventory Management</h1>
-                    <button class="btn btn-primary" onclick="openAddItemModal()">Add New Item</button>
+                    <h1>Inventory management</h1>
+                    <button class="btn btn-primary" onclick="openAddItemModal()"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add new item</button>
                 </div>
-                
+
                 <div class="search-bar">
                     <input type="text" id="inventory-search" placeholder="Search inventory items...">
                     <select id="category-filter">
-                        <option value="">All Categories</option>
+                        <option value="">All categories</option>
                         <option value="electronics">Electronics</option>
-                        <option value="office">Office Supplies</option>
-                        <option value="raw-materials">Raw Materials</option>
+                        <option value="office">Office supplies</option>
+                        <option value="raw-materials">Raw materials</option>
                     </select>
                 </div>
 
@@ -115,12 +112,12 @@
                     <table id="inventory-table">
                         <thead>
                             <tr>
-                                <th>Item Code</th>
+                                <th>Item code</th>
                                 <th>Name</th>
                                 <th>Category</th>
-                                <th>Stock Level</th>
-                                <th>Unit Price</th>
-                                <th>Total Value</th>
+                                <th>Stock level</th>
+                                <th class="num">Unit price</th>
+                                <th class="num">Total value</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -132,9 +129,9 @@
             <div class="tab-content" id="accounting">
                 <div class="page-header">
                     <h1>Accounting</h1>
-                    <button class="btn btn-primary" onclick="openTransactionModal()">New Transaction</button>
+                    <button class="btn btn-primary" onclick="openTransactionModal()"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg> New transaction</button>
                 </div>
-                
+
                 <div class="accounting-overview">
                     <div class="balance-card">
                         <h3>Assets</h3>
@@ -151,29 +148,29 @@
                 </div>
 
                 <div class="transactions-section">
-                    <h3>Recent Transactions</h3>
+                    <h3>Recent transactions</h3>
                     <div class="transaction-list" id="transaction-list"></div>
                 </div>
             </div>
 
             <div class="tab-content" id="hr">
                 <div class="page-header">
-                    <h1>Human Resources</h1>
-                    <button class="btn btn-primary" onclick="openEmployeeModal()">Add Employee</button>
+                    <h1>Human resources</h1>
+                    <button class="btn btn-primary" onclick="openEmployeeModal()"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Add employee</button>
                 </div>
-                
+
                 <div class="hr-stats">
                     <div class="stat-card">
                         <div class="stat-number">156</div>
-                        <div class="stat-label">Total Employees</div>
+                        <div class="stat-label">Total employees</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">12</div>
-                        <div class="stat-label">New Hires (This Month)</div>
+                        <div class="stat-label">New hires (this month)</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">3</div>
-                        <div class="stat-label">Open Positions</div>
+                        <div class="stat-label">Open positions</div>
                     </div>
                 </div>
 
@@ -185,8 +182,8 @@
                                 <th>Name</th>
                                 <th>Department</th>
                                 <th>Position</th>
-                                <th>Hire Date</th>
-                                <th>Salary</th>
+                                <th>Hire date</th>
+                                <th class="num">Salary</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -198,26 +195,26 @@
             <div class="tab-content" id="procurement">
                 <div class="page-header">
                     <h1>Procurement</h1>
-                    <button class="btn btn-primary" onclick="openPurchaseOrderModal()">New Purchase Order</button>
+                    <button class="btn btn-primary" onclick="openPurchaseOrderModal()"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg> New purchase order</button>
                 </div>
-                
+
                 <div class="procurement-stats">
                     <div class="stat-card">
                         <div class="stat-number">$847,230</div>
-                        <div class="stat-label">Monthly Spend</div>
+                        <div class="stat-label">Monthly spend</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">23</div>
-                        <div class="stat-label">Pending Orders</div>
+                        <div class="stat-label">Pending orders</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">47</div>
-                        <div class="stat-label">Active Suppliers</div>
+                        <div class="stat-label">Active suppliers</div>
                     </div>
                 </div>
 
                 <div class="purchase-orders">
-                    <h3>Recent Purchase Orders</h3>
+                    <h3>Recent purchase orders</h3>
                     <div class="purchase-order-list" id="purchase-order-list"></div>
                 </div>
             </div>
@@ -225,23 +222,23 @@
             <div class="tab-content" id="reports">
                 <div class="page-header">
                     <h1>Reports</h1>
-                    <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                    <button class="btn btn-primary" onclick="generateReport()">Generate report</button>
                 </div>
-                
+
                 <div class="report-categories">
                     <div class="report-card" onclick="selectReport('financial')">
-                        <div class="report-icon">💰</div>
-                        <h3>Financial Reports</h3>
-                        <p>Balance sheet, P&L, cash flow</p>
+                        <div class="report-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></div>
+                        <h3>Financial reports</h3>
+                        <p>Balance sheet, P&amp;L, cash flow</p>
                     </div>
                     <div class="report-card" onclick="selectReport('inventory')">
-                        <div class="report-icon">📦</div>
-                        <h3>Inventory Reports</h3>
+                        <div class="report-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg></div>
+                        <h3>Inventory reports</h3>
                         <p>Stock levels, turnover, valuation</p>
                     </div>
                     <div class="report-card" onclick="selectReport('hr')">
-                        <div class="report-icon">👥</div>
-                        <h3>HR Reports</h3>
+                        <div class="report-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></div>
+                        <h3>HR reports</h3>
                         <p>Headcount, payroll, performance</p>
                     </div>
                 </div>
