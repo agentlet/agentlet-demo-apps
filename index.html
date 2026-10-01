@@ -3,232 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Corp - Business Applications Portal</title>
+    <title>Business applications | Westbrook Industries</title>
+    <link rel="stylesheet" href="shared/theme.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
+        .portal-main {
+            flex: 1;
+            width: 100%;
+            max-width: 1040px;
             margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
+            padding: var(--space-6) var(--space-5);
         }
 
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
-            text-align: center;
+        .portal-intro {
+            margin-bottom: var(--space-5);
         }
 
-        .logo {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .portal-intro h1 {
+            margin-bottom: var(--space-1);
         }
 
-        .logo::before {
-            content: "⬢ ";
-            color: #3498db;
-        }
-
-        .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .main-content {
-            padding: 40px;
-        }
-
-        .welcome {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .welcome h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 2em;
-        }
-
-        .welcome p {
-            color: #7f8c8d;
-            font-size: 1.1em;
+        .portal-intro p {
+            color: var(--text-muted);
         }
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-3);
         }
 
         .app-card {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
             text-decoration: none;
-            color: inherit;
         }
 
         .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: #3498db;
+            border-color: var(--accent);
+            text-decoration: none;
         }
 
         .app-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+            width: 36px;
+            height: 36px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border-radius: var(--radius);
         }
 
         .app-title {
-            font-size: 1.4em;
             font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .app-card:hover .app-title {
+            color: var(--accent);
         }
 
         .app-description {
-            color: #7f8c8d;
-            line-height: 1.6;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-top: 15px;
-        }
-
-        .status.available {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status.coming-soon {
-            background: #fff3cd;
-            color: #856404;
+            margin-top: 2px;
+            font-size: var(--text-sm);
+            color: var(--text-muted);
         }
 
         .footer {
-            background: #ecf0f1;
-            padding: 20px 40px;
+            padding: var(--space-4) var(--space-5);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
             text-align: center;
-            color: #7f8c8d;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid var(--border);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <div class="logo">Nexus Corp</div>
-            <div class="subtitle">Business Applications Portal</div>
+            <div class="header-left">
+                <div class="logo">Westbrook</div>
+                <div class="app-title">Business applications</div>
+            </div>
         </header>
 
-        <main class="main-content">
-            <div class="welcome">
-                <h2>Welcome to Your Business Hub</h2>
-                <p>Access all your essential business applications from one centralized location.</p>
+        <main class="portal-main">
+            <div class="portal-intro">
+                <h1>Applications</h1>
+                <p>Internal tools for sales, operations, finance, people and support.</p>
             </div>
 
             <div class="apps-grid">
                 <a href="crm/index.html" class="app-card">
-                    <div class="app-icon">👥</div>
-                    <div class="app-title">Customer Relationship Management</div>
-                    <div class="app-description">
-                        Manage customer information, track interactions, and monitor sales opportunities. 
-                        Complete customer lifecycle management in one place.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 2v2"/><path d="M7 21v-2a2 2 0 012-2h6a2 2 0 012 2v2"/><path d="M8 2v2"/><circle cx="12" cy="10" r="3"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Customer relationship management</div>
+                        <div class="app-description">Customers, opportunities, activities and sales reports.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
-
                 <a href="erp/index.html" class="app-card">
-                    <div class="app-icon">📊</div>
-                    <div class="app-title">Enterprise Resource Planning</div>
-                    <div class="app-description">
-                        Integrated business processes including inventory, accounting, and human resources. 
-                        Streamline operations across departments.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Enterprise resource planning</div>
+                        <div class="app-description">Inventory, accounting, procurement and employee records.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
-
                 <a href="bi/index.html" class="app-card">
-                    <div class="app-icon">📈</div>
-                    <div class="app-title">Business Intelligence</div>
-                    <div class="app-description">
-                        Advanced analytics and reporting dashboard. Generate insights from your data 
-                        with interactive charts and KPI monitoring.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Business intelligence</div>
+                        <div class="app-description">Sales, customer, operations and financial dashboards.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
-
                 <a href="helpdesk/index.html" class="app-card">
-                    <div class="app-icon">🎫</div>
-                    <div class="app-title">Help Desk & Ticketing</div>
-                    <div class="app-description">
-                        IT support ticket management system. Track issues, assign tasks, and monitor 
-                        resolution times with automated workflows.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Help desk</div>
+                        <div class="app-description">IT support tickets, knowledge base and agents.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
-
                 <a href="hr/index.html" class="app-card">
-                    <div class="app-icon">👤</div>
-                    <div class="app-title">Human Resources</div>
-                    <div class="app-description">
-                        Employee management, payroll processing, and performance tracking. 
-                        Complete HR solution for workforce management.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Human resources</div>
+                        <div class="app-description">Employees, recruitment, payroll, performance and benefits.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
-
                 <a href="projects/index.html" class="app-card">
-                    <div class="app-icon">📋</div>
-                    <div class="app-title">Project Management</div>
-                    <div class="app-description">
-                        Plan, execute, and monitor projects with Gantt charts, task assignments, 
-                        and team collaboration tools.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 7v7"/><path d="M12 7v4"/><path d="M16 7v9"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Project management</div>
+                        <div class="app-description">Projects, task board, Gantt chart, resources and calendar.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
-
                 <a href="expenses/index.html" class="app-card">
-                    <div class="app-icon">💳</div>
-                    <div class="app-title">Expense Management</div>
-                    <div class="app-description">
-                        Invoice and expense approval system. Download receipts, validate expenses, 
-                        and manage approval workflows with compliance tracking.
+                    <div class="app-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg></div>
+                    <div class="app-text">
+                        <div class="app-title">Expense management</div>
+                        <div class="app-description">Review, approve or reject expense claims and download receipts.</div>
                     </div>
-                    <span class="status available">Available</span>
                 </a>
             </div>
         </main>
 
         <footer class="footer">
-            <p>&copy; 2024 Nexus Corp. All rights reserved.</p>
+            &copy; 2026 Westbrook Industries. Internal use only.
         </footer>
     </div>
 </body>
