@@ -1,10 +1,11 @@
-// Project Management System JavaScript
+// Projects app
 class ProjectManagement {
     constructor() {
         this.projects = [];
         this.tasks = [];
         this.resources = [];
         this.currentTab = 'dashboard';
+        this.calendarOffset = 0;
         this.init();
     }
 
@@ -19,44 +20,44 @@ class ProjectManagement {
         this.projects = [
             {
                 id: 1,
-                name: 'Website Redesign',
-                code: 'WR-2024-001',
-                description: 'Complete redesign of corporate website with modern UX/UI',
+                name: 'Corporate website redesign',
+                code: 'WR-2026-001',
+                description: 'Rebuild the corporate website with a new navigation and a faster page layout',
                 status: 'active',
                 priority: 'high',
                 manager: 'sarah-wilson',
-                startDate: '2024-01-15',
-                endDate: '2024-03-15',
+                startDate: '2026-04-06',
+                endDate: '2026-11-27',
                 budget: 50000,
                 client: 'Internal',
                 progress: 65
             },
             {
                 id: 2,
-                name: 'Mobile App Development',
-                code: 'MAD-2024-002',
-                description: 'Native iOS and Android app for customer portal',
+                name: 'Customer mobile app',
+                code: 'MAD-2026-002',
+                description: 'Native iOS and Android app for the customer ordering portal',
                 status: 'planning',
                 priority: 'critical',
                 manager: 'mike-chen',
-                startDate: '2024-02-01',
-                endDate: '2024-06-01',
+                startDate: '2026-10-05',
+                endDate: '2026-12-18',
                 budget: 120000,
-                client: 'ABC Corp',
+                client: 'Brightwater Logistics',
                 progress: 15
             },
             {
                 id: 3,
-                name: 'Data Migration',
-                code: 'DM-2024-003',
-                description: 'Migrate legacy systems to cloud infrastructure',
+                name: 'Legacy data migration',
+                code: 'DM-2026-003',
+                description: 'Move the legacy order and inventory systems to cloud infrastructure',
                 status: 'active',
                 priority: 'medium',
                 manager: 'emily-davis',
-                startDate: '2024-01-01',
-                endDate: '2024-04-01',
+                startDate: '2026-02-02',
+                endDate: '2026-10-16',
                 budget: 75000,
-                client: 'XYZ Inc',
+                client: 'Kestrel Foods',
                 progress: 80
             }
         ];
@@ -70,7 +71,7 @@ class ProjectManagement {
                 status: 'done',
                 assignee: 'john-smith',
                 priority: 'high',
-                dueDate: '2024-02-01',
+                dueDate: '2026-09-11',
                 estimatedHours: 20
             },
             {
@@ -81,18 +82,18 @@ class ProjectManagement {
                 status: 'in-progress',
                 assignee: 'sarah-wilson',
                 priority: 'high',
-                dueDate: '2024-02-15',
+                dueDate: '2026-10-05',
                 estimatedHours: 60
             },
             {
                 id: 3,
-                title: 'API Integration',
+                title: 'API integration',
                 description: 'Connect frontend with backend APIs',
                 projectId: 2,
                 status: 'todo',
                 assignee: 'mike-chen',
                 priority: 'medium',
-                dueDate: '2024-03-01',
+                dueDate: '2026-10-14',
                 estimatedHours: 40
             }
         ];
@@ -100,27 +101,27 @@ class ProjectManagement {
         this.resources = [
             {
                 id: 1,
-                name: 'John Smith',
-                role: 'Frontend Developer',
-                currentProject: 'Website Redesign',
+                name: 'Kwame Mensah',
+                role: 'Frontend developer',
+                currentProject: 'Corporate website redesign',
                 utilization: 85,
                 availability: 'Available',
                 costPerHour: 75
             },
             {
                 id: 2,
-                name: 'Sarah Wilson',
-                role: 'Project Manager',
-                currentProject: 'Website Redesign',
+                name: 'Daniel Moreau',
+                role: 'Project manager',
+                currentProject: 'Corporate website redesign',
                 utilization: 90,
                 availability: 'Busy',
                 costPerHour: 95
             },
             {
                 id: 3,
-                name: 'Mike Chen',
-                role: 'Full Stack Developer',
-                currentProject: 'Mobile App Development',
+                name: 'Sofia Marchetti',
+                role: 'Full stack developer',
+                currentProject: 'Customer mobile app',
                 utilization: 70,
                 availability: 'Available',
                 costPerHour: 85
@@ -184,7 +185,10 @@ class ProjectManagement {
             content.classList.remove('active');
         });
         
-        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        const activeItem = document.querySelector(`[data-tab="${tabName}"]`);
+        activeItem.classList.add('active');
+        const label = activeItem.querySelector('span').textContent.trim();
+        document.title = `${label} | Projects | Westbrook Industries`;
         document.getElementById(tabName).classList.add('active');
         
         switch(tabName) {
@@ -216,6 +220,7 @@ class ProjectManagement {
         this.renderProjectOverview();
         this.renderUpcomingDeadlines();
         this.renderRecentActivity();
+        this.renderWorkloadChart();
     }
 
     renderProjectOverview() {
@@ -226,7 +231,7 @@ class ProjectManagement {
             <div class="project-item">
                 <div class="project-info">
                     <div class="project-name">${project.name}</div>
-                    <div class="project-details">${project.code} • ${project.client}</div>
+                    <div class="project-details">${project.code}, ${project.client}</div>
                 </div>
                 <div class="project-status ${project.status}">${this.formatStatus(project.status)}</div>
             </div>
@@ -244,11 +249,16 @@ class ProjectManagement {
             return timeDiff > 0 && timeDiff <= 7 * 24 * 60 * 60 * 1000;
         });
 
+        if (upcomingTasks.length === 0) {
+            container.innerHTML = '<div class="empty-state">No deadlines in the next 7 days</div>';
+            return;
+        }
+
         container.innerHTML = upcomingTasks.map(task => `
             <div class="deadline-item">
                 <div class="deadline-info">
                     <div class="deadline-task">${task.title}</div>
-                    <div class="deadline-date">Due: ${this.formatDate(task.dueDate)}</div>
+                    <div class="deadline-date">Due ${this.formatDate(task.dueDate)}</div>
                 </div>
                 <div class="priority-badge ${task.priority}">${this.formatPriority(task.priority)}</div>
             </div>
@@ -260,10 +270,10 @@ class ProjectManagement {
         if (!container) return;
 
         const activities = [
-            { title: 'Project "Website Redesign" updated', time: '2 hours ago' },
-            { title: 'Task "API Integration" assigned to Mike Chen', time: '4 hours ago' },
-            { title: 'New project "Mobile App Development" created', time: '1 day ago' },
-            { title: 'Resource "John Smith" availability changed', time: '2 days ago' }
+            { title: 'Project "Corporate website redesign" updated', time: '2 hours ago' },
+            { title: 'Task "API integration" assigned to Sofia Marchetti', time: '4 hours ago' },
+            { title: 'New project "Customer mobile app" created', time: '1 day ago' },
+            { title: 'Resource "Kwame Mensah" availability changed', time: '2 days ago' }
         ];
 
         container.innerHTML = activities.map(activity => `
@@ -330,7 +340,8 @@ class ProjectManagement {
             <div class="task-card" onclick="editTask(${task.id})">
                 <div class="task-title">${task.title}</div>
                 <div class="task-meta">
-                    <span>Due: ${this.formatDate(task.dueDate)}</span>
+                    <span class="priority-badge ${task.priority}">${this.formatPriority(task.priority)}</span>
+                    <span>Due ${this.formatDate(task.dueDate)}</span>
                     <span class="task-assignee">${this.getAssigneeName(task.assignee)}</span>
                 </div>
             </div>
@@ -344,19 +355,25 @@ class ProjectManagement {
         const timeline = document.getElementById('gantt-timeline');
         if (timeline) {
             timeline.innerHTML = `
-                <div class="timeline-item">Jan 2024</div>
-                <div class="timeline-item">Feb 2024</div>
-                <div class="timeline-item">Mar 2024</div>
-                <div class="timeline-item">Apr 2024</div>
-                <div class="timeline-item">May 2024</div>
-                <div class="timeline-item">Jun 2024</div>
+                <div class="timeline-item">Jan</div>
+                <div class="timeline-item">Feb</div>
+                <div class="timeline-item">Mar</div>
+                <div class="timeline-item">Apr</div>
+                <div class="timeline-item">May</div>
+                <div class="timeline-item">Jun</div>
+                <div class="timeline-item">Jul</div>
+                <div class="timeline-item">Aug</div>
+                <div class="timeline-item">Sep</div>
+                <div class="timeline-item">Oct</div>
+                <div class="timeline-item">Nov</div>
+                <div class="timeline-item">Dec</div>
             `;
         }
 
         container.innerHTML = this.projects.map(project => `
             <div class="gantt-row">
                 <div class="gantt-project">${project.name}</div>
-                <div class="gantt-bar" style="width: ${project.progress}%; margin-left: ${this.calculateGanttOffset(project.startDate)}%"></div>
+                <div class="gantt-bar ${project.status}" style="width: ${project.progress}%; margin-left: ${this.calculateGanttOffset(project.startDate)}%"></div>
             </div>
         `).join('');
     }
@@ -370,14 +387,16 @@ class ProjectManagement {
                 <td>${resource.name}</td>
                 <td>${resource.role}</td>
                 <td>${resource.currentProject}</td>
-                <td>
-                    <div class="utilization-bar">
-                        <div class="utilization-fill" style="width: ${resource.utilization}%"></div>
+                <td class="num">
+                    <div class="utilization">
+                        <div class="utilization-bar">
+                            <div class="utilization-fill" style="width: ${resource.utilization}%"></div>
+                        </div>
+                        <span>${resource.utilization}%</span>
                     </div>
-                    ${resource.utilization}%
                 </td>
-                <td>${resource.availability}</td>
-                <td>$${resource.costPerHour}/hr</td>
+                <td><span class="badge ${resource.availability === 'Available' ? 'tone-success' : 'tone-warning'}">${resource.availability}</span></td>
+                <td class="num">$${resource.costPerHour.toFixed(2)}/hr</td>
                 <td>
                     <button class="btn btn-link" onclick="editResource(${resource.id})">Edit</button>
                 </td>
@@ -385,6 +404,7 @@ class ProjectManagement {
         `).join('');
 
         this.renderTeamCapacity();
+        this.renderAllocationChart();
     }
 
     renderTeamCapacity() {
@@ -409,8 +429,9 @@ class ProjectManagement {
         if (!container) return;
 
         const today = new Date();
-        const currentMonth = today.getMonth();
-        const currentYear = today.getFullYear();
+        const shown = new Date(today.getFullYear(), today.getMonth() + this.calendarOffset, 1);
+        const currentMonth = shown.getMonth();
+        const currentYear = shown.getFullYear();
         const firstDay = new Date(currentYear, currentMonth, 1);
         const lastDay = new Date(currentYear, currentMonth + 1, 0);
         const startDate = new Date(firstDay);
@@ -425,7 +446,7 @@ class ProjectManagement {
             const dayEvents = this.getEventsForDate(currentDate);
             
             calendarHTML += `
-                <div class="calendar-day ${!isCurrentMonth ? 'other-month' : ''}">
+                <div class="calendar-day ${!isCurrentMonth ? 'other-month' : ''}${currentDate.toDateString() === today.toDateString() ? ' today' : ''}">
                     <div class="day-number">${currentDate.getDate()}</div>
                     <div class="day-events">
                         ${dayEvents.map(event => `<div class="event-item">${event}</div>`).join('')}
@@ -436,6 +457,33 @@ class ProjectManagement {
 
         container.innerHTML = calendarHTML;
         document.getElementById('calendar-title').textContent = `${this.getMonthName(currentMonth)} ${currentYear}`;
+        this.renderUpcomingEvents();
+    }
+
+    renderUpcomingEvents() {
+        const container = document.getElementById('upcoming-events');
+        if (!container) return;
+
+        const now = new Date();
+        const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        const events = [];
+        this.projects.forEach(project => {
+            if (project.startDate >= todayIso) events.push({ date: project.startDate, text: `${project.name} starts` });
+            if (project.endDate >= todayIso) events.push({ date: project.endDate, text: `${project.name} ends` });
+        });
+        events.sort((a, b) => a.date.localeCompare(b.date));
+
+        if (events.length === 0) {
+            container.innerHTML = '<div class="empty-state">No upcoming events</div>';
+            return;
+        }
+
+        container.innerHTML = events.slice(0, 6).map(event => `
+            <div class="event-row">
+                <span class="event-date">${this.formatDate(event.date)}</span>
+                <span>${event.text}</span>
+            </div>
+        `).join('');
     }
 
     renderReports() {
@@ -443,41 +491,97 @@ class ProjectManagement {
     }
 
     renderCompletionChart() {
-        const canvas = document.getElementById('completion-chart');
-        if (!canvas) return;
+        const chart = this.prepareCanvas(document.getElementById('completion-chart'));
+        if (!chart) return;
 
-        const ctx = canvas.getContext('2d');
         const data = [65, 45, 80, 75, 85, 90];
-        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-        
-        this.drawChart(ctx, data, labels, canvas.width, canvas.height);
+        const labels = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+
+        this.drawChart(chart.ctx, data, labels, chart.width, chart.height);
+    }
+
+    renderWorkloadChart() {
+        const chart = this.prepareCanvas(document.getElementById('workload-chart'));
+        if (!chart) return;
+
+        const names = this.resources.map(resource => resource.name.split(' ')[0]);
+        const data = this.resources.map(resource => resource.utilization);
+        this.drawChart(chart.ctx, data, names, chart.width, chart.height);
+    }
+
+    renderAllocationChart() {
+        const chart = this.prepareCanvas(document.getElementById('allocation-chart'));
+        if (!chart) return;
+
+        const byProject = {};
+        this.resources.forEach(resource => {
+            (byProject[resource.currentProject] = byProject[resource.currentProject] || []).push(resource.utilization);
+        });
+        const labels = Object.keys(byProject);
+        const data = labels.map(name => Math.round(byProject[name].reduce((sum, v) => sum + v, 0) / byProject[name].length));
+        this.drawChart(chart.ctx, data, labels, chart.width, chart.height);
+    }
+
+    cssVar(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    prepareCanvas(canvas) {
+        if (!canvas) return null;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (!width || !height) return null;
+
+        const ratio = window.devicePixelRatio || 1;
+        canvas.width = Math.round(width * ratio);
+        canvas.height = Math.round(height * ratio);
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        return { ctx, width, height };
     }
 
     drawChart(ctx, data, labels, width, height) {
         ctx.clearRect(0, 0, width, height);
-        
-        const padding = 40;
-        const chartWidth = width - 2 * padding;
-        const chartHeight = height - 2 * padding;
-        const maxValue = Math.max(...data);
-        const barWidth = chartWidth / data.length;
-        
-        ctx.fillStyle = '#8e44ad';
-        
+
+        const font = this.cssVar('--font-sans');
+        const padLeft = 36;
+        const padRight = 12;
+        const padTop = 22;
+        const padBottom = 28;
+        const chartWidth = width - padLeft - padRight;
+        const chartHeight = height - padTop - padBottom;
+        const top = 100;
+        const barSlot = chartWidth / data.length;
+        const barWidth = Math.min(barSlot * 0.6, 56);
+
+        ctx.font = `11px ${font}`;
+        ctx.lineWidth = 1;
+        for (let step = 0; step <= 4; step++) {
+            const value = (top / 4) * step;
+            const y = Math.round(padTop + chartHeight - (value / top) * chartHeight) + 0.5;
+            ctx.strokeStyle = this.cssVar('--chart-grid');
+            ctx.beginPath();
+            ctx.moveTo(padLeft, y);
+            ctx.lineTo(width - padRight, y);
+            ctx.stroke();
+            ctx.fillStyle = this.cssVar('--text-muted');
+            ctx.textAlign = 'right';
+            ctx.fillText(value + '%', padLeft - 6, y + 4);
+        }
+
         data.forEach((value, index) => {
-            const barHeight = (value / maxValue) * chartHeight;
-            const x = padding + index * barWidth + barWidth * 0.1;
-            const y = height - padding - barHeight;
-            
-            ctx.fillRect(x, y, barWidth * 0.8, barHeight);
-            
-            ctx.fillStyle = '#2c3e50';
-            ctx.font = '12px Arial';
+            const barHeight = (value / top) * chartHeight;
+            const x = padLeft + index * barSlot + (barSlot - barWidth) / 2;
+            const y = padTop + chartHeight - barHeight;
+
+            ctx.fillStyle = this.cssVar('--chart-1');
+            ctx.fillRect(x, y, barWidth, barHeight);
+
             ctx.textAlign = 'center';
-            ctx.fillText(labels[index], x + barWidth * 0.4, height - padding + 20);
-            ctx.fillText(value + '%', x + barWidth * 0.4, y - 5);
-            
-            ctx.fillStyle = '#8e44ad';
+            ctx.fillStyle = this.cssVar('--text');
+            ctx.fillText(value + '%', x + barWidth / 2, y - 6);
+            ctx.fillStyle = this.cssVar('--text-muted');
+            ctx.fillText(labels[index], x + barWidth / 2, height - padBottom + 16, barSlot - 4);
         });
     }
 
@@ -588,7 +692,7 @@ class ProjectManagement {
         const statusMap = {
             'planning': 'Planning',
             'active': 'Active',
-            'on-hold': 'On Hold',
+            'on-hold': 'On hold',
             'completed': 'Completed',
             'cancelled': 'Cancelled'
         };
@@ -606,25 +710,26 @@ class ProjectManagement {
     }
 
     formatDate(dateString) {
+        if (!dateString) return 'No date';
         const date = new Date(dateString);
-        return date.toLocaleDateString();
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
     }
 
     getManagerName(managerId) {
         const managers = {
-            'sarah-wilson': 'Sarah Wilson',
-            'mike-chen': 'Mike Chen',
-            'emily-davis': 'Emily Davis'
+            'sarah-wilson': 'Daniel Moreau',
+            'mike-chen': 'Sofia Marchetti',
+            'emily-davis': 'Rajesh Iyer'
         };
         return managers[managerId] || managerId;
     }
 
     getAssigneeName(assigneeId) {
         const assignees = {
-            'john-smith': 'JS',
-            'sarah-wilson': 'SW',
-            'mike-chen': 'MC',
-            'emily-davis': 'ED'
+            'john-smith': 'KM',
+            'sarah-wilson': 'DM',
+            'mike-chen': 'SM',
+            'emily-davis': 'RI'
         };
         return assignees[assigneeId] || assigneeId;
     }
@@ -637,14 +742,11 @@ class ProjectManagement {
     }
 
     getEventsForDate(date) {
+        const iso = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
         const events = [];
         this.projects.forEach(project => {
-            const startDate = new Date(project.startDate);
-            const endDate = new Date(project.endDate);
-            
-            if (date >= startDate && date <= endDate) {
-                events.push(project.name);
-            }
+            if (project.startDate === iso) events.push(`${project.name} starts`);
+            if (project.endDate === iso) events.push(`${project.name} ends`);
         });
         return events.slice(0, 2);
     }
@@ -718,7 +820,9 @@ function calendarView(view) {
 }
 
 function navigateCalendar(direction) {
-    console.log('Navigate calendar:', direction);
+    if (!window.projectApp) return;
+    window.projectApp.calendarOffset += direction;
+    window.projectApp.renderCalendar();
 }
 
 function addEvent() {
@@ -743,5 +847,5 @@ function refreshDashboard() {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    new ProjectManagement();
+    window.projectApp = new ProjectManagement();
 });
