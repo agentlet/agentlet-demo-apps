@@ -21,3 +21,5 @@ jobs:
         run: node --test
       - name: Check CDN resources are pinned with integrity
         run: node scripts/cdn-inventory.mjs --check
+      - name: Check plain punctuation and no emoji
+        run: node scripts/check-typography.mjs
