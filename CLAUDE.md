@@ -72,3 +72,11 @@ In exceptional cases, you can bypass the hook with:
 git commit --no-verify -m "your message"
 ```
 However, this is strongly discouraged as it defeats the purpose of maintaining consistent commit history.
+
+## Dependency scan
+
+The `Security` workflow scans the libraries the demo pages load from CDNs for known vulnerabilities, on pull requests, on pushes to main and nightly. It uses the shared [dependency-scan action](https://github.com/agentlet/.github/tree/main/actions/dependency-scan). There is no lockfile: `node scripts/cdn-inventory.mjs` writes a CycloneDX SBOM to `reports/security/sbom-cdn.cdx.json` (git-ignored), and every component in it is a blocking scope. Resources that are not pinned to an exact version cannot be matched against advisories, so `node scripts/cdn-inventory.mjs --check` in CI keeps them out.
+
+A finding blocks when it is critical or high with a known fix, or when it is in the CISA Known Exploited Vulnerabilities catalog. A failing nightly run opens or updates one issue labelled `security`.
+
+Exceptions live in `security/vulnerability-exceptions.json` (empty by default). An exception is a deliberate, time-boxed decision to accept a known risk, for example when no fix exists and the affected code cannot be reached. Each entry needs an `id` (GHSA or CVE), a `reason`, an `owner` and an `expires` date (`YYYY-MM-DD`). An expired entry fails the gate until it is renewed or removed. Exception changes are reviewed in a pull request like code.
