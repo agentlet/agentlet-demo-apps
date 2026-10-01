@@ -1,4 +1,4 @@
-// Help Desk & Ticketing System JavaScript
+// Help desk JavaScript
 
 // Global variables
 let tickets = [];
@@ -11,56 +11,56 @@ const pageSize = 10;
 const sampleTickets = [
     {
         id: 'TKT-001',
-        subject: 'Login Issues with Email Client',
+        subject: 'Login issues with email client',
         status: 'open',
         priority: 'high',
-        requester: 'john.doe@nexuscorp.com',
-        agent: 'Jane Smith',
-        created: '2024-01-15T09:30:00Z',
+        requester: 'sofia.marchetti@westbrook.example',
+        agent: 'Hannah Kowalski',
+        created: '2026-09-28T09:30:00Z',
         category: 'software',
         description: 'Unable to connect to email server after password change'
     },
     {
         id: 'TKT-002',
-        subject: 'Printer Not Working in Conference Room',
+        subject: 'Printer not working in conference room',
         status: 'in-progress',
         priority: 'normal',
-        requester: 'sarah.wilson@nexuscorp.com',
-        agent: 'Mike Wilson',
-        created: '2024-01-15T11:45:00Z',
+        requester: 'mateo.alvarez@westbrook.example',
+        agent: 'Kwame Mensah',
+        created: '2026-09-28T11:45:00Z',
         category: 'hardware',
         description: 'Conference room printer shows offline status'
     },
     {
         id: 'TKT-003',
-        subject: 'VPN Connection Timeout',
+        subject: 'VPN connection timeout',
         status: 'urgent',
         priority: 'urgent',
-        requester: 'david.chen@nexuscorp.com',
-        agent: 'John Doe',
-        created: '2024-01-15T14:20:00Z',
+        requester: 'yuki.tanaka@westbrook.example',
+        agent: 'Rajesh Iyer',
+        created: '2026-09-29T14:20:00Z',
         category: 'network',
         description: 'Cannot establish VPN connection from home office'
     },
     {
         id: 'TKT-004',
-        subject: 'Software License Request',
+        subject: 'Software license request',
         status: 'pending',
         priority: 'low',
-        requester: 'emily.davis@nexuscorp.com',
-        agent: 'Jane Smith',
-        created: '2024-01-14T16:15:00Z',
+        requester: 'fatima.al-sayed@westbrook.example',
+        agent: 'Hannah Kowalski',
+        created: '2026-09-30T16:15:00Z',
         category: 'software',
-        description: 'Need additional Adobe Creative Suite license'
+        description: 'Need an additional license for the design software'
     },
     {
         id: 'TKT-005',
-        subject: 'Account Access Request',
+        subject: 'Account access request',
         status: 'resolved',
         priority: 'normal',
-        requester: 'robert.johnson@nexuscorp.com',
-        agent: 'Mike Wilson',
-        created: '2024-01-14T10:30:00Z',
+        requester: 'oliver.grant@westbrook.example',
+        agent: 'Kwame Mensah',
+        created: '2026-09-30T10:30:00Z',
         category: 'access',
         description: 'New employee needs access to project management system'
     }
@@ -68,62 +68,88 @@ const sampleTickets = [
 
 const sampleUsers = [
     {
-        name: 'John Doe',
-        email: 'john.doe@nexuscorp.com',
+        name: 'Sofia Marchetti',
+        email: 'sofia.marchetti@westbrook.example',
         department: 'Engineering',
         role: 'Developer',
         ticketsCreated: 12,
-        lastActive: '2024-01-15T14:30:00Z'
+        lastActive: '2026-09-30T14:30:00Z'
     },
     {
-        name: 'Sarah Wilson',
-        email: 'sarah.wilson@nexuscorp.com',
+        name: 'Mateo Alvarez',
+        email: 'mateo.alvarez@westbrook.example',
         department: 'Marketing',
         role: 'Marketing Manager',
         ticketsCreated: 8,
-        lastActive: '2024-01-15T13:45:00Z'
+        lastActive: '2026-09-30T13:45:00Z'
     },
     {
-        name: 'David Chen',
-        email: 'david.chen@nexuscorp.com',
+        name: 'Yuki Tanaka',
+        email: 'yuki.tanaka@westbrook.example',
         department: 'Sales',
         role: 'Sales Representative',
         ticketsCreated: 15,
-        lastActive: '2024-01-15T16:20:00Z'
+        lastActive: '2026-09-30T16:20:00Z'
     },
     {
-        name: 'Emily Davis',
-        email: 'emily.davis@nexuscorp.com',
+        name: 'Fatima Al-Sayed',
+        email: 'fatima.al-sayed@westbrook.example',
         department: 'Design',
         role: 'UI/UX Designer',
         ticketsCreated: 6,
-        lastActive: '2024-01-15T12:10:00Z'
+        lastActive: '2026-09-29T12:10:00Z'
     }
 ];
 
 const sampleKnowledge = [
     {
-        title: 'How to Reset Email Password',
+        title: 'How to reset your email password',
         category: 'software',
         views: 245,
-        lastUpdated: '2024-01-10',
+        lastUpdated: '2026-09-10',
         content: 'Step-by-step guide to reset your email password...'
     },
     {
-        title: 'VPN Setup Guide',
+        title: 'VPN setup guide',
         category: 'network',
         views: 189,
-        lastUpdated: '2024-01-08',
+        lastUpdated: '2026-09-08',
         content: 'Complete guide to setting up VPN connection...'
     },
     {
-        title: 'Printer Troubleshooting',
+        title: 'Printer troubleshooting',
         category: 'hardware',
         views: 156,
-        lastUpdated: '2024-01-12',
+        lastUpdated: '2026-09-12',
         content: 'Common printer issues and their solutions...'
     }
 ];
+
+// Badge tones (see shared/theme.css)
+const statusTones = {
+    'open': 'info',
+    'in-progress': 'neutral',
+    'pending': 'warning',
+    'urgent': 'danger',
+    'resolved': 'success',
+    'closed': 'neutral'
+};
+
+const priorityTones = {
+    'low': 'neutral',
+    'normal': 'neutral',
+    'high': 'warning',
+    'urgent': 'danger'
+};
+
+// Read a theme token so canvas charts use the same colours as the CSS
+function cssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function statusBadge(status) {
+    return `<span class="ticket-status status-badge ${status} tone-${statusTones[status] || 'neutral'}">${status.replace('-', ' ')}</span>`;
+}
 
 // URL Router for SPA functionality
 const router = {
@@ -201,7 +227,7 @@ function switchTab(tabName) {
     if (navItem && tabContent) {
         navItem.classList.add('active');
         tabContent.classList.add('active');
-        document.title = `${navItem.textContent.trim()} - Help Desk - Nexus Corp`;
+        document.title = `${navItem.querySelector('span:not(.badge)').textContent.trim()} | Help desk | Westbrook Industries`;
     }
     
     loadTabContent(tabName);
@@ -285,9 +311,9 @@ function loadRecentTickets() {
         ticketElement.innerHTML = `
             <div class="ticket-info">
                 <div class="ticket-subject">${ticket.subject}</div>
-                <div class="ticket-meta">${ticket.id} • ${ticket.requester}</div>
+                <div class="ticket-meta">${ticket.id}, ${ticket.requester}</div>
             </div>
-            <span class="ticket-status ${ticket.status}">${ticket.status.replace('-', ' ')}</span>
+            ${statusBadge(ticket.status)}
         `;
         container.appendChild(ticketElement);
     });
@@ -298,9 +324,9 @@ function loadAgentPerformance() {
     if (!container) return;
     
     const agents = [
-        { name: 'Jane Smith', resolved: 23, avg: '2.4h' },
-        { name: 'Mike Wilson', resolved: 19, avg: '3.1h' },
-        { name: 'John Doe', resolved: 15, avg: '2.8h' }
+        { name: 'Hannah Kowalski', resolved: 23, avg: '2.4h' },
+        { name: 'Kwame Mensah', resolved: 19, avg: '3.1h' },
+        { name: 'Rajesh Iyer', resolved: 15, avg: '2.8h' }
     ];
     
     container.innerHTML = '';
@@ -310,11 +336,48 @@ function loadAgentPerformance() {
         agentElement.innerHTML = `
             <div class="ticket-info">
                 <div class="ticket-subject">${agent.name}</div>
-                <div class="ticket-meta">Avg Response: ${agent.avg}</div>
+                <div class="ticket-meta">Avg response: ${agent.avg}</div>
             </div>
-            <span class="ticket-status resolved">${agent.resolved} resolved</span>
+            <span class="ticket-status status-badge resolved tone-neutral">${agent.resolved} resolved</span>
         `;
         container.appendChild(agentElement);
+    });
+}
+
+// Canvas chart helpers (colours come from the theme tokens)
+function chartFont() {
+    return `12px ${getComputedStyle(document.body).fontFamily}`;
+}
+
+function drawPie(ctx, canvas, labels, values, colors, radius, centerX, centerY) {
+    const total = values.reduce((sum, val) => sum + val, 0);
+    let startAngle = -Math.PI / 2;
+    ctx.strokeStyle = cssVar('--surface');
+    ctx.lineWidth = 2;
+    values.forEach((value, index) => {
+        const sliceAngle = (value / total) * 2 * Math.PI;
+        ctx.fillStyle = colors[index];
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        startAngle += sliceAngle;
+    });
+
+    // Legend on the right
+    ctx.font = chartFont();
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    const legendX = centerX + radius + 24;
+    const legendY = centerY - ((labels.length - 1) * 11);
+    labels.forEach((label, index) => {
+        const y = legendY + index * 22;
+        ctx.fillStyle = colors[index];
+        ctx.fillRect(legendX, y - 5, 10, 10);
+        ctx.fillStyle = cssVar('--text');
+        ctx.fillText(`${label} (${values[index]})`, legendX + 16, y);
     });
 }
 
@@ -329,27 +392,10 @@ function createPriorityChart() {
     
     const priorities = ['Low', 'Normal', 'High', 'Urgent'];
     const values = [12, 18, 8, 3];
-    const colors = ['#27ae60', '#3498db', '#f39c12', '#e74c3c'];
+    const colors = [cssVar('--chart-5'), cssVar('--chart-1'), cssVar('--chart-3'), cssVar('--chart-6')];
     
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = Math.min(centerX, centerY) - 20;
-    
-    let startAngle = 0;
-    const total = values.reduce((sum, val) => sum + val, 0);
-    
-    values.forEach((value, index) => {
-        const sliceAngle = (value / total) * 2 * Math.PI;
-        
-        ctx.fillStyle = colors[index];
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-        ctx.closePath();
-        ctx.fill();
-        
-        startAngle += sliceAngle;
-    });
+    const radius = Math.min(canvas.width / 4, canvas.height / 2) - 12;
+    drawPie(ctx, canvas, priorities, values, colors, radius, canvas.width / 4 + 8, canvas.height / 2);
 }
 
 function createResponseChart() {
@@ -363,31 +409,54 @@ function createResponseChart() {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
     const avgTimes = [2.4, 1.8, 3.2, 2.1, 2.7];
     
-    const chartWidth = canvas.width - 60;
-    const chartHeight = canvas.height - 40;
-    const maxTime = Math.max(...avgTimes);
+    const left = 36;
+    const top = 16;
+    const chartWidth = canvas.width - left - 16;
+    const chartHeight = canvas.height - top - 28;
+    const maxTime = 4;
     
-    ctx.strokeStyle = '#e74c3c';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    
-    avgTimes.forEach((time, index) => {
-        const x = 30 + (index * (chartWidth / (avgTimes.length - 1)));
-        const y = 20 + (chartHeight - (time / maxTime) * chartHeight);
-        
-        if (index === 0) {
-            ctx.moveTo(x, y);
-        } else {
-            ctx.lineTo(x, y);
-        }
-        
-        ctx.fillStyle = '#e74c3c';
+    // Gridlines and axis labels (hours)
+    ctx.font = chartFont();
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'right';
+    ctx.lineWidth = 1;
+    for (let hours = 0; hours <= maxTime; hours++) {
+        const y = top + chartHeight - (hours / maxTime) * chartHeight;
+        ctx.strokeStyle = cssVar('--chart-grid');
         ctx.beginPath();
-        ctx.arc(x, y, 4, 0, 2 * Math.PI);
-        ctx.fill();
-    });
+        ctx.moveTo(left, y);
+        ctx.lineTo(left + chartWidth, y);
+        ctx.stroke();
+        ctx.fillStyle = cssVar('--text-muted');
+        ctx.fillText(`${hours}h`, left - 8, y);
+    }
     
+    const points = avgTimes.map((time, index) => ({
+        x: left + 16 + (index * ((chartWidth - 32) / (avgTimes.length - 1))),
+        y: top + chartHeight - (time / maxTime) * chartHeight
+    }));
+    
+    ctx.strokeStyle = cssVar('--chart-1');
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    points.forEach((point, index) => {
+        if (index === 0) {
+            ctx.moveTo(point.x, point.y);
+        } else {
+            ctx.lineTo(point.x, point.y);
+        }
+    });
     ctx.stroke();
+    
+    ctx.textAlign = 'center';
+    points.forEach((point, index) => {
+        ctx.fillStyle = cssVar('--chart-1');
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = cssVar('--text-muted');
+        ctx.fillText(days[index], point.x, top + chartHeight + 16);
+    });
 }
 
 // Ticket management functions
@@ -411,8 +480,8 @@ function renderTicketsTable() {
             <td><input type="checkbox" value="${ticket.id}"></td>
             <td>${ticket.id}</td>
             <td>${ticket.subject}</td>
-            <td><span class="ticket-status ${ticket.status}">${ticket.status.replace('-', ' ')}</span></td>
-            <td><span class="priority-badge ${ticket.priority}">${ticket.priority}</span></td>
+            <td>${statusBadge(ticket.status)}</td>
+            <td><span class="priority-badge ${ticket.priority} tone-${priorityTones[ticket.priority] || 'neutral'}">${ticket.priority}</span></td>
             <td>${ticket.requester}</td>
             <td>${ticket.agent || 'Unassigned'}</td>
             <td>${formatDate(ticket.created)}</td>
@@ -498,12 +567,12 @@ function renderKnowledgeArticles() {
         const articleElement = document.createElement('div');
         articleElement.className = 'article-item';
         articleElement.innerHTML = `
-            <div style="background: white; padding: 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer;" onclick="viewArticle('${article.title}')">
-                <h4 style="color: #2c3e50; margin-bottom: 10px;">${article.title}</h4>
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; color: #7f8c8d;">
+            <div class="article-card" onclick="viewArticle('${article.title}')">
+                <h4 class="article-title">${article.title}</h4>
+                <div class="article-meta">
                     <span>Category: ${article.category}</span>
                     <span>${article.views} views</span>
-                    <span>Updated: ${article.lastUpdated}</span>
+                    <span>Updated: ${formatDate(article.lastUpdated)}</span>
                 </div>
             </div>
         `;
@@ -554,21 +623,43 @@ function createVolumeChart() {
     canvas.width = canvas.offsetWidth;
     canvas.height = 300;
     
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    const months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
     const volumes = [45, 52, 48, 61, 58, 65];
     
-    const chartWidth = canvas.width - 60;
-    const chartHeight = canvas.height - 60;
-    const maxVolume = Math.max(...volumes);
+    const left = 36;
+    const top = 16;
+    const chartWidth = canvas.width - left - 16;
+    const chartHeight = canvas.height - top - 32;
+    const axisMax = 80;
     
-    ctx.fillStyle = '#e74c3c';
+    // Gridlines and axis labels
+    ctx.font = chartFont();
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'right';
+    ctx.lineWidth = 1;
+    for (let value = 0; value <= axisMax; value += 20) {
+        const y = top + chartHeight - (value / axisMax) * chartHeight;
+        ctx.strokeStyle = cssVar('--chart-grid');
+        ctx.beginPath();
+        ctx.moveTo(left, y);
+        ctx.lineTo(left + chartWidth, y);
+        ctx.stroke();
+        ctx.fillStyle = cssVar('--text-muted');
+        ctx.fillText(String(value), left - 8, y);
+    }
+    
+    const slot = chartWidth / volumes.length;
+    const barWidth = slot * 0.5;
+    ctx.textAlign = 'center';
     volumes.forEach((volume, index) => {
-        const barWidth = chartWidth / volumes.length - 10;
-        const barHeight = (volume / maxVolume) * chartHeight;
-        const x = 30 + index * (chartWidth / volumes.length);
-        const y = chartHeight - barHeight + 30;
+        const barHeight = (volume / axisMax) * chartHeight;
+        const x = left + index * slot + (slot - barWidth) / 2;
+        const y = top + chartHeight - barHeight;
         
+        ctx.fillStyle = cssVar('--chart-1');
         ctx.fillRect(x, y, barWidth, barHeight);
+        ctx.fillStyle = cssVar('--text-muted');
+        ctx.fillText(months[index], x + barWidth / 2, top + chartHeight + 16);
     });
 }
 
@@ -582,27 +673,10 @@ function createResolutionChart() {
     
     const categories = ['< 1h', '1-4h', '4-24h', '> 24h'];
     const counts = [15, 28, 12, 5];
-    const colors = ['#27ae60', '#f39c12', '#e67e22', '#e74c3c'];
+    const colors = [cssVar('--chart-5'), cssVar('--chart-1'), cssVar('--chart-4'), cssVar('--chart-6')];
     
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = Math.min(centerX, centerY) - 30;
-    
-    let startAngle = 0;
-    const total = counts.reduce((sum, count) => sum + count, 0);
-    
-    counts.forEach((count, index) => {
-        const sliceAngle = (count / total) * 2 * Math.PI;
-        
-        ctx.fillStyle = colors[index];
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-        ctx.closePath();
-        ctx.fill();
-        
-        startAngle += sliceAngle;
-    });
+    const radius = Math.min(canvas.width / 4, canvas.height / 2) - 24;
+    drawPie(ctx, canvas, categories, counts, colors, radius, canvas.width / 4 + 8, canvas.height / 2);
 }
 
 function loadTopIssues() {
@@ -610,11 +684,11 @@ function loadTopIssues() {
     if (!container) return;
     
     const issues = [
-        { title: 'Email Login Problems', count: 23 },
-        { title: 'VPN Connection Issues', count: 18 },
-        { title: 'Printer Malfunctions', count: 15 },
-        { title: 'Software License Requests', count: 12 },
-        { title: 'Account Access Requests', count: 9 }
+        { title: 'Email login problems', count: 23 },
+        { title: 'VPN connection issues', count: 18 },
+        { title: 'Printer malfunctions', count: 15 },
+        { title: 'Software license requests', count: 12 },
+        { title: 'Account access requests', count: 9 }
     ];
     
     container.innerHTML = '';
@@ -679,7 +753,7 @@ function createNewTicket() {
 // Utility functions
 function formatDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 }
 
 function editTicket(ticketId) {

@@ -3,53 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Desk & Ticketing - Nexus Corp</title>
+    <title>Dashboard | Help desk | Westbrook Industries</title>
+    <link rel="stylesheet" href="../shared/theme.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="header-left">
-                <div class="logo">⬢ Nexus Corp</div>
-                <div class="app-title">Help Desk & Ticketing System</div>
+                <div class="logo">Westbrook</div>
+                <div class="app-title">Help desk</div>
             </div>
             <div class="header-right">
                 <div class="notification-badge">
-                    <span class="notification-icon">🔔</span>
+                    <span class="notification-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg></span>
                     <span class="notification-count">3</span>
                 </div>
                 <div class="user-info">
-                    <span class="user-name">IT Support</span>
-                    <span class="user-role">Help Desk Agent</span>
+                    <span class="user-name">Lukas Brandt</span>
+                    <span class="user-role">IT support lead</span>
                 </div>
-                <button class="back-btn" onclick="window.location.href='../'">← Back to Portal</button>
+                <button class="back-btn" onclick="window.location.href='../'"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg> Portal</button>
             </div>
         </header>
 
         <nav class="sidebar">
             <div class="nav-item active" data-tab="dashboard">
-                <div class="nav-icon">📊</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></div>
                 <span>Dashboard</span>
             </div>
             <div class="nav-item" data-tab="tickets">
-                <div class="nav-icon">🎫</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></div>
                 <span>Tickets</span>
                 <span class="badge">12</span>
             </div>
             <div class="nav-item" data-tab="knowledge">
-                <div class="nav-icon">📚</div>
-                <span>Knowledge Base</span>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg></div>
+                <span>Knowledge base</span>
             </div>
             <div class="nav-item" data-tab="users">
-                <div class="nav-icon">👥</div>
-                <span>User Management</span>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></div>
+                <span>User management</span>
             </div>
             <div class="nav-item" data-tab="reports">
-                <div class="nav-icon">📈</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
                 <span>Reports</span>
             </div>
             <div class="nav-item" data-tab="settings">
-                <div class="nav-icon">⚙️</div>
+                <div class="nav-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></div>
                 <span>Settings</span>
             </div>
         </nav>
@@ -57,36 +58,32 @@
         <main class="main-content">
             <div class="tab-content active" id="dashboard">
                 <div class="page-header">
-                    <h1>Help Desk Dashboard</h1>
+                    <h1>Help desk dashboard</h1>
                     <div class="quick-actions">
-                        <button class="btn btn-primary" onclick="createTicket()">New Ticket</button>
+                        <button class="btn btn-primary" onclick="createTicket()">New ticket</button>
                         <button class="btn btn-secondary" onclick="refreshDashboard()">Refresh</button>
                     </div>
                 </div>
 
                 <div class="stats-grid">
                     <div class="stat-card urgent">
-                        <div class="stat-icon">🚨</div>
                         <div class="stat-value">3</div>
-                        <div class="stat-label">Urgent Tickets</div>
+                        <div class="stat-label">Urgent tickets</div>
                         <div class="stat-trend">+1 today</div>
                     </div>
                     <div class="stat-card open">
-                        <div class="stat-icon">📋</div>
                         <div class="stat-value">24</div>
-                        <div class="stat-label">Open Tickets</div>
+                        <div class="stat-label">Open tickets</div>
                         <div class="stat-trend">-2 today</div>
                     </div>
                     <div class="stat-card pending">
-                        <div class="stat-icon">⏳</div>
                         <div class="stat-value">8</div>
-                        <div class="stat-label">Pending Response</div>
+                        <div class="stat-label">Pending response</div>
                         <div class="stat-trend">+3 today</div>
                     </div>
                     <div class="stat-card resolved">
-                        <div class="stat-icon">✅</div>
                         <div class="stat-value">156</div>
-                        <div class="stat-label">Resolved This Month</div>
+                        <div class="stat-label">Resolved this month</div>
                         <div class="stat-trend">+12%</div>
                     </div>
                 </div>
@@ -94,29 +91,29 @@
                 <div class="dashboard-grid">
                     <div class="recent-tickets">
                         <div class="card-header">
-                            <h3>Recent Tickets</h3>
-                            <button class="btn btn-link" onclick="router.navigate('#tickets')">View All</button>
+                            <h3>Recent tickets</h3>
+                            <button class="btn btn-link" onclick="router.navigate('#tickets')">View all</button>
                         </div>
                         <div class="ticket-list" id="recent-tickets"></div>
                     </div>
 
                     <div class="agent-performance">
                         <div class="card-header">
-                            <h3>Agent Performance</h3>
+                            <h3>Agent performance</h3>
                         </div>
                         <div class="performance-list" id="agent-performance"></div>
                     </div>
 
                     <div class="priority-breakdown">
                         <div class="card-header">
-                            <h3>Priority Breakdown</h3>
+                            <h3>Priority breakdown</h3>
                         </div>
                         <canvas id="priority-chart"></canvas>
                     </div>
 
                     <div class="response-times">
                         <div class="card-header">
-                            <h3>Response Times</h3>
+                            <h3>Response times</h3>
                         </div>
                         <canvas id="response-chart"></canvas>
                     </div>
@@ -125,10 +122,10 @@
 
             <div class="tab-content" id="tickets">
                 <div class="page-header">
-                    <h1>Ticket Management</h1>
+                    <h1>Ticket management</h1>
                     <div class="ticket-actions">
-                        <button class="btn btn-primary" onclick="createTicket()">Create Ticket</button>
-                        <button class="btn btn-secondary" onclick="bulkUpdate()">Bulk Update</button>
+                        <button class="btn btn-primary" onclick="createTicket()">Create ticket</button>
+                        <button class="btn btn-secondary" onclick="bulkUpdate()">Bulk update</button>
                     </div>
                 </div>
 
@@ -136,9 +133,9 @@
                     <div class="filter-group">
                         <label>Status:</label>
                         <select id="status-filter">
-                            <option value="">All Statuses</option>
+                            <option value="">All statuses</option>
                             <option value="open">Open</option>
-                            <option value="in-progress">In Progress</option>
+                            <option value="in-progress">In progress</option>
                             <option value="pending">Pending</option>
                             <option value="resolved">Resolved</option>
                             <option value="closed">Closed</option>
@@ -147,7 +144,7 @@
                     <div class="filter-group">
                         <label>Priority:</label>
                         <select id="priority-filter">
-                            <option value="">All Priorities</option>
+                            <option value="">All priorities</option>
                             <option value="low">Low</option>
                             <option value="normal">Normal</option>
                             <option value="high">High</option>
@@ -157,10 +154,10 @@
                     <div class="filter-group">
                         <label>Agent:</label>
                         <select id="agent-filter">
-                            <option value="">All Agents</option>
-                            <option value="john-doe">John Doe</option>
-                            <option value="jane-smith">Jane Smith</option>
-                            <option value="mike-wilson">Mike Wilson</option>
+                            <option value="">All agents</option>
+                            <option value="john-doe">Rajesh Iyer</option>
+                            <option value="jane-smith">Hannah Kowalski</option>
+                            <option value="mike-wilson">Kwame Mensah</option>
                         </select>
                     </div>
                     <div class="filter-group">
@@ -192,36 +189,36 @@
 
             <div class="tab-content" id="knowledge">
                 <div class="page-header">
-                    <h1>Knowledge Base</h1>
+                    <h1>Knowledge base</h1>
                     <div class="kb-actions">
-                        <button class="btn btn-primary" onclick="createArticle()">New Article</button>
+                        <button class="btn btn-primary" onclick="createArticle()">New article</button>
                         <button class="btn btn-secondary" onclick="importArticles()">Import</button>
                     </div>
                 </div>
 
                 <div class="kb-search">
                     <input type="text" id="kb-search" placeholder="Search knowledge base...">
-                    <button class="search-btn">🔍</button>
+                    <button class="search-btn" aria-label="Search"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></button>
                 </div>
 
                 <div class="kb-categories">
                     <div class="category-card" onclick="filterKB('hardware')">
-                        <div class="category-icon">💻</div>
-                        <h3>Hardware Issues</h3>
+                        <div class="category-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></div>
+                        <h3>Hardware issues</h3>
                         <p>45 articles</p>
                     </div>
                     <div class="category-card" onclick="filterKB('software')">
-                        <div class="category-icon">⚙️</div>
-                        <h3>Software Problems</h3>
+                        <div class="category-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg></div>
+                        <h3>Software problems</h3>
                         <p>67 articles</p>
                     </div>
                     <div class="category-card" onclick="filterKB('network')">
-                        <div class="category-icon">🌐</div>
-                        <h3>Network & Connectivity</h3>
+                        <div class="category-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></div>
+                        <h3>Network & connectivity</h3>
                         <p>32 articles</p>
                     </div>
                     <div class="category-card" onclick="filterKB('security')">
-                        <div class="category-icon">🔒</div>
+                        <div class="category-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div>
                         <h3>Security</h3>
                         <p>28 articles</p>
                     </div>
@@ -234,9 +231,9 @@
 
             <div class="tab-content" id="users">
                 <div class="page-header">
-                    <h1>User Management</h1>
+                    <h1>User management</h1>
                     <div class="user-actions">
-                        <button class="btn btn-primary" onclick="addUser()">Add User</button>
+                        <button class="btn btn-primary" onclick="addUser()">Add user</button>
                         <button class="btn btn-secondary" onclick="exportUsers()">Export</button>
                     </div>
                 </div>
@@ -244,15 +241,15 @@
                 <div class="user-stats">
                     <div class="user-stat">
                         <div class="stat-number">247</div>
-                        <div class="stat-text">Total Users</div>
+                        <div class="stat-text">Total users</div>
                     </div>
                     <div class="user-stat">
                         <div class="stat-number">189</div>
-                        <div class="stat-text">Active This Month</div>
+                        <div class="stat-text">Active this month</div>
                     </div>
                     <div class="user-stat">
                         <div class="stat-number">12</div>
-                        <div class="stat-text">New Users</div>
+                        <div class="stat-text">New users</div>
                     </div>
                 </div>
 
@@ -264,8 +261,8 @@
                                 <th>Email</th>
                                 <th>Department</th>
                                 <th>Role</th>
-                                <th>Tickets Created</th>
-                                <th>Last Active</th>
+                                <th>Tickets created</th>
+                                <th>Last active</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -276,56 +273,56 @@
 
             <div class="tab-content" id="reports">
                 <div class="page-header">
-                    <h1>Reports & Analytics</h1>
+                    <h1>Reports & analytics</h1>
                     <div class="report-actions">
-                        <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                        <button class="btn btn-primary" onclick="generateReport()">Generate report</button>
                         <button class="btn btn-secondary" onclick="scheduleReport()">Schedule</button>
                     </div>
                 </div>
 
                 <div class="report-filters">
                     <select id="report-period">
-                        <option value="week">Last Week</option>
-                        <option value="month" selected>Last Month</option>
-                        <option value="quarter">Last Quarter</option>
-                        <option value="year">Last Year</option>
+                        <option value="week">Last week</option>
+                        <option value="month" selected>Last month</option>
+                        <option value="quarter">Last quarter</option>
+                        <option value="year">Last year</option>
                     </select>
                     <select id="report-type">
-                        <option value="summary">Summary Report</option>
-                        <option value="detailed">Detailed Report</option>
-                        <option value="performance">Performance Report</option>
+                        <option value="summary">Summary report</option>
+                        <option value="detailed">Detailed report</option>
+                        <option value="performance">Performance report</option>
                     </select>
                 </div>
 
                 <div class="reports-grid">
                     <div class="report-card">
                         <div class="report-header">
-                            <h3>Ticket Volume Trends</h3>
+                            <h3>Ticket volume trends</h3>
                         </div>
                         <canvas id="volume-chart"></canvas>
                     </div>
 
                     <div class="report-card">
                         <div class="report-header">
-                            <h3>Resolution Time Analysis</h3>
+                            <h3>Resolution time analysis</h3>
                         </div>
                         <canvas id="resolution-chart"></canvas>
                     </div>
 
                     <div class="report-card">
                         <div class="report-header">
-                            <h3>Customer Satisfaction</h3>
+                            <h3>Customer satisfaction</h3>
                         </div>
                         <div class="satisfaction-score">
                             <div class="score-value">4.6</div>
-                            <div class="score-label">Average Rating</div>
+                            <div class="score-label">Average rating</div>
                             <div class="score-trend">+0.3 this month</div>
                         </div>
                     </div>
 
                     <div class="report-card">
                         <div class="report-header">
-                            <h3>Top Issues</h3>
+                            <h3>Top issues</h3>
                         </div>
                         <div class="issues-list" id="top-issues"></div>
                     </div>
@@ -334,15 +331,15 @@
 
             <div class="tab-content" id="settings">
                 <div class="page-header">
-                    <h1>System Settings</h1>
-                    <button class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+                    <h1>System settings</h1>
+                    <button class="btn btn-primary" onclick="saveSettings()">Save changes</button>
                 </div>
 
                 <div class="settings-sections">
                     <div class="settings-section">
-                        <h3>General Settings</h3>
+                        <h3>General settings</h3>
                         <div class="setting-row">
-                            <label>Default Priority</label>
+                            <label>Default priority</label>
                             <select id="default-priority">
                                 <option value="low">Low</option>
                                 <option value="normal" selected>Normal</option>
@@ -350,27 +347,27 @@
                             </select>
                         </div>
                         <div class="setting-row">
-                            <label>Auto-assign Tickets</label>
+                            <label>Auto-assign tickets</label>
                             <input type="checkbox" id="auto-assign" checked>
                         </div>
                         <div class="setting-row">
-                            <label>Email Notifications</label>
+                            <label>Email notifications</label>
                             <input type="checkbox" id="email-notifications" checked>
                         </div>
                     </div>
 
                     <div class="settings-section">
-                        <h3>SLA Settings</h3>
+                        <h3>SLA settings</h3>
                         <div class="setting-row">
-                            <label>Urgent Response Time (hours)</label>
+                            <label>Urgent response time (hours)</label>
                             <input type="number" id="urgent-sla" value="1">
                         </div>
                         <div class="setting-row">
-                            <label>High Response Time (hours)</label>
+                            <label>High response time (hours)</label>
                             <input type="number" id="high-sla" value="4">
                         </div>
                         <div class="setting-row">
-                            <label>Normal Response Time (hours)</label>
+                            <label>Normal response time (hours)</label>
                             <input type="number" id="normal-sla" value="24">
                         </div>
                     </div>
@@ -379,11 +376,11 @@
         </main>
     </div>
 
-    <!-- Ticket Creation Modal -->
+    <!-- Ticket creation modal -->
     <div id="ticket-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Create New Ticket</h2>
+                <h2>Create new ticket</h2>
                 <span class="close" onclick="closeModal('ticket-modal')">&times;</span>
             </div>
             <form id="ticket-form">
@@ -404,7 +401,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Requester Email *</label>
+                        <label>Requester email *</label>
                         <input type="email" id="ticket-requester" required>
                     </div>
                     <div class="form-group">
@@ -414,7 +411,7 @@
                             <option value="software">Software</option>
                             <option value="network">Network</option>
                             <option value="security">Security</option>
-                            <option value="access">Access Request</option>
+                            <option value="access">Access request</option>
                         </select>
                     </div>
                 </div>
@@ -424,7 +421,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('ticket-modal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create Ticket</button>
+                    <button type="submit" class="btn btn-primary">Create ticket</button>
                 </div>
             </form>
         </div>
