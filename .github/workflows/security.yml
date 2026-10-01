@@ -1,0 +1,40 @@
+name: Security
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '7 4 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      security-events: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+
+      # There is no lockfile: the libraries the pages load from CDNs are
+      # listed in an SBOM written by the inventory script.
+      - name: Generate the CDN SBOM
+        run: node scripts/cdn-inventory.mjs
+
+      - name: Scan dependencies
+        uses: agentlet/.github/actions/dependency-scan@13f8b012ab7b0e07229389ac7538bdab38cdb4e6 # dependency-scan-v1
+        with:
+          blocking-sbom: reports/security/sbom-cdn.cdx.json
+          lockfile: ''
+          issue-on-failure: ${{ github.event_name == 'schedule' }}
+          issue-title: 'Nightly scan: a CDN library has a blocking vulnerability'
