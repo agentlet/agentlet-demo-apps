@@ -45,7 +45,7 @@ The first command runs the unit tests for the CDN inventory script. The second c
 
 ## Credits
 
-Maintained by Fabien Vinas as part of the [agentlet](https://github.com/agentlet) project.
+Part of the [agentlet](https://github.com/agentlet) project.
 
 The receipt PDFs in `expenses/mock/` are sample receipts from [Jens Walter's my-receipts repository](https://github.com/JensWalter/my-receipts), released under CC0.
 
