@@ -86,7 +86,7 @@ def is_proper_noun(text):
 
 def build_error_message(commit_message, allowed_types):
     """Build a helpful error message with examples."""
-    error_msg = f"""{Colors.RED}{Colors.BOLD}✗ Invalid commit message format{Colors.END}
+    error_msg = f"""{Colors.RED}{Colors.BOLD}Invalid commit message format{Colors.END}
 
 {Colors.YELLOW}Your commit message:{Colors.END}
 {Colors.RED}"{commit_message}"{Colors.END}
@@ -95,9 +95,9 @@ def build_error_message(commit_message, allowed_types):
 {Colors.GREEN}type(scope): description{Colors.END}
 
 {Colors.YELLOW}Where:{Colors.END}
-• {Colors.CYAN}type{Colors.END}: one of {', '.join(allowed_types)}
-• {Colors.CYAN}scope{Colors.END}: optional, indicates module/component (e.g., auth, api, ui)
-• {Colors.CYAN}description{Colors.END}: brief description in imperative mood, lowercase start, no period
+- {Colors.CYAN}type{Colors.END}: one of {', '.join(allowed_types)}
+- {Colors.CYAN}scope{Colors.END}: optional, indicates module/component (e.g., auth, api, ui)
+- {Colors.CYAN}description{Colors.END}: brief description in imperative mood, lowercase start, no period
 
 {Colors.YELLOW}Valid examples:{Colors.END}
 {Colors.GREEN}feat(auth): add OAuth2 integration{Colors.END}
@@ -142,7 +142,7 @@ def main():
     is_valid, error_message = validate_conventional_commit(commit_message)
     
     if is_valid:
-        print(f"{Colors.GREEN}✓ Commit message follows Conventional Commits format{Colors.END}")
+        print(f"{Colors.GREEN}Commit message follows Conventional Commits format{Colors.END}")
         sys.exit(0)
     else:
         print(error_message)
