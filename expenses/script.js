@@ -68,7 +68,7 @@ const sampleExpenses = {
             description: "Business trip to Chicago - Client meetings",
             date: "2024-01-08",
             approvedDate: "2024-01-10",
-            receipt: "travel_expenses.pdf",
+            receipt: "example1.pdf",
             status: "approved",
             approvedBy: "Sarah Johnson",
             comments: "All documentation complete. Valid business purpose."
@@ -82,7 +82,7 @@ const sampleExpenses = {
             description: "Printer ink and paper supplies",
             date: "2024-01-05",
             approvedDate: "2024-01-06",
-            receipt: "staples_receipt.pdf",
+            receipt: "example4.pdf",
             status: "approved",
             approvedBy: "Sarah Johnson",
             comments: "Standard office supplies - approved."
@@ -98,13 +98,33 @@ const sampleExpenses = {
             description: "Business dinner",
             date: "2024-01-09",
             rejectedDate: "2024-01-11",
-            receipt: "restaurant_receipt_2.pdf",
+            receipt: "example3.pdf",
             status: "rejected",
             rejectedBy: "Sarah Johnson",
             comments: "Exceeds daily meal allowance limit of $75. Please resubmit with valid amount."
         }
     ]
 };
+
+const currencySymbols = {
+    'USD': '$',
+    'EUR': '€',
+    'PLN': 'zł'
+};
+
+// Format an amount with two decimals and a thousands separator, e.g. 2,404.33
+function formatAmount(amount) {
+    return amount.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+// Format an amount with the symbol of its currency (defaults to USD)
+function formatCurrencyAmount(amount, currency) {
+    const symbol = currencySymbols[currency || 'USD'] || '$';
+    return `${symbol}${formatAmount(amount)}`;
+}
 
 // Current expense being reviewed
 let currentExpense = null;
@@ -223,18 +243,20 @@ function loadExpenses() {
 function updateDashboardStats() {
     const pendingCount = sampleExpenses.pending.length;
     // Convert all amounts to USD for display (simplified conversion)
-    const pendingAmount = sampleExpenses.pending.reduce((sum, expense) => {
+    // Work in cents so the displayed total never carries floating point noise
+    const pendingCents = sampleExpenses.pending.reduce((sum, expense) => {
         let amount = expense.amount;
         // Simple currency conversion for display
         if (expense.currency === 'EUR') amount *= 1.1;
         if (expense.currency === 'PLN') amount *= 0.25;
-        return sum + amount;
+        return sum + Math.round(amount * 100);
     }, 0);
+    const pendingAmount = pendingCents / 100;
     const approvedThisMonth = sampleExpenses.approved.length;
     
     // Update stat cards
     document.querySelector('.stats-grid .stat-card:nth-child(1) .stat-value').textContent = pendingCount;
-    document.querySelector('.stats-grid .stat-card:nth-child(2) .stat-value').textContent = `$${pendingAmount.toLocaleString()}`;
+    document.querySelector('.stats-grid .stat-card:nth-child(2) .stat-value').textContent = `$${formatAmount(pendingAmount)}`;
     document.querySelector('.stats-grid .stat-card:nth-child(3) .stat-value').textContent = approvedThisMonth;
 }
 
@@ -280,15 +302,7 @@ function createExpenseCard(expense, status) {
         `${expense.category} • Rejected ${expense.rejectedDate}` :
         `${expense.category} • Submitted ${expense.submittedDate}`;
     
-    // Format amount with correct currency
-    const currencySymbols = {
-        'USD': '$',
-        'EUR': '€',
-        'PLN': 'zł'
-    };
-    const currency = expense.currency || 'USD';
-    const symbol = currencySymbols[currency] || '$';
-    const formattedAmount = `${symbol}${expense.amount.toLocaleString()}`;
+    const formattedAmount = formatCurrencyAmount(expense.amount, expense.currency);
     
     card.innerHTML = `
         <div class="expense-info">
@@ -315,15 +329,7 @@ function reviewExpense(expenseId) {
     // Populate modal with expense details
     document.getElementById('modal-employee').textContent = expense.employee;
     
-    // Format amount with correct currency
-    const currencySymbols = {
-        'USD': '$',
-        'EUR': '€', 
-        'PLN': 'zł'
-    };
-    const currency = expense.currency || 'USD';
-    const symbol = currencySymbols[currency] || '$';
-    document.getElementById('modal-amount').textContent = `${symbol}${expense.amount.toLocaleString()}`;
+    document.getElementById('modal-amount').textContent = formatCurrencyAmount(expense.amount, expense.currency);
     
     document.getElementById('modal-category').textContent = expense.category;
     document.getElementById('modal-date').textContent = expense.date;

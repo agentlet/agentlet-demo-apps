@@ -197,7 +197,7 @@
                     <div class="task-column">
                         <div class="column-header">
                             <h3>To Do</h3>
-                            <span class="task-count">8</span>
+                            <span class="task-count" id="todo-count">8</span>
                         </div>
                         <div class="task-list" id="todo-tasks"></div>
                         <button class="add-task-btn" onclick="createTask('todo')">+ Add Task</button>
@@ -206,7 +206,7 @@
                     <div class="task-column">
                         <div class="column-header">
                             <h3>In Progress</h3>
-                            <span class="task-count">12</span>
+                            <span class="task-count" id="inprogress-count">12</span>
                         </div>
                         <div class="task-list" id="inprogress-tasks"></div>
                         <button class="add-task-btn" onclick="createTask('in-progress')">+ Add Task</button>
@@ -215,7 +215,7 @@
                     <div class="task-column">
                         <div class="column-header">
                             <h3>Review</h3>
-                            <span class="task-count">5</span>
+                            <span class="task-count" id="review-count">5</span>
                         </div>
                         <div class="task-list" id="review-tasks"></div>
                         <button class="add-task-btn" onclick="createTask('review')">+ Add Task</button>
@@ -224,9 +224,10 @@
                     <div class="task-column">
                         <div class="column-header">
                             <h3>Done</h3>
-                            <span class="task-count">23</span>
+                            <span class="task-count" id="done-count">23</span>
                         </div>
                         <div class="task-list" id="done-tasks"></div>
+                        <button class="add-task-btn" onclick="createTask('done')">+ Add Task</button>
                     </div>
                 </div>
             </div>
@@ -413,16 +414,16 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Project Name *</label>
-                            <input type="text" id="project-name" required>
+                            <input type="text" id="project-name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label>Project Code</label>
-                            <input type="text" id="project-code">
+                            <input type="text" id="project-code" name="code">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea id="project-description" rows="4"></textarea>
+                        <textarea id="project-description" name="description" rows="4"></textarea>
                     </div>
                 </div>
 
@@ -431,7 +432,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Priority</label>
-                            <select id="project-priority">
+                            <select id="project-priority" name="priority">
                                 <option value="low">Low</option>
                                 <option value="medium" selected>Medium</option>
                                 <option value="high">High</option>
@@ -440,7 +441,7 @@
                         </div>
                         <div class="form-group">
                             <label>Project Manager</label>
-                            <select id="project-manager">
+                            <select id="project-manager" name="manager">
                                 <option value="">Select Manager</option>
                                 <option value="sarah-wilson">Sarah Wilson</option>
                                 <option value="mike-chen">Mike Chen</option>
@@ -451,21 +452,21 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Start Date</label>
-                            <input type="date" id="project-start-date">
+                            <input type="date" id="project-start-date" name="startDate">
                         </div>
                         <div class="form-group">
                             <label>End Date</label>
-                            <input type="date" id="project-end-date">
+                            <input type="date" id="project-end-date" name="endDate">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Budget</label>
-                            <input type="number" id="project-budget" step="1000">
+                            <input type="number" id="project-budget" name="budget" step="1000">
                         </div>
                         <div class="form-group">
                             <label>Client</label>
-                            <input type="text" id="project-client">
+                            <input type="text" id="project-client" name="client">
                         </div>
                     </div>
                 </div>
@@ -489,23 +490,23 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Task Title *</label>
-                        <input type="text" id="task-title" required>
+                        <input type="text" id="task-title" name="title" required>
                     </div>
                     <div class="form-group">
                         <label>Project</label>
-                        <select id="task-project">
+                        <select id="task-project" name="projectId">
                             <option value="">Select Project</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="task-description" rows="3"></textarea>
+                    <textarea id="task-description" name="description" rows="3"></textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Assignee</label>
-                        <select id="task-assignee">
+                        <select id="task-assignee" name="assignee">
                             <option value="">Select Assignee</option>
                             <option value="john-smith">John Smith</option>
                             <option value="sarah-wilson">Sarah Wilson</option>
@@ -514,7 +515,7 @@
                     </div>
                     <div class="form-group">
                         <label>Priority</label>
-                        <select id="task-priority">
+                        <select id="task-priority" name="priority">
                             <option value="low">Low</option>
                             <option value="medium" selected>Medium</option>
                             <option value="high">High</option>
@@ -524,12 +525,23 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Due Date</label>
-                        <input type="date" id="task-due-date">
+                        <label>Status</label>
+                        <select id="task-status" name="status">
+                            <option value="todo" selected>To Do</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="review">Review</option>
+                            <option value="done">Done</option>
+                        </select>
                     </div>
                     <div class="form-group">
+                        <label>Due Date</label>
+                        <input type="date" id="task-due-date" name="dueDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
                         <label>Estimated Hours</label>
-                        <input type="number" id="task-hours" min="1">
+                        <input type="number" id="task-hours" name="estimatedHours" min="1">
                     </div>
                 </div>
                 <div class="form-actions">

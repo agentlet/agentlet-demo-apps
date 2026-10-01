@@ -1,110 +1,54 @@
-# Nexus Corp - Business Applications Portal
+# Agentlet demo apps
 
-A collection of corporate-style, AI-generated single-page applications built with HTML, CSS, and JavaScript, featuring a Python backend for data simulation.
+Mock business applications used as targets for [agentlet](https://agentlet.io) demos and tests. They are static HTML, CSS and JavaScript pages for a fictional company, Nexus Corp, with sample data held in memory. They exist so that agentlets built with [agentlet-core](https://github.com/agentlet/agentlet-core), or generated with [agentlet-designer](https://github.com/agentlet/agentlet-designer), have realistic forms, tables, dashboards and workflows to work on.
+
+Nothing here talks to a server. There is no backend, no API and no persistence: reloading a page resets its data.
+
+## Live demo
+
+https://agentlet.github.io/agentlet-demo-apps/
+
+## Run locally
+
+From the repository root:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000. Any other static file server works too, and opening `index.html` directly from disk also works.
 
 ## Applications
 
-- **Main Portal (`index.html`)**: Central hub for accessing all business applications.
-- **BI (`bi/`)**: Business Intelligence dashboard for data visualization and analytics.
-- **CRM (`crm/`)**: Customer Relationship Management system.
-- **ERP (`erp/`)**: Enterprise Resource Planning application.
-- **Helpdesk (`helpdesk/`)**: Ticketing and support system.
-- **HR (`hr/`)**: Human Resources management application.
-- **Projects (`projects/`)**: Project management tool.
+The portal at `index.html` links to all of them.
 
-## Features
+| App | Path | What it is |
+| --- | --- | --- |
+| CRM | `crm/` | Dashboard, customers (30 sample customers in a paginated, searchable table with a detail form), opportunities, activities and reports |
+| ERP | `erp/` | Dashboard, inventory, accounting, procurement, HR and reports |
+| BI | `bi/` | Overview, sales, customers, operations and financial dashboards with charts (loads Chart.js from a CDN) |
+| Helpdesk | `helpdesk/` | Dashboard, tickets, knowledge base, users, reports and settings |
+| HR | `hr/` | Dashboard, employees, recruitment, payroll, performance, benefits and reports |
+| Projects | `projects/` | Dashboard, projects, task board, Gantt chart, resources, calendar and reports |
+| Expenses | `expenses/` | Dashboard, pending, approved and rejected expenses with a review dialog and receipt PDFs to download |
 
-- **Professional Design**: Corporate-style UI with clean, professional aesthetics
-- **Responsive Layout**: Works on desktop, tablet, and mobile devices
-- **Interactive Forms**: Complex multi-section forms with validation
-- **Data Management**: JSON-based storage with Python backend
-- **Real-time Updates**: Dynamic content updates without page refresh
-- **Keyboard Shortcuts**: Alt+1-5 for tab navigation, Ctrl/Cmd+N for new records
+The CRM keyboard shortcuts are Alt+1 to Alt+5 for the tabs and Ctrl/Cmd+N to add a customer on the customers tab.
 
-## Getting Started
+## Tests
 
-### Quick Start (Static Mode)
-Simply open `index.html` in your web browser to access the portal and navigate to the CRM application.
+```bash
+node --test
+node scripts/cdn-inventory.mjs --check
+```
 
-### Full Featured Mode (with Backend)
-1. Navigate to the CRM directory:
-   ```bash
-   cd crm
-   ```
-
-2. Start the Python server:
-   ```bash
-   python3 server.py
-   ```
-   Or specify a custom port:
-   ```bash
-   python3 server.py 8080
-   ```
-
-3. Open your browser and go to:
-   ```
-   http://localhost:8080
-   ```
-
-
-
-## Technical Details
-
-### Frontend Technologies
-- HTML5 with semantic markup
-- CSS3 with Grid and Flexbox
-- Vanilla JavaScript (ES6+)
-- Responsive design principles
-
-### Backend Features
-- Python HTTP server with REST API
-- JSON file-based data storage
-- CORS support for cross-origin requests
-- RESTful endpoints for CRUD operations
-
-
-
-## Sample Data
-
-The application comes with realistic sample data including:
-- 5 sample customers from various industries
-- Multiple sales opportunities in different stages
-- Activity history and notes
-- Realistic contact information and company details
-
-## Included Applications
-
-The portal is designed to accommodate additional business applications:
-- Enterprise Resource Planning (ERP)
-- Business Intelligence Dashboard
-- Help Desk & Ticketing System
-- Human Resources Management
-- Project Management Tools
-- **Expenses (`expenses/`)**: Invoice and expense approval system with document download and validation workflows
-
-## Company Branding
-
-**Nexus Corp** - The fictional company used throughout the applications features:
-- Professional blue and gray color scheme
-- Hexagonal logo design
-- Consistent corporate identity
-- Enterprise-grade UI patterns
-
-## Browser Compatibility
-
-- Chrome/Chromium 70+
-- Firefox 65+
-- Safari 12+
-- Edge 79+
+The first command runs the unit tests for the CDN inventory script. The second checks that every library the pages load from a CDN is pinned to an exact version with an integrity hash. See `CLAUDE.md` for the dependency scan and the commit message conventions.
 
 ## Credits
 
-This repository is maintained by **Fabien Vinas** as part of the [Agentlet ecosystem](https://github.com/agentlet).
+Part of the [agentlet](https://github.com/agentlet) project.
 
-### Data Sources
+The receipt PDFs in `expenses/mock/` are sample receipts from [Jens Walter's my-receipts repository](https://github.com/JensWalter/my-receipts), released under CC0.
 
-The **Expenses** web app example makes use of sample receipt files from [Jens Walter's receipts repository](https://github.com/JensWalter/my-receipts). These provide realistic receipt and invoice samples for demonstration purposes.
+## License
 
-## License  
-
-This project is for demonstration purposes. Feel free to use and modify for your own projects.
+[MIT](LICENSE)
