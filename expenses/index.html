@@ -3,127 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Expenses - Invoice & Expense Approval</title>
+    <title>Dashboard | Expenses | Westbrook Industries</title>
+    <link rel="stylesheet" href="../shared/theme.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
             <div class="header-left">
-                <a href="../" class="back-link">← Back to Portal</a>
-                <div class="app-title">
-                    <span class="logo">⬢</span>
-                    <span>Nexus Expenses</span>
-                </div>
+                <div class="logo">Westbrook</div>
+                <div class="app-title">Expenses</div>
             </div>
             <div class="header-right">
                 <div class="user-info">
-                    <span class="user-name">Sarah Johnson</span>
-                    <span class="user-role">Finance Manager</span>
+                    <span class="user-name">Ingrid Solheim</span>
+                    <span class="user-role">Finance controller</span>
                 </div>
+                <a href="../" class="back-link"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg> Portal</a>
             </div>
         </header>
 
         <nav class="app-nav">
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="dashboard">
-                    <span class="tab-icon">📊</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
                     Dashboard
                 </button>
                 <button class="nav-tab" data-tab="pending">
-                    <span class="tab-icon">⏳</span>
-                    Pending Approval
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+                    Pending approval
                 </button>
                 <button class="nav-tab" data-tab="approved">
-                    <span class="tab-icon">✅</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
                     Approved
                 </button>
                 <button class="nav-tab" data-tab="rejected">
-                    <span class="tab-icon">❌</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
                     Rejected
                 </button>
                 <button class="nav-tab" data-tab="reports">
-                    <span class="tab-icon">📈</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span>
                     Reports
                 </button>
             </div>
         </nav>
 
         <main class="app-main">
-            <!-- Dashboard Tab -->
+            <!-- Dashboard tab -->
             <div class="tab-content active" id="dashboard">
                 <div class="dashboard">
-                    <h2>Expense Approval Dashboard</h2>
+                    <h2>Expense approval dashboard</h2>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-value">34</div>
-                            <div class="stat-label">Pending Approvals</div>
+                            <div class="stat-label">Pending approvals</div>
                             <div class="stat-change urgent">Requires attention</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">$12,450</div>
-                            <div class="stat-label">Pending Amount</div>
+                            <div class="stat-label">Pending amount</div>
                             <div class="stat-change neutral">This week</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">156</div>
-                            <div class="stat-label">Approved This Month</div>
+                            <div class="stat-label">Approved this month</div>
                             <div class="stat-change positive">+23 vs last month</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">2.3 days</div>
-                            <div class="stat-label">Avg Processing Time</div>
+                            <div class="stat-label">Avg processing time</div>
                             <div class="stat-change positive">-0.5 days</div>
                         </div>
                     </div>
-                    
+
                     <div class="dashboard-sections">
                         <div class="recent-activities">
-                            <h3>Recent Activities</h3>
+                            <h3>Recent activities</h3>
                             <div class="activity-list">
                                 <div class="activity-item">
-                                    <span class="activity-icon">✅</span>
+                                    <span class="activity-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
                                     <div class="activity-details">
-                                        <strong>Approved: Travel Expense - John Smith</strong>
+                                        <strong>Approved: Travel expense - Kwame Mensah</strong>
                                         <span>$1,245.00 - Business trip to Chicago</span>
                                         <small>30 minutes ago</small>
                                     </div>
                                 </div>
                                 <div class="activity-item">
-                                    <span class="activity-icon">❌</span>
+                                    <span class="activity-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
                                     <div class="activity-details">
-                                        <strong>Rejected: Meal Expense - Mike Davis</strong>
+                                        <strong>Rejected: Meal expense - Rajesh Iyer</strong>
                                         <span>$89.50 - Exceeds daily meal limit</span>
                                         <small>1 hour ago</small>
                                     </div>
                                 </div>
                                 <div class="activity-item">
-                                    <span class="activity-icon">📎</span>
+                                    <span class="activity-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg></span>
                                     <div class="activity-details">
-                                        <strong>New Submission: Office Supplies - Lisa Chen</strong>
+                                        <strong>New submission: Office supplies - Hannah Kowalski</strong>
                                         <span>$234.75 - Pending review</span>
                                         <small>2 hours ago</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="urgent-items">
-                            <h3>Urgent Approvals</h3>
+                            <h3>Urgent approvals</h3>
                             <div class="urgent-list">
                                 <div class="urgent-item">
-                                    <div class="urgent-priority high"></div>
+                                    <div class="urgent-priority high badge tone-danger">High</div>
                                     <div class="urgent-details">
-                                        <strong>Software License - Tom Wilson</strong>
+                                        <strong>Software license - Mateo Alvarez</strong>
                                         <span>$2,400.00 - Expires today</span>
                                         <small>Submitted 3 days ago</small>
                                     </div>
                                     <button class="btn-small btn-primary">Review</button>
                                 </div>
                                 <div class="urgent-item">
-                                    <div class="urgent-priority medium"></div>
+                                    <div class="urgent-priority medium badge tone-warning">Medium</div>
                                     <div class="urgent-details">
-                                        <strong>Conference Registration - Amy Park</strong>
+                                        <strong>Conference registration - Yuki Tanaka</strong>
                                         <span>$1,850.00 - Early bird deadline</span>
                                         <small>Submitted 2 days ago</small>
                                     </div>
@@ -135,23 +134,23 @@
                 </div>
             </div>
 
-            <!-- Pending Approval Tab -->
+            <!-- Pending approval tab -->
             <div class="tab-content" id="pending">
                 <div class="pending-section">
                     <div class="section-header">
-                        <h2>Pending Approvals</h2>
+                        <h2>Pending approvals</h2>
                         <div class="filters-bar">
                             <input type="text" placeholder="Search expenses..." class="search-input">
                             <select class="filter-select">
-                                <option value="">All Categories</option>
+                                <option value="">All categories</option>
                                 <option value="travel">Travel</option>
                                 <option value="meals">Meals</option>
-                                <option value="office">Office Supplies</option>
+                                <option value="office">Office supplies</option>
                                 <option value="software">Software</option>
                                 <option value="equipment">Equipment</option>
                             </select>
                             <select class="filter-select">
-                                <option value="">All Amounts</option>
+                                <option value="">All amounts</option>
                                 <option value="0-100">$0 - $100</option>
                                 <option value="100-500">$100 - $500</option>
                                 <option value="500-1000">$500 - $1,000</option>
@@ -166,50 +165,50 @@
                 </div>
             </div>
 
-            <!-- Approved Tab -->
+            <!-- Approved tab -->
             <div class="tab-content" id="approved">
                 <div class="approved-section">
-                    <h2>Approved Expenses</h2>
+                    <h2>Approved expenses</h2>
                     <div class="expenses-list" id="approved-expenses">
                         <!-- Approved expenses will be populated by JavaScript -->
                     </div>
                 </div>
             </div>
 
-            <!-- Rejected Tab -->
+            <!-- Rejected tab -->
             <div class="tab-content" id="rejected">
                 <div class="rejected-section">
-                    <h2>Rejected Expenses</h2>
+                    <h2>Rejected expenses</h2>
                     <div class="expenses-list" id="rejected-expenses">
                         <!-- Rejected expenses will be populated by JavaScript -->
                     </div>
                 </div>
             </div>
 
-            <!-- Reports Tab -->
+            <!-- Reports tab -->
             <div class="tab-content" id="reports">
                 <div class="reports-section">
-                    <h2>Expense Reports & Analytics</h2>
+                    <h2>Expense reports & analytics</h2>
                     <div class="reports-grid">
                         <div class="report-card">
-                            <h3>Monthly Expense Summary</h3>
-                            <p>Comprehensive overview of all expense approvals for the current month</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Monthly expense summary</h3>
+                            <p>Overview of all expense approvals for the current month</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                         <div class="report-card">
-                            <h3>Department Analysis</h3>
+                            <h3>Department analysis</h3>
                             <p>Expense breakdown by department and spending patterns</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                         <div class="report-card">
-                            <h3>Policy Compliance</h3>
-                            <p>Analysis of policy violations and approval trends</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Policy compliance</h3>
+                            <p>Policy violations and approval trends</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                         <div class="report-card">
-                            <h3>Processing Time Analysis</h3>
-                            <p>Metrics on approval processing times and bottlenecks</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Processing time analysis</h3>
+                            <p>Approval processing times and bottlenecks</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                     </div>
                 </div>
@@ -217,12 +216,12 @@
         </main>
     </div>
 
-    <!-- Expense Review Modal -->
+    <!-- Expense review modal -->
     <div id="expense-modal" class="modal">
         <div class="modal-content large-modal">
             <div class="modal-header">
-                <h3>Expense Review</h3>
-                <span class="close" onclick="closeModal('expense-modal')">&times;</span>
+                <h3>Expense review</h3>
+                <span class="close" onclick="closeModal('expense-modal')" aria-label="Close"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span>
             </div>
             <div class="expense-review">
                 <div class="expense-details">
@@ -248,12 +247,12 @@
                     </div>
                     <div class="detail-row">
                         <label>Receipt:</label>
-                        <button id="download-receipt" class="btn-secondary">Download Receipt</button>
+                        <button id="download-receipt" class="btn-secondary"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg> Download receipt</button>
                     </div>
                 </div>
-                
+
                 <div class="validation-checklist">
-                    <h4>Validation Checklist</h4>
+                    <h4>Validation checklist</h4>
                     <div class="checklist-items">
                         <label class="checklist-item">
                             <input type="checkbox" id="check-receipt">
@@ -282,7 +281,7 @@
                     <div class="approval-actions">
                         <button class="btn-success" onclick="approveExpense()">Approve</button>
                         <button class="btn-danger" onclick="rejectExpense()">Reject</button>
-                        <button class="btn-secondary" onclick="requestMoreInfo()">Request More Info</button>
+                        <button class="btn-secondary" onclick="requestMoreInfo()">Request more info</button>
                         <button class="btn-secondary" onclick="closeModal('expense-modal')">Cancel</button>
                     </div>
                 </div>
