@@ -10,9 +10,9 @@ const pageSize = 10;
 const sampleEmployees = [
     {
         id: 'EMP001',
-        firstName: 'John',
-        lastName: 'Smith',
-        email: 'john.smith@nexuscorp.com',
+        firstName: 'Rajesh',
+        lastName: 'Iyer',
+        email: 'rajesh.iyer@westbrook.example',
         phone: '+1 (555) 123-4567',
         department: 'engineering',
         position: 'Senior Software Engineer',
@@ -20,14 +20,14 @@ const sampleEmployees = [
         salary: 125000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.5
     },
     {
         id: 'EMP002',
-        firstName: 'Sarah',
-        lastName: 'Wilson',
-        email: 'sarah.wilson@nexuscorp.com',
+        firstName: 'Kwame',
+        lastName: 'Mensah',
+        email: 'kwame.mensah@westbrook.example',
         phone: '+1 (555) 234-5678',
         department: 'engineering',
         position: 'Engineering Manager',
@@ -35,14 +35,14 @@ const sampleEmployees = [
         salary: 145000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'David Chen',
+        manager: 'Tomás Herrera',
         performanceRating: 4.8
     },
     {
         id: 'EMP003',
-        firstName: 'Mike',
-        lastName: 'Davis',
-        email: 'mike.davis@nexuscorp.com',
+        firstName: 'Mateo',
+        lastName: 'Alvarez',
+        email: 'mateo.alvarez@westbrook.example',
         phone: '+1 (555) 345-6789',
         department: 'sales',
         position: 'Sales Representative',
@@ -50,14 +50,14 @@ const sampleEmployees = [
         salary: 75000,
         status: 'active',
         location: 'new-york',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.2
     },
     {
         id: 'EMP004',
-        firstName: 'Emily',
-        lastName: 'Chen',
-        email: 'emily.chen@nexuscorp.com',
+        firstName: 'Yuki',
+        lastName: 'Tanaka',
+        email: 'yuki.tanaka@westbrook.example',
         phone: '+1 (555) 456-7890',
         department: 'marketing',
         position: 'Marketing Specialist',
@@ -65,14 +65,14 @@ const sampleEmployees = [
         salary: 68000,
         status: 'active',
         location: 'chicago',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.3
     },
     {
         id: 'EMP005',
-        firstName: 'David',
-        lastName: 'Wilson',
-        email: 'david.wilson@nexuscorp.com',
+        firstName: 'Fatima',
+        lastName: 'Al-Sayed',
+        email: 'fatima.alsayed@westbrook.example',
         phone: '+1 (555) 567-8901',
         department: 'hr',
         position: 'HR Business Partner',
@@ -80,14 +80,14 @@ const sampleEmployees = [
         salary: 82000,
         status: 'on-leave',
         location: 'remote',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.6
     },
     {
         id: 'EMP006',
-        firstName: 'Jessica',
-        lastName: 'Brown',
-        email: 'jessica.brown@nexuscorp.com',
+        firstName: 'Oliver',
+        lastName: 'Grant',
+        email: 'oliver.grant@westbrook.example',
         phone: '+1 (555) 678-9012',
         department: 'finance',
         position: 'Financial Analyst',
@@ -95,14 +95,14 @@ const sampleEmployees = [
         salary: 95000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.1
     },
     {
         id: 'EMP007',
-        firstName: 'Chris',
-        lastName: 'Green',
-        email: 'chris.green@nexuscorp.com',
+        firstName: 'Chiara',
+        lastName: 'Romano',
+        email: 'chiara.romano@westbrook.example',
         phone: '+1 (555) 789-0123',
         department: 'engineering',
         position: 'Software Engineer',
@@ -110,14 +110,14 @@ const sampleEmployees = [
         salary: 110000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.0
     },
     {
         id: 'EMP008',
-        firstName: 'Amanda',
-        lastName: 'White',
-        email: 'amanda.white@nexuscorp.com',
+        firstName: 'Nikhil',
+        lastName: 'Desai',
+        email: 'nikhil.desai@westbrook.example',
         phone: '+1 (555) 890-1234',
         department: 'sales',
         position: 'Account Executive',
@@ -125,14 +125,14 @@ const sampleEmployees = [
         salary: 85000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.4
     },
     {
         id: 'EMP009',
-        firstName: 'James',
-        lastName: 'Harris',
-        email: 'james.harris@nexuscorp.com',
+        firstName: 'Zainab',
+        lastName: 'Bello',
+        email: 'zainab.bello@westbrook.example',
         phone: '+1 (555) 901-2345',
         department: 'marketing',
         position: 'Content Strategist',
@@ -140,14 +140,14 @@ const sampleEmployees = [
         salary: 72000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.2
     },
     {
         id: 'EMP010',
-        firstName: 'Linda',
-        lastName: 'Martin',
-        email: 'linda.martin@nexuscorp.com',
+        firstName: 'Henrik',
+        lastName: 'Larsen',
+        email: 'henrik.larsen@westbrook.example',
         phone: '+1 (555) 012-3456',
         department: 'hr',
         position: 'Recruiter',
@@ -155,14 +155,14 @@ const sampleEmployees = [
         salary: 78000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.3
     },
     {
         id: 'EMP011',
-        firstName: 'Robert',
-        lastName: 'Thompson',
-        email: 'robert.thompson@nexuscorp.com',
+        firstName: 'Elena',
+        lastName: 'Petrova',
+        email: 'elena.petrova@westbrook.example',
         phone: '+1 (555) 123-4567',
         department: 'finance',
         position: 'Senior Accountant',
@@ -170,29 +170,29 @@ const sampleEmployees = [
         salary: 105000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.6
     },
     {
         id: 'EMP012',
-        firstName: 'Patricia',
-        lastName: 'Garcia',
-        email: 'patricia.garcia@nexuscorp.com',
+        firstName: 'Samuel',
+        lastName: 'Adeyemi',
+        email: 'samuel.adeyemi@westbrook.example',
         phone: '+1 (555) 234-5678',
         department: 'engineering',
         position: 'QA Tester',
-        hireDate: '2023-08-01',
+        hireDate: '2025-08-01',
         salary: 90000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 3.9
     },
     {
         id: 'EMP013',
-        firstName: 'Michael',
-        lastName: 'Martinez',
-        email: 'michael.martinez@nexuscorp.com',
+        firstName: 'Beatriz',
+        lastName: 'Costa',
+        email: 'beatriz.costa@westbrook.example',
         phone: '+1 (555) 345-6789',
         department: 'sales',
         position: 'Sales Development Representative',
@@ -200,14 +200,14 @@ const sampleEmployees = [
         salary: 65000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.0
     },
     {
         id: 'EMP014',
-        firstName: 'Barbara',
-        lastName: 'Rodriguez',
-        email: 'barbara.rodriguez@nexuscorp.com',
+        firstName: 'Jonas',
+        lastName: 'Weber',
+        email: 'jonas.weber@westbrook.example',
         phone: '+1 (555) 456-7890',
         department: 'marketing',
         position: 'SEO Specialist',
@@ -215,14 +215,14 @@ const sampleEmployees = [
         salary: 69000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.1
     },
     {
         id: 'EMP015',
-        firstName: 'William',
-        lastName: 'Lopez',
-        email: 'william.lopez@nexuscorp.com',
+        firstName: 'Leila',
+        lastName: 'Haddad',
+        email: 'leila.haddad@westbrook.example',
         phone: '+1 (555) 567-8901',
         department: 'hr',
         position: 'HR Generalist',
@@ -230,14 +230,14 @@ const sampleEmployees = [
         salary: 75000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.4
     },
     {
         id: 'EMP016',
-        firstName: 'Elizabeth',
-        lastName: 'Perez',
-        email: 'elizabeth.perez@nexuscorp.com',
+        firstName: 'Valentina',
+        lastName: 'Rojas',
+        email: 'valentina.rojas@westbrook.example',
         phone: '+1 (555) 678-9012',
         department: 'finance',
         position: 'Accountant',
@@ -245,14 +245,14 @@ const sampleEmployees = [
         salary: 88000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.0
     },
     {
         id: 'EMP017',
-        firstName: 'Richard',
-        lastName: 'Williams',
-        email: 'richard.williams@nexuscorp.com',
+        firstName: 'Arjun',
+        lastName: 'Menon',
+        email: 'arjun.menon@westbrook.example',
         phone: '+1 (555) 789-0123',
         department: 'engineering',
         position: 'DevOps Engineer',
@@ -260,14 +260,14 @@ const sampleEmployees = [
         salary: 115000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.7
     },
     {
         id: 'EMP018',
-        firstName: 'Susan',
-        lastName: 'Jones',
-        email: 'susan.jones@nexuscorp.com',
+        firstName: 'Grace',
+        lastName: 'Nakamura',
+        email: 'grace.nakamura@westbrook.example',
         phone: '+1 (555) 890-1234',
         department: 'sales',
         position: 'Key Account Manager',
@@ -275,14 +275,14 @@ const sampleEmployees = [
         salary: 95000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.8
     },
     {
         id: 'EMP019',
-        firstName: 'Joseph',
-        lastName: 'Miller',
-        email: 'joseph.miller@nexuscorp.com',
+        firstName: 'Stefan',
+        lastName: 'Novak',
+        email: 'stefan.novak@westbrook.example',
         phone: '+1 (555) 901-2345',
         department: 'marketing',
         position: 'Social Media Manager',
@@ -290,14 +290,14 @@ const sampleEmployees = [
         salary: 71000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.3
     },
     {
         id: 'EMP020',
-        firstName: 'Margaret',
-        lastName: 'Taylor',
-        email: 'margaret.taylor@nexuscorp.com',
+        firstName: 'Aisha',
+        lastName: 'Rahman',
+        email: 'aisha.rahman@westbrook.example',
         phone: '+1 (555) 012-3456',
         department: 'hr',
         position: 'Compensation Analyst',
@@ -305,14 +305,14 @@ const sampleEmployees = [
         salary: 81000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.2
     },
     {
         id: 'EMP021',
-        firstName: 'Charles',
-        lastName: 'Anderson',
-        email: 'charles.anderson@nexuscorp.com',
+        firstName: 'Ingrid',
+        lastName: 'Solheim',
+        email: 'ingrid.solheim@westbrook.example',
         phone: '+1 (555) 123-4567',
         department: 'finance',
         position: 'Controller',
@@ -320,29 +320,29 @@ const sampleEmployees = [
         salary: 130000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Tomás Herrera',
         performanceRating: 4.9
     },
     {
         id: 'EMP022',
-        firstName: 'Mary',
-        lastName: 'Thomas',
-        email: 'mary.thomas@nexuscorp.com',
+        firstName: 'Tariq',
+        lastName: 'Hassan',
+        email: 'tariq.hassan@westbrook.example',
         phone: '+1 (555) 234-5678',
         department: 'engineering',
         position: 'UI/UX Designer',
-        hireDate: '2023-09-01',
+        hireDate: '2025-09-01',
         salary: 98000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.1
     },
     {
         id: 'EMP023',
-        firstName: 'Daniel',
-        lastName: 'Jackson',
-        email: 'daniel.jackson@nexuscorp.com',
+        firstName: 'Priya',
+        lastName: 'Raman',
+        email: 'priya.raman@westbrook.example',
         phone: '+1 (555) 345-6789',
         department: 'sales',
         position: 'Sales Manager',
@@ -350,14 +350,14 @@ const sampleEmployees = [
         salary: 110000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Tomás Herrera',
         performanceRating: 4.7
     },
     {
         id: 'EMP024',
-        firstName: 'Karen',
-        lastName: 'White',
-        email: 'karen.white@nexuscorp.com',
+        firstName: 'Hannah',
+        lastName: 'Kowalski',
+        email: 'hannah.kowalski@westbrook.example',
         phone: '+1 (555) 456-7890',
         department: 'marketing',
         position: 'Product Marketing Manager',
@@ -365,14 +365,14 @@ const sampleEmployees = [
         salary: 78000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Tomás Herrera',
         performanceRating: 4.5
     },
     {
         id: 'EMP025',
-        firstName: 'Paul',
-        lastName: 'Harris',
-        email: 'paul.harris@nexuscorp.com',
+        firstName: 'Mei-Ling',
+        lastName: 'Tan',
+        email: 'mei-ling.tan@westbrook.example',
         phone: '+1 (555) 567-8901',
         department: 'hr',
         position: 'HR Manager',
@@ -380,29 +380,29 @@ const sampleEmployees = [
         salary: 95000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Tomás Herrera',
         performanceRating: 4.8
     },
     {
         id: 'EMP026',
-        firstName: 'Nancy',
-        lastName: 'Clark',
-        email: 'nancy.clark@nexuscorp.com',
+        firstName: 'Lars',
+        lastName: 'Eriksson',
+        email: 'lars.eriksson@westbrook.example',
         phone: '+1 (555) 678-9012',
         department: 'finance',
         position: 'Financial Planner',
-        hireDate: '2023-10-01',
+        hireDate: '2026-01-12',
         salary: 92000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.2
     },
     {
         id: 'EMP027',
-        firstName: 'Mark',
-        lastName: 'Lewis',
-        email: 'mark.lewis@nexuscorp.com',
+        firstName: 'Ngozi',
+        lastName: 'Eze',
+        email: 'ngozi.eze@westbrook.example',
         phone: '+1 (555) 789-0123',
         department: 'engineering',
         position: 'Embedded Systems Engineer',
@@ -410,14 +410,14 @@ const sampleEmployees = [
         salary: 120000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.6
     },
     {
         id: 'EMP028',
-        firstName: 'Betty',
-        lastName: 'Robinson',
-        email: 'betty.robinson@nexuscorp.com',
+        firstName: 'Mateus',
+        lastName: 'Ferreira',
+        email: 'mateus.ferreira@westbrook.example',
         phone: '+1 (555) 890-1234',
         department: 'sales',
         position: 'Channel Sales Manager',
@@ -425,14 +425,14 @@ const sampleEmployees = [
         salary: 105000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.9
     },
     {
         id: 'EMP029',
-        firstName: 'George',
-        lastName: 'Walker',
-        email: 'george.walker@nexuscorp.com',
+        firstName: 'Sung-min',
+        lastName: 'Park',
+        email: 'sung-min.park@westbrook.example',
         phone: '+1 (555) 901-2345',
         department: 'marketing',
         position: 'Graphic Designer',
@@ -440,14 +440,14 @@ const sampleEmployees = [
         salary: 74000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.4
     },
     {
         id: 'EMP030',
-        firstName: 'Sandra',
-        lastName: 'Hall',
-        email: 'sandra.hall@nexuscorp.com',
+        firstName: 'Camille',
+        lastName: 'Dubois',
+        email: 'camille.dubois@westbrook.example',
         phone: '+1 (555) 012-3456',
         department: 'hr',
         position: 'Benefits Coordinator',
@@ -455,14 +455,14 @@ const sampleEmployees = [
         salary: 79000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.3
     },
     {
         id: 'EMP031',
-        firstName: 'Steven',
-        lastName: 'Allen',
-        email: 'steven.allen@nexuscorp.com',
+        firstName: 'Ravi',
+        lastName: 'Choudhury',
+        email: 'ravi.choudhury@westbrook.example',
         phone: '+1 (555) 123-4567',
         department: 'finance',
         position: 'Auditor',
@@ -470,29 +470,29 @@ const sampleEmployees = [
         salary: 98000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.5
     },
     {
         id: 'EMP032',
-        firstName: 'Donna',
-        lastName: 'Young',
-        email: 'donna.young@nexuscorp.com',
+        firstName: 'Ayumi',
+        lastName: 'Sato',
+        email: 'ayumi.sato@westbrook.example',
         phone: '+1 (555) 234-5678',
         department: 'engineering',
         position: 'Firmware Engineer',
-        hireDate: '2023-11-01',
+        hireDate: '2026-02-02',
         salary: 112000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.0
     },
     {
         id: 'EMP033',
-        firstName: 'Kenneth',
-        lastName: 'King',
-        email: 'kenneth.king@nexuscorp.com',
+        firstName: 'Dmitri',
+        lastName: 'Volkov',
+        email: 'dmitri.volkov@westbrook.example',
         phone: '+1 (555) 345-6789',
         department: 'sales',
         position: 'Sales Engineer',
@@ -500,14 +500,14 @@ const sampleEmployees = [
         salary: 100000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.8
     },
     {
         id: 'EMP034',
-        firstName: 'Cynthia',
-        lastName: 'Wright',
-        email: 'cynthia.wright@nexuscorp.com',
+        firstName: 'Imani',
+        lastName: 'Washington',
+        email: 'imani.washington@westbrook.example',
         phone: '+1 (555) 456-7890',
         department: 'marketing',
         position: 'Events Coordinator',
@@ -515,14 +515,14 @@ const sampleEmployees = [
         salary: 70000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.2
     },
     {
         id: 'EMP035',
-        firstName: 'Ronald',
-        lastName: 'Scott',
-        email: 'ronald.scott@nexuscorp.com',
+        firstName: 'Emre',
+        lastName: 'Yilmaz',
+        email: 'emre.yilmaz@westbrook.example',
         phone: '+1 (555) 567-8901',
         department: 'hr',
         position: 'HRIS Analyst',
@@ -530,29 +530,29 @@ const sampleEmployees = [
         salary: 83000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.6
     },
     {
         id: 'EMP036',
-        firstName: 'Dorothy',
-        lastName: 'Green',
-        email: 'dorothy.green@nexuscorp.com',
+        firstName: 'Sana',
+        lastName: 'Qureshi',
+        email: 'sana.qureshi@westbrook.example',
         phone: '+1 (555) 678-9012',
         department: 'finance',
         position: 'Tax Specialist',
-        hireDate: '2023-12-01',
+        hireDate: '2026-04-13',
         salary: 96000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.1
     },
     {
         id: 'EMP037',
-        firstName: 'Brian',
-        lastName: 'Adams',
-        email: 'brian.adams@nexuscorp.com',
+        firstName: 'Tomasz',
+        lastName: 'Wrona',
+        email: 'tomasz.wrona@westbrook.example',
         phone: '+1 (555) 789-0123',
         department: 'engineering',
         position: 'Mobile App Developer',
@@ -560,14 +560,14 @@ const sampleEmployees = [
         salary: 118000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.7
     },
     {
         id: 'EMP038',
-        firstName: 'Sharon',
-        lastName: 'Baker',
-        email: 'sharon.baker@nexuscorp.com',
+        firstName: 'Lucia',
+        lastName: 'Fernandez',
+        email: 'lucia.fernandez@westbrook.example',
         phone: '+1 (555) 890-1234',
         department: 'sales',
         position: 'Customer Success Manager',
@@ -575,14 +575,14 @@ const sampleEmployees = [
         salary: 92000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.9
     },
     {
         id: 'EMP039',
-        firstName: 'Kevin',
-        lastName: 'Nelson',
-        email: 'kevin.nelson@nexuscorp.com',
+        firstName: 'Kofi',
+        lastName: 'Boateng',
+        email: 'kofi.boateng@westbrook.example',
         phone: '+1 (555) 901-2345',
         department: 'marketing',
         position: 'Email Marketing Specialist',
@@ -590,14 +590,14 @@ const sampleEmployees = [
         salary: 73000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.3
     },
     {
         id: 'EMP040',
-        firstName: 'Deborah',
-        lastName: 'Carter',
-        email: 'deborah.carter@nexuscorp.com',
+        firstName: 'Anneke',
+        lastName: 'de Vries',
+        email: 'anneke.devries@westbrook.example',
         phone: '+1 (555) 012-3456',
         department: 'hr',
         position: 'Payroll Specialist',
@@ -605,14 +605,14 @@ const sampleEmployees = [
         salary: 80000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.4
     },
     {
         id: 'EMP041',
-        firstName: 'Jason',
-        lastName: 'Mitchell',
-        email: 'jason.mitchell@nexuscorp.com',
+        firstName: 'Hiroshi',
+        lastName: 'Nakagawa',
+        email: 'hiroshi.nakagawa@westbrook.example',
         phone: '+1 (555) 123-4567',
         department: 'finance',
         position: 'FP&A Analyst',
@@ -620,29 +620,29 @@ const sampleEmployees = [
         salary: 102000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.7
     },
     {
         id: 'EMP042',
-        firstName: 'Michelle',
-        lastName: 'Perez',
-        email: 'michelle.perez@nexuscorp.com',
+        firstName: 'Marisol',
+        lastName: 'Vega',
+        email: 'marisol.vega@westbrook.example',
         phone: '+1 (555) 234-5678',
         department: 'engineering',
         position: 'Data Scientist',
-        hireDate: '2023-12-15',
+        hireDate: '2026-06-01',
         salary: 128000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.2
     },
     {
         id: 'EMP043',
-        firstName: 'Ryan',
-        lastName: 'Roberts',
-        email: 'ryan.roberts@nexuscorp.com',
+        firstName: 'Callum',
+        lastName: 'MacLeod',
+        email: 'callum.macleod@westbrook.example',
         phone: '+1 (555) 345-6789',
         department: 'sales',
         position: 'Regional Sales Director',
@@ -650,14 +650,14 @@ const sampleEmployees = [
         salary: 135000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.9
     },
     {
         id: 'EMP044',
-        firstName: 'Laura',
-        lastName: 'Turner',
-        email: 'laura.turner@nexuscorp.com',
+        firstName: 'Noor',
+        lastName: 'Khalil',
+        email: 'noor.khalil@westbrook.example',
         phone: '+1 (555) 456-7890',
         department: 'marketing',
         position: 'Marketing Analyst',
@@ -665,14 +665,14 @@ const sampleEmployees = [
         salary: 76000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.6
     },
     {
         id: 'EMP045',
-        firstName: 'Jeffrey',
-        lastName: 'Phillips',
-        email: 'jeffrey.phillips@nexuscorp.com',
+        firstName: 'Siobhan',
+        lastName: 'Doyle',
+        email: 'siobhan.doyle@westbrook.example',
         phone: '+1 (555) 567-8901',
         department: 'hr',
         position: 'Talent Acquisition Specialist',
@@ -680,29 +680,29 @@ const sampleEmployees = [
         salary: 85000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.7
     },
     {
         id: 'EMP046',
-        firstName: 'Kimberly',
-        lastName: 'Campbell',
-        email: 'kimberly.campbell@nexuscorp.com',
+        firstName: 'Thandiwe',
+        lastName: 'Nkosi',
+        email: 'thandiwe.nkosi@westbrook.example',
         phone: '+1 (555) 678-9012',
         department: 'finance',
         position: 'Procurement Specialist',
-        hireDate: '2024-01-05',
+        hireDate: '2026-07-06',
         salary: 89000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.3
     },
     {
         id: 'EMP047',
-        firstName: 'Gary',
-        lastName: 'Parker',
-        email: 'gary.parker@nexuscorp.com',
+        firstName: 'Mikael',
+        lastName: 'Lindqvist',
+        email: 'mikael.lindqvist@westbrook.example',
         phone: '+1 (555) 789-0123',
         department: 'engineering',
         position: 'Cloud Engineer',
@@ -710,14 +710,14 @@ const sampleEmployees = [
         salary: 122000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.8
     },
     {
         id: 'EMP048',
-        firstName: 'Amy',
-        lastName: 'Evans',
-        email: 'amy.evans@nexuscorp.com',
+        firstName: 'Rosa',
+        lastName: 'Gutierrez',
+        email: 'rosa.gutierrez@westbrook.example',
         phone: '+1 (555) 890-1234',
         department: 'sales',
         position: 'Sales Operations Analyst',
@@ -725,14 +725,14 @@ const sampleEmployees = [
         salary: 90000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.7
     },
     {
         id: 'EMP049',
-        firstName: 'Stephen',
-        lastName: 'Edwards',
-        email: 'stephen.edwards@nexuscorp.com',
+        firstName: 'Aleksander',
+        lastName: 'Nowak',
+        email: 'aleksander.nowak@westbrook.example',
         phone: '+1 (555) 901-2345',
         department: 'marketing',
         position: 'Public Relations Specialist',
@@ -740,14 +740,14 @@ const sampleEmployees = [
         salary: 75000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.4
     },
     {
         id: 'EMP050',
-        firstName: 'Angela',
-        lastName: 'Collins',
-        email: 'angela.collins@nexuscorp.com',
+        firstName: 'Farah',
+        lastName: 'Mansour',
+        email: 'farah.mansour@westbrook.example',
         phone: '+1 (555) 012-3456',
         department: 'hr',
         position: 'Employee Relations Specialist',
@@ -755,14 +755,14 @@ const sampleEmployees = [
         salary: 82000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.5
     },
     {
         id: 'EMP051',
-        firstName: 'Frank',
-        lastName: 'Stewart',
-        email: 'frank.stewart@nexuscorp.com',
+        firstName: 'Wei',
+        lastName: 'Zhang',
+        email: 'wei.zhang@westbrook.example',
         phone: '+1 (555) 123-4567',
         department: 'finance',
         position: 'Investor Relations',
@@ -770,29 +770,29 @@ const sampleEmployees = [
         salary: 110000,
         status: 'active',
         location: 'new-york',
-        manager: 'Robert Johnson',
+        manager: 'Ingrid Solheim',
         performanceRating: 4.8
     },
     {
         id: 'EMP052',
-        firstName: 'Brenda',
-        lastName: 'Sanchez',
-        email: 'brenda.sanchez@nexuscorp.com',
+        firstName: 'Ifeoma',
+        lastName: 'Chukwu',
+        email: 'ifeoma.chukwu@westbrook.example',
         phone: '+1 (555) 234-5678',
         department: 'engineering',
         position: 'Security Engineer',
-        hireDate: '2024-02-01',
+        hireDate: '2026-08-17',
         salary: 130000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Sarah Wilson',
+        manager: 'Kwame Mensah',
         performanceRating: 4.3
     },
     {
         id: 'EMP053',
-        firstName: 'Larry',
-        lastName: 'Morris',
-        email: 'larry.morris@nexuscorp.com',
+        firstName: 'Giovanni',
+        lastName: 'Bianchi',
+        email: 'giovanni.bianchi@westbrook.example',
         phone: '+1 (555) 345-6789',
         department: 'sales',
         position: 'Business Development Manager',
@@ -800,14 +800,14 @@ const sampleEmployees = [
         salary: 115000,
         status: 'active',
         location: 'chicago',
-        manager: 'Jennifer Lee',
+        manager: 'Priya Raman',
         performanceRating: 4.9
     },
     {
         id: 'EMP054',
-        firstName: 'Pamela',
-        lastName: 'Rogers',
-        email: 'pamela.rogers@nexuscorp.com',
+        firstName: 'Katarzyna',
+        lastName: 'Wojcik',
+        email: 'katarzyna.wojcik@westbrook.example',
         phone: '+1 (555) 456-7890',
         department: 'marketing',
         position: 'Brand Manager',
@@ -815,14 +815,14 @@ const sampleEmployees = [
         salary: 80000,
         status: 'active',
         location: 'remote',
-        manager: 'Robert Johnson',
+        manager: 'Hannah Kowalski',
         performanceRating: 4.7
     },
     {
         id: 'EMP055',
-        firstName: 'Gregory',
-        lastName: 'Reed',
-        email: 'gregory.reed@nexuscorp.com',
+        firstName: 'Devraj',
+        lastName: 'Kulkarni',
+        email: 'devraj.kulkarni@westbrook.example',
         phone: '+1 (555) 567-8901',
         department: 'hr',
         position: 'Training and Development Manager',
@@ -830,17 +830,17 @@ const sampleEmployees = [
         salary: 88000,
         status: 'active',
         location: 'san-francisco',
-        manager: 'Lisa Anderson',
+        manager: 'Mei-Ling Tan',
         performanceRating: 4.8
     }
 ];
 
 const sampleCandidates = [
-    { name: 'Alex Johnson', position: 'Software Engineer', stage: 'applied', score: 85 },
-    { name: 'Maria Garcia', position: 'Product Manager', stage: 'screening', score: 92 },
-    { name: 'James Wilson', position: 'Data Scientist', stage: 'interview', score: 88 },
-    { name: 'Lisa Chen', position: 'UX Designer', stage: 'offer', score: 94 },
-    { name: 'Robert Kim', position: 'DevOps Engineer', stage: 'hired', score: 90 }
+    { name: 'Anders Nilsson', position: 'Software Engineer', stage: 'applied', score: 85 },
+    { name: 'Adaeze Obi', position: 'Product Manager', stage: 'screening', score: 92 },
+    { name: 'Rohan Mehta', position: 'Data Scientist', stage: 'interview', score: 88 },
+    { name: 'Maya Lindgren', position: 'UX Designer', stage: 'offer', score: 94 },
+    { name: 'Joon-ho Kim', position: 'DevOps Engineer', stage: 'hired', score: 90 }
 ];
 
 // URL Router for SPA functionality
@@ -920,7 +920,8 @@ function switchTab(tabName) {
     if (navItem && tabContent) {
         navItem.classList.add('active');
         tabContent.classList.add('active');
-        document.title = `${navItem.textContent.trim()} - Human Resources - Nexus Corp`;
+        const tabLabel = (navItem.querySelector('span') || navItem).textContent.trim();
+        document.title = `${tabLabel} | Human resources | Westbrook Industries`;
     }
     
     loadTabContent(tabName);
@@ -1009,7 +1010,7 @@ function loadRecentHires() {
             <div class="employee-avatar">${employee.firstName.charAt(0)}${employee.lastName.charAt(0)}</div>
             <div class="employee-info">
                 <div class="employee-name">${employee.firstName} ${employee.lastName}</div>
-                <div class="employee-details">${employee.position} • ${formatDate(employee.hireDate)}</div>
+                <div class="employee-details">${employee.position}, ${formatDate(employee.hireDate)}</div>
             </div>
         `;
         container.appendChild(hireElement);
@@ -1021,9 +1022,9 @@ function loadUpcomingReviews() {
     if (!container) return;
     
     const upcomingReviews = [
-        { name: 'John Smith', date: '2024-01-20', type: 'Annual Review' },
-        { name: 'Sarah Wilson', date: '2024-01-22', type: 'Quarterly Check-in' },
-        { name: 'Mike Davis', date: '2024-01-25', type: '90-Day Review' }
+        { name: 'Rajesh Iyer', date: '2026-10-12', type: 'Annual review' },
+        { name: 'Kwame Mensah', date: '2026-10-14', type: 'Quarterly check-in' },
+        { name: 'Mateo Alvarez', date: '2026-10-19', type: '90-day review' }
     ];
     
     container.innerHTML = '';
@@ -1034,69 +1035,144 @@ function loadUpcomingReviews() {
             <div class="employee-avatar">${review.name.split(' ').map(n => n.charAt(0)).join('')}</div>
             <div class="employee-info">
                 <div class="employee-name">${review.name}</div>
-                <div class="employee-details">${review.type} • ${review.date}</div>
+                <div class="employee-details">${review.type}, ${formatDate(review.date)}</div>
             </div>
         `;
         container.appendChild(reviewElement);
     });
 }
 
-function createDepartmentChart() {
-    const canvas = document.getElementById('department-chart');
-    if (!canvas) return;
-    
+// Chart helpers (colors come from the shared theme tokens)
+function cssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function chartFont(size) {
+    return `${size}px ${getComputedStyle(document.body).fontFamily}`;
+}
+
+function prepareCanvas(canvas) {
     const ctx = canvas.getContext('2d');
     canvas.width = canvas.offsetWidth;
     canvas.height = 250;
-    
-    const departments = ['Engineering', 'Sales', 'Marketing', 'HR', 'Finance'];
-    const counts = [45, 32, 28, 15, 22];
-    const colors = ['#3498db', '#e74c3c', '#f39c12', '#27ae60', '#9b59b6'];
-    
-    const centerX = canvas.width / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return ctx;
+}
+
+function drawPie(canvas, labels, values, formatValue) {
+    const ctx = prepareCanvas(canvas);
+    const palette = [1, 2, 3, 4, 5, 6].map(i => cssVar(`--chart-${i}`));
+    const surface = cssVar('--surface');
+    const textColor = cssVar('--text');
+    const mutedColor = cssVar('--text-muted');
+    const total = values.reduce((sum, value) => sum + value, 0);
+    const valueTexts = values.map(value => `${formatValue(value)} (${(value / total * 100).toFixed(1)}%)`);
+
+    // Size the legend first so the pie can shrink on narrow panels
+    ctx.font = chartFont(13);
+    const labelWidth = Math.max(...labels.map(label => ctx.measureText(label).width));
+    ctx.font = chartFont(12);
+    const valueWidth = Math.max(...valueTexts.map(text => ctx.measureText(text).width));
+    const legendWidth = 18 + labelWidth + 16 + valueWidth;
+
+    const radius = Math.max(40, Math.min(95, (canvas.width - 16 - 28 - legendWidth) / 2));
+    const centerX = 8 + radius;
     const centerY = canvas.height / 2;
-    const radius = Math.min(centerX, centerY) - 20;
-    
-    let startAngle = 0;
-    const total = counts.reduce((sum, count) => sum + count, 0);
-    
-    counts.forEach((count, index) => {
-        const sliceAngle = (count / total) * 2 * Math.PI;
-        
-        ctx.fillStyle = colors[index];
+
+    let startAngle = -Math.PI / 2;
+    values.forEach((value, index) => {
+        const sliceAngle = (value / total) * 2 * Math.PI;
+        ctx.fillStyle = palette[index % palette.length];
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
         ctx.closePath();
         ctx.fill();
-        
+        ctx.strokeStyle = surface;
+        ctx.lineWidth = 2;
+        ctx.stroke();
         startAngle += sliceAngle;
     });
+
+    // Legend
+    const legendX = centerX + radius + 28;
+    const rowHeight = 26;
+    const legendY = centerY - (values.length * rowHeight) / 2 + rowHeight / 2;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    values.forEach((value, index) => {
+        const y = legendY + index * rowHeight;
+        ctx.fillStyle = palette[index % palette.length];
+        ctx.fillRect(legendX, y - 5, 10, 10);
+        ctx.fillStyle = textColor;
+        ctx.font = chartFont(13);
+        ctx.fillText(labels[index], legendX + 18, y);
+        ctx.fillStyle = mutedColor;
+        ctx.font = chartFont(12);
+        ctx.fillText(valueTexts[index], legendX + 18 + labelWidth + 16, y);
+    });
+}
+
+function drawAxes(ctx, canvas, margins, maxValue, steps, formatTick) {
+    const grid = cssVar('--chart-grid');
+    const mutedColor = cssVar('--text-muted');
+    const plotWidth = canvas.width - margins.left - margins.right;
+    const plotHeight = canvas.height - margins.top - margins.bottom;
+    ctx.font = chartFont(11);
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'right';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= steps; i++) {
+        const value = (maxValue / steps) * i;
+        const y = Math.round(margins.top + plotHeight - (value / maxValue) * plotHeight) + 0.5;
+        ctx.strokeStyle = grid;
+        ctx.beginPath();
+        ctx.moveTo(margins.left, y);
+        ctx.lineTo(margins.left + plotWidth, y);
+        ctx.stroke();
+        ctx.fillStyle = mutedColor;
+        ctx.fillText(formatTick(value), margins.left - 8, y);
+    }
+    return { plotWidth, plotHeight };
+}
+
+function createDepartmentChart() {
+    const canvas = document.getElementById('department-chart');
+    if (!canvas) return;
+
+    const departments = ['Engineering', 'Sales', 'Marketing', 'HR', 'Finance'];
+    const counts = [45, 32, 28, 15, 22];
+    drawPie(canvas, departments, counts, value => String(value));
 }
 
 function createAttendanceChart() {
     const canvas = document.getElementById('attendance-chart');
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = 250;
-    
+
+    const ctx = prepareCanvas(canvas);
+
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
     const attendance = [94, 96, 93, 97, 89];
-    
-    const chartWidth = canvas.width - 60;
-    const chartHeight = canvas.height - 60;
-    const maxAttendance = 100;
-    
-    ctx.fillStyle = '#27ae60';
+
+    const margins = { top: 16, right: 16, bottom: 28, left: 40 };
+    const { plotWidth, plotHeight } = drawAxes(ctx, canvas, margins, 100, 4, value => `${value}%`);
+    const slot = plotWidth / attendance.length;
+    const barWidth = Math.min(48, slot - 24);
+
+    ctx.fillStyle = cssVar('--chart-1');
     attendance.forEach((rate, index) => {
-        const barWidth = chartWidth / attendance.length - 10;
-        const barHeight = (rate / maxAttendance) * chartHeight;
-        const x = 30 + index * (chartWidth / attendance.length);
-        const y = chartHeight - barHeight + 30;
-        
+        const barHeight = (rate / 100) * plotHeight;
+        const x = margins.left + index * slot + (slot - barWidth) / 2;
+        const y = margins.top + plotHeight - barHeight;
         ctx.fillRect(x, y, barWidth, barHeight);
+    });
+
+    ctx.fillStyle = cssVar('--text-muted');
+    ctx.font = chartFont(12);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    days.forEach((day, index) => {
+        ctx.fillText(day, margins.left + index * slot + slot / 2, canvas.height - margins.bottom + 8);
     });
 }
 
@@ -1123,11 +1199,11 @@ function renderEmployeesTable() {
             </td>
             <td>${employee.firstName} ${employee.lastName}</td>
             <td>${employee.id}</td>
-            <td>${capitalizeFirst(employee.department)}</td>
+            <td>${departmentLabel(employee.department)}</td>
             <td>${employee.position}</td>
             <td>${formatDate(employee.hireDate)}</td>
-            <td><span class="status-badge ${employee.status}">${employee.status.replace('-', ' ')}</span></td>
-            <td>$${employee.salary.toLocaleString()}</td>
+            <td><span class="status-badge ${employee.status} ${statusTone(employee.status)}">${employee.status.replace('-', ' ')}</span></td>
+            <td class="num">$${employee.salary.toLocaleString('en-US')}</td>
             <td>
                 <button class="action-btn" onclick="editEmployee('${employee.id}')">Edit</button>
                 <button class="action-btn secondary" onclick="viewEmployee('${employee.id}')">View</button>
@@ -1218,7 +1294,7 @@ function loadCandidatePipeline() {
             candidateElement.innerHTML = `
                 <div class="candidate-name">${candidate.name}</div>
                 <div class="candidate-position">${candidate.position}</div>
-                <div style="margin-top: 10px; font-size: 0.8em; color: #27ae60;">Score: ${candidate.score}%</div>
+                <div class="candidate-score">Score: ${candidate.score}%</div>
             `;
             container.appendChild(candidateElement);
         });
@@ -1239,15 +1315,13 @@ function loadJobPostings() {
     container.innerHTML = '';
     jobPostings.forEach(job => {
         const jobElement = document.createElement('div');
-        jobElement.style.cssText = 'background: white; padding: 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);';
+        jobElement.className = 'posting-item';
         jobElement.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <h4 style="color: #2c3e50; margin-bottom: 5px;">${job.title}</h4>
-                    <div style="color: #7f8c8d; font-size: 0.9em;">${job.applicants} applicants</div>
-                </div>
-                <span class="status-badge ${job.status.toLowerCase()}">${job.status}</span>
+            <div>
+                <div class="posting-title">${job.title}</div>
+                <div class="posting-meta">${job.applicants} applicants</div>
             </div>
+            <span class="status-badge ${job.status.toLowerCase()} ${job.status === 'Active' ? 'tone-success' : 'tone-neutral'}">${job.status}</span>
         `;
         container.appendChild(jobElement);
     });
@@ -1255,9 +1329,37 @@ function loadJobPostings() {
 
 // Performance functions
 function loadPerformance() {
+    loadReviewCalendar();
     loadTopPerformers();
     loadGoalsChart();
     loadFeedbackStats();
+}
+
+function loadReviewCalendar() {
+    const container = document.getElementById('review-calendar');
+    if (!container) return;
+
+    const scheduledReviews = [
+        { date: '2026-10-12', name: 'Rajesh Iyer', type: 'Annual review' },
+        { date: '2026-10-14', name: 'Kwame Mensah', type: 'Quarterly check-in' },
+        { date: '2026-10-19', name: 'Mateo Alvarez', type: '90-day review' },
+        { date: '2026-10-27', name: 'Yuki Tanaka', type: 'Annual review' },
+        { date: '2026-11-03', name: 'Oliver Grant', type: 'Quarterly check-in' }
+    ];
+
+    container.innerHTML = '';
+    scheduledReviews.forEach(review => {
+        const rowElement = document.createElement('div');
+        rowElement.className = 'list-row';
+        rowElement.innerHTML = `
+            <div>
+                <div class="list-row-title">${review.name}</div>
+                <div class="list-row-meta">${review.type}</div>
+            </div>
+            <span class="list-row-meta">${formatDate(review.date)}</span>
+        `;
+        container.appendChild(rowElement);
+    });
 }
 
 function loadTopPerformers() {
@@ -1271,15 +1373,15 @@ function loadTopPerformers() {
     container.innerHTML = '';
     topPerformers.forEach((performer, index) => {
         const performerElement = document.createElement('div');
-        performerElement.style.cssText = 'display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f1f2f6;';
+        performerElement.className = 'performer-item';
         performerElement.innerHTML = `
-            <div style="font-weight: 600; color: #27ae60; font-size: 1.2em;">#${index + 1}</div>
+            <div class="performer-rank">${index + 1}</div>
             <div class="employee-avatar">${performer.firstName.charAt(0)}${performer.lastName.charAt(0)}</div>
-            <div style="flex: 1;">
-                <div style="font-weight: 600; color: #2c3e50;">${performer.firstName} ${performer.lastName}</div>
-                <div style="color: #7f8c8d; font-size: 0.9em;">${performer.position}</div>
+            <div class="performer-info">
+                <div class="employee-name">${performer.firstName} ${performer.lastName}</div>
+                <div class="employee-details">${performer.position}</div>
             </div>
-            <div style="font-weight: 600; color: #27ae60;">${performer.performanceRating}/5</div>
+            <div class="performer-rating">${performer.performanceRating}/5</div>
         `;
         container.appendChild(performerElement);
     });
@@ -1288,38 +1390,50 @@ function loadTopPerformers() {
 function loadGoalsChart() {
     const canvas = document.getElementById('goals-chart');
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = 250;
-    
+
+    const ctx = prepareCanvas(canvas);
+
     const quarters = ['Q1', 'Q2', 'Q3', 'Q4'];
     const goalsMet = [78, 82, 75, 84];
-    
-    const chartWidth = canvas.width - 60;
-    const chartHeight = canvas.height - 60;
-    
-    ctx.strokeStyle = '#27ae60';
-    ctx.lineWidth = 3;
+
+    const margins = { top: 16, right: 24, bottom: 28, left: 40 };
+    const { plotWidth, plotHeight } = drawAxes(ctx, canvas, margins, 100, 4, value => `${value}%`);
+    const step = plotWidth / quarters.length;
+    const points = goalsMet.map((percentage, index) => ({
+        x: margins.left + step * index + step / 2,
+        y: margins.top + plotHeight - (percentage / 100) * plotHeight
+    }));
+
+    ctx.strokeStyle = cssVar('--chart-1');
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    
-    goalsMet.forEach((percentage, index) => {
-        const x = 30 + (index * (chartWidth / (goalsMet.length - 1)));
-        const y = 30 + (chartHeight - (percentage / 100) * chartHeight);
-        
+    points.forEach((point, index) => {
         if (index === 0) {
-            ctx.moveTo(x, y);
+            ctx.moveTo(point.x, point.y);
         } else {
-            ctx.lineTo(x, y);
+            ctx.lineTo(point.x, point.y);
         }
-        
-        ctx.fillStyle = '#27ae60';
-        ctx.beginPath();
-        ctx.arc(x, y, 4, 0, 2 * Math.PI);
-        ctx.fill();
     });
-    
     ctx.stroke();
+
+    points.forEach((point, index) => {
+        ctx.fillStyle = cssVar('--chart-1');
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = cssVar('--text');
+        ctx.font = chartFont(11);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(`${goalsMet[index]}%`, point.x, point.y - 8);
+    });
+
+    ctx.fillStyle = cssVar('--text-muted');
+    ctx.font = chartFont(12);
+    ctx.textBaseline = 'top';
+    quarters.forEach((quarter, index) => {
+        ctx.fillText(quarter, points[index].x, canvas.height - margins.bottom + 8);
+    });
 }
 
 function loadFeedbackStats() {
@@ -1329,17 +1443,17 @@ function loadFeedbackStats() {
     const feedbackData = [
         { category: 'Communication', average: 4.2 },
         { category: 'Leadership', average: 3.8 },
-        { category: 'Technical Skills', average: 4.5 },
+        { category: 'Technical skills', average: 4.5 },
         { category: 'Teamwork', average: 4.1 }
     ];
     
     container.innerHTML = '';
     feedbackData.forEach(item => {
         const statElement = document.createElement('div');
-        statElement.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f1f2f6;';
+        statElement.className = 'feedback-row';
         statElement.innerHTML = `
-            <span style="color: #2c3e50; font-weight: 500;">${item.category}</span>
-            <span style="color: #27ae60; font-weight: 600;">${item.average}/5</span>
+            <span>${item.category}</span>
+            <span class="feedback-score">${item.average}/5</span>
         `;
         container.appendChild(statElement);
     });
@@ -1355,34 +1469,10 @@ function loadPayroll() {
 function createPayrollChart() {
     const canvas = document.getElementById('payroll-chart');
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = 250;
-    
+
     const categories = ['Salaries', 'Benefits', 'Taxes', 'Other'];
     const amounts = [1200000, 234120, 392450, 89760];
-    const colors = ['#3498db', '#27ae60', '#e74c3c', '#f39c12'];
-    
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = Math.min(centerX, centerY) - 20;
-    
-    let startAngle = 0;
-    const total = amounts.reduce((sum, amount) => sum + amount, 0);
-    
-    amounts.forEach((amount, index) => {
-        const sliceAngle = (amount / total) * 2 * Math.PI;
-        
-        ctx.fillStyle = colors[index];
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-        ctx.closePath();
-        ctx.fill();
-        
-        startAngle += sliceAngle;
-    });
+    drawPie(canvas, categories, amounts, amount => `$${Math.round(amount / 1000).toLocaleString('en-US')}K`);
 }
 
 function loadSalaryBands() {
@@ -1400,13 +1490,13 @@ function loadSalaryBands() {
     container.innerHTML = '';
     salaryBands.forEach(band => {
         const bandElement = document.createElement('div');
-        bandElement.style.cssText = 'background: #f8f9fa; padding: 15px; margin-bottom: 10px; border-radius: 8px;';
+        bandElement.className = 'band-item';
         bandElement.innerHTML = `
-            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px;">${band.department}</div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.9em; color: #7f8c8d;">
-                <span>Min: $${band.min.toLocaleString()}</span>
-                <span>Avg: $${band.avg.toLocaleString()}</span>
-                <span>Max: $${band.max.toLocaleString()}</span>
+            <div class="band-name">${band.department}</div>
+            <div class="band-range">
+                <span>Min: $${band.min.toLocaleString('en-US')}</span>
+                <span>Avg: $${band.avg.toLocaleString('en-US')}</span>
+                <span>Max: $${band.max.toLocaleString('en-US')}</span>
             </div>
         `;
         container.appendChild(bandElement);
@@ -1418,19 +1508,19 @@ function loadPayrollCalendar() {
     if (!container) return;
     
     const payrollEvents = [
-        { date: '2024-01-15', event: 'Bi-weekly Payroll', type: 'payroll' },
-        { date: '2024-01-31', event: 'Monthly Benefits', type: 'benefits' },
-        { date: '2024-02-01', event: 'Tax Filing Due', type: 'tax' },
-        { date: '2024-02-15', event: 'Bi-weekly Payroll', type: 'payroll' }
+        { date: '2026-10-15', event: 'Bi-weekly payroll', type: 'payroll' },
+        { date: '2026-10-30', event: 'Monthly benefits', type: 'benefits' },
+        { date: '2026-11-02', event: 'Tax filing due', type: 'tax' },
+        { date: '2026-11-13', event: 'Bi-weekly payroll', type: 'payroll' }
     ];
     
     container.innerHTML = '';
     payrollEvents.forEach(event => {
         const eventElement = document.createElement('div');
-        eventElement.style.cssText = 'padding: 10px 0; border-bottom: 1px solid #f1f2f6; display: flex; justify-content: space-between;';
+        eventElement.className = 'list-row';
         eventElement.innerHTML = `
-            <span style="color: #2c3e50; font-weight: 500;">${event.event}</span>
-            <span style="color: #7f8c8d; font-size: 0.9em;">${event.date}</span>
+            <span class="list-row-title">${event.event}</span>
+            <span class="list-row-meta">${formatDate(event.date)}</span>
         `;
         container.appendChild(eventElement);
     });
@@ -1448,8 +1538,8 @@ function loadHealthPlans() {
     if (!container) return;
     
     const healthPlans = [
-        { name: 'Premium Health Plan', enrollment: '89%', cost: '$450/month' },
-        { name: 'Basic Health Plan', enrollment: '11%', cost: '$200/month' }
+        { name: 'Premium health plan', enrollment: '89%', cost: '$450/month' },
+        { name: 'Basic health plan', enrollment: '11%', cost: '$200/month' }
     ];
     
     container.innerHTML = '';
@@ -1458,7 +1548,7 @@ function loadHealthPlans() {
         planElement.className = 'plan-item';
         planElement.innerHTML = `
             <div class="plan-name">${plan.name}</div>
-            <div class="plan-details">Enrollment: ${plan.enrollment} • Cost: ${plan.cost}</div>
+            <div class="plan-details">Enrollment: ${plan.enrollment}, cost: ${plan.cost}</div>
         `;
         container.appendChild(planElement);
     });
@@ -1469,8 +1559,8 @@ function loadRetirementPlans() {
     if (!container) return;
     
     const retirementPlans = [
-        { name: '401(k) Plan', enrollment: '65%', match: '4% company match' },
-        { name: 'Roth IRA Option', enrollment: '23%', match: 'No match' }
+        { name: '401(k) plan', enrollment: '65%', match: '4% company match' },
+        { name: 'Roth IRA option', enrollment: '23%', match: 'no match' }
     ];
     
     container.innerHTML = '';
@@ -1479,7 +1569,7 @@ function loadRetirementPlans() {
         planElement.className = 'plan-item';
         planElement.innerHTML = `
             <div class="plan-name">${plan.name}</div>
-            <div class="plan-details">Enrollment: ${plan.enrollment} • ${plan.match}</div>
+            <div class="plan-details">Enrollment: ${plan.enrollment}, ${plan.match}</div>
         `;
         container.appendChild(planElement);
     });
@@ -1490,10 +1580,10 @@ function loadAdditionalBenefits() {
     if (!container) return;
     
     const additionalBenefits = [
-        { name: 'Dental Insurance', enrollment: '76%', cost: '$25/month' },
-        { name: 'Vision Insurance', enrollment: '82%', cost: '$15/month' },
-        { name: 'Life Insurance', enrollment: '94%', cost: 'Company paid' },
-        { name: 'Flexible Spending Account', enrollment: '45%', cost: 'Pre-tax' }
+        { name: 'Dental insurance', enrollment: '76%', cost: '$25/month' },
+        { name: 'Vision insurance', enrollment: '82%', cost: '$15/month' },
+        { name: 'Life insurance', enrollment: '94%', cost: 'company paid' },
+        { name: 'Flexible spending account', enrollment: '45%', cost: 'pre-tax' }
     ];
     
     container.innerHTML = '';
@@ -1502,7 +1592,7 @@ function loadAdditionalBenefits() {
         benefitElement.className = 'plan-item';
         benefitElement.innerHTML = `
             <div class="plan-name">${benefit.name}</div>
-            <div class="plan-details">Enrollment: ${benefit.enrollment} • Cost: ${benefit.cost}</div>
+            <div class="plan-details">Enrollment: ${benefit.enrollment}, cost: ${benefit.cost}</div>
         `;
         container.appendChild(benefitElement);
     });
@@ -1518,22 +1608,22 @@ function loadRecentReports() {
     if (!container) return;
     
     const recentReports = [
-        { name: 'Monthly Headcount Report', date: '2024-01-15', type: 'PDF' },
-        { name: 'Compensation Analysis', date: '2024-01-12', type: 'Excel' },
-        { name: 'Performance Review Summary', date: '2024-01-10', type: 'PDF' },
-        { name: 'Turnover Analysis', date: '2024-01-08', type: 'Excel' }
+        { name: 'Monthly headcount report', date: '2026-09-15', type: 'PDF' },
+        { name: 'Compensation analysis', date: '2026-09-12', type: 'Excel' },
+        { name: 'Performance review summary', date: '2026-09-10', type: 'PDF' },
+        { name: 'Turnover analysis', date: '2026-09-08', type: 'Excel' }
     ];
     
     container.innerHTML = '';
     recentReports.forEach(report => {
         const reportElement = document.createElement('div');
-        reportElement.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f2f6;';
+        reportElement.className = 'list-row';
         reportElement.innerHTML = `
             <div>
-                <div style="font-weight: 600; color: #2c3e50;">${report.name}</div>
-                <div style="color: #7f8c8d; font-size: 0.9em;">${report.date}</div>
+                <div class="list-row-title">${report.name}</div>
+                <div class="list-row-meta">${formatDate(report.date)}</div>
             </div>
-            <span style="background: #e9ecef; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">${report.type}</span>
+            <span class="badge">${report.type}</span>
         `;
         container.appendChild(reportElement);
     });
@@ -1565,7 +1655,7 @@ function createNewEmployee() {
         ...formData,
         status: 'active',
         location: 'san-francisco',
-        manager: 'HR Manager',
+        manager: 'Mei-Ling Tan',
         performanceRating: 0
     };
     
@@ -1584,11 +1674,22 @@ function createNewEmployee() {
 // Utility functions
 function formatDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleDateString();
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 }
 
 function capitalizeFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function departmentLabel(department) {
+    return department === 'hr' ? 'HR' : capitalizeFirst(department);
+}
+
+function statusTone(status) {
+    if (status === 'active') return 'tone-success';
+    if (status === 'on-leave') return 'tone-warning';
+    if (status === 'terminated') return 'tone-danger';
+    return 'tone-neutral';
 }
 
 function editEmployee(empId) {
