@@ -313,15 +313,18 @@ class ProjectManagement {
         const reviewTasks = this.tasks.filter(task => task.status === 'review');
         const doneTasks = this.tasks.filter(task => task.status === 'done');
 
-        this.renderTaskColumn('todo-tasks', todoTasks);
-        this.renderTaskColumn('inprogress-tasks', inProgressTasks);
-        this.renderTaskColumn('review-tasks', reviewTasks);
-        this.renderTaskColumn('done-tasks', doneTasks);
+        this.renderTaskColumn('todo-tasks', todoTasks, 'todo-count');
+        this.renderTaskColumn('inprogress-tasks', inProgressTasks, 'inprogress-count');
+        this.renderTaskColumn('review-tasks', reviewTasks, 'review-count');
+        this.renderTaskColumn('done-tasks', doneTasks, 'done-count');
     }
 
-    renderTaskColumn(containerId, tasks) {
+    renderTaskColumn(containerId, tasks, countId) {
         const container = document.getElementById(containerId);
         if (!container) return;
+
+        const count = countId && document.getElementById(countId);
+        if (count) count.textContent = tasks.length;
 
         container.innerHTML = tasks.map(task => `
             <div class="task-card" onclick="editTask(${task.id})">
@@ -560,15 +563,15 @@ class ProjectManagement {
         const formData = new FormData(form);
         
         const newTask = {
-            id: this.tasks.length + 1,
+            id: this.tasks.reduce((max, task) => Math.max(max, task.id), 0) + 1,
             title: formData.get('title'),
             description: formData.get('description'),
-            projectId: parseInt(formData.get('projectId')),
+            projectId: parseInt(formData.get('projectId')) || null,
             assignee: formData.get('assignee'),
             priority: formData.get('priority'),
             dueDate: formData.get('dueDate'),
-            estimatedHours: parseInt(formData.get('estimatedHours')),
-            status: 'todo'
+            estimatedHours: parseInt(formData.get('estimatedHours')) || null,
+            status: formData.get('status') || 'todo'
         };
 
         this.tasks.push(newTask);
@@ -661,10 +664,9 @@ function createProject() {
 }
 
 function createTask(status = 'todo') {
+    const statusSelect = document.getElementById('task-status');
+    if (statusSelect) statusSelect.value = status;
     document.getElementById('task-modal').style.display = 'block';
-    if (status !== 'todo') {
-        document.getElementById('task-status').value = status;
-    }
 }
 
 function editProject(projectId) {
