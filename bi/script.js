@@ -1,4 +1,48 @@
-// Business Intelligence Dashboard JavaScript
+// Business intelligence dashboard JavaScript
+
+// Chart styling: colors come from the theme tokens (CSS custom properties)
+function cssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+// Hex token to translucent rgba, for flat area fills
+function withAlpha(hex, alpha) {
+    const h = hex.replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function chartColors(count) {
+    const out = [];
+    for (let i = 0; i < count; i++) out.push(cssVar('--chart-' + ((i % 6) + 1)));
+    return out;
+}
+
+function applyChartDefaults() {
+    if (typeof Chart === 'undefined') return;
+    Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = cssVar('--text-muted');
+    Chart.defaults.borderColor = cssVar('--chart-grid');
+    Chart.defaults.animation = false;
+    Chart.defaults.plugins.legend.labels.boxWidth = 10;
+    Chart.defaults.plugins.legend.labels.boxHeight = 10;
+    Chart.defaults.plugins.legend.labels.padding = 14;
+    Chart.defaults.plugins.tooltip.backgroundColor = cssVar('--gray-900');
+    Chart.defaults.plugins.tooltip.cornerRadius = 4;
+    Chart.defaults.plugins.tooltip.padding = 8;
+    Chart.defaults.elements.line.borderWidth = 2;
+    Chart.defaults.elements.line.tension = 0;
+    Chart.defaults.elements.point.radius = 3;
+    Chart.defaults.elements.bar.borderRadius = 0;
+    Chart.defaults.datasets.bar.maxBarThickness = 56;
+    Chart.defaults.elements.arc.borderWidth = 2;
+    Chart.defaults.elements.arc.borderColor = cssVar('--surface');
+    Chart.defaults.scales.category.grid = { display: false };
+}
+applyChartDefaults();
 
 // Global variables for charts
 let charts = {};
@@ -65,11 +109,11 @@ const biData = {
             data: [145, 89, 67, 45, 23]
         },
         topPerformers: [
-            { name: 'Sarah Johnson', role: 'Senior Sales Rep', sales: 124500 },
-            { name: 'Mike Chen', role: 'Account Manager', sales: 108900 },
-            { name: 'Emma Davis', role: 'Sales Rep', sales: 95600 },
-            { name: 'Alex Wilson', role: 'Senior Account Manager', sales: 87300 },
-            { name: 'Lisa Brown', role: 'Sales Rep', sales: 78200 }
+            { name: 'Priya Raman', role: 'Senior sales rep', sales: 124500 },
+            { name: 'Kwame Mensah', role: 'Account manager', sales: 108900 },
+            { name: 'Sofia Marchetti', role: 'Sales rep', sales: 95600 },
+            { name: 'Rajesh Iyer', role: 'Senior account manager', sales: 87300 },
+            { name: 'Hannah Kowalski', role: 'Sales rep', sales: 78200 }
         ]
     },
     operations: {
@@ -103,6 +147,7 @@ const biData = {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    applyChartDefaults();
     initializeApp();
 });
 
@@ -189,7 +234,7 @@ function switchTab(tabName) {
         tabContent.classList.add('active');
         
         // Update page title
-        document.title = `${navItem.textContent.trim()} - Business Intelligence - Nexus Corp`;
+        document.title = `${navItem.textContent.trim()} | Business intelligence | Westbrook Industries`;
     }
     
     // Load tab-specific content
@@ -257,13 +302,11 @@ function createRevenueChart() {
         data: {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             datasets: [{
-                label: 'Daily Revenue',
+                label: 'Daily revenue',
                 data: biData.overview.revenueData.daily,
-                borderColor: '#667eea',
-                backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4
+                borderColor: cssVar('--chart-1'),
+                backgroundColor: cssVar('--chart-1'),
+                fill: false
             }]
         },
         options: {
@@ -324,14 +367,7 @@ function createCategoryChart() {
             labels: biData.overview.categories.labels,
             datasets: [{
                 data: biData.overview.categories.data,
-                backgroundColor: [
-                    '#667eea',
-                    '#764ba2',
-                    '#f093fb',
-                    '#f5576c',
-                    '#4facfe'
-                ],
-                borderWidth: 0
+                backgroundColor: chartColors(5)
             }]
         },
         options: {
@@ -359,10 +395,9 @@ function createAcquisitionChart() {
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             datasets: [{
-                label: 'New Customers',
+                label: 'New customers',
                 data: [234, 189, 267, 298, 245, 287],
-                backgroundColor: '#667eea',
-                borderRadius: 4
+                backgroundColor: cssVar('--chart-1')
             }]
         },
         options: {
@@ -395,10 +430,10 @@ function createPerformanceChart() {
         data: {
             labels: ['Sales', 'Marketing', 'Support', 'Product', 'Finance'],
             datasets: [{
-                label: 'Performance Score',
+                label: 'Performance score',
                 data: [85, 92, 78, 88, 95],
-                backgroundColor: 'rgba(102, 126, 234, 0.2)',
-                borderColor: '#667eea',
+                backgroundColor: withAlpha(cssVar('--chart-1'), 0.12),
+                borderColor: cssVar('--chart-1'),
                 borderWidth: 2
             }]
         },
@@ -441,14 +476,7 @@ function createPipelineChart() {
             datasets: [{
                 label: 'Opportunities',
                 data: biData.sales.pipeline.data,
-                backgroundColor: [
-                    '#667eea',
-                    '#764ba2',
-                    '#f093fb',
-                    '#f5576c',
-                    '#4facfe'
-                ],
-                borderRadius: 4
+                backgroundColor: cssVar('--chart-1')
             }]
         },
         options: {
@@ -510,11 +538,10 @@ function createInventoryChart() {
     charts.inventory = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['In Stock', 'Low Stock', 'Out of Stock'],
+            labels: ['In stock', 'Low stock', 'Out of stock'],
             datasets: [{
                 data: [87, 10, 3],
-                backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
-                borderWidth: 0
+                backgroundColor: [cssVar('--success'), cssVar('--warning'), cssVar('--danger')]
             }]
         },
         options: {
@@ -544,11 +571,9 @@ function createEfficiencyChart() {
             datasets: [{
                 label: 'Efficiency %',
                 data: [91.2, 92.8, 93.5, 94.2],
-                borderColor: '#667eea',
-                backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4
+                borderColor: cssVar('--chart-1'),
+                backgroundColor: cssVar('--chart-1'),
+                fill: false
             }]
         },
         options: {
@@ -583,10 +608,9 @@ function createFulfillmentChart() {
         data: {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
             datasets: [{
-                label: 'Processing Time (days)',
+                label: 'Processing time (days)',
                 data: [2.1, 2.3, 2.0, 2.4, 2.2],
-                backgroundColor: '#667eea',
-                borderRadius: 4
+                backgroundColor: cssVar('--chart-1')
             }]
         },
         options: {
@@ -619,13 +643,11 @@ function createQualityChart() {
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             datasets: [{
-                label: 'Quality Score',
+                label: 'Quality score',
                 data: [98.5, 98.8, 99.0, 98.9, 99.1, 99.1],
-                borderColor: '#28a745',
-                backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4
+                borderColor: cssVar('--chart-2'),
+                backgroundColor: cssVar('--chart-2'),
+                fill: false
             }]
         },
         options: {
@@ -667,13 +689,7 @@ function createSegmentationChart() {
             labels: biData.customers.segmentation.labels,
             datasets: [{
                 data: biData.customers.segmentation.data,
-                backgroundColor: [
-                    '#667eea',
-                    '#764ba2',
-                    '#f093fb',
-                    '#f5576c'
-                ],
-                borderWidth: 0
+                backgroundColor: chartColors(4)
             }]
         },
         options: {
@@ -703,8 +719,7 @@ function createLTVChart() {
             datasets: [{
                 label: 'Average LTV',
                 data: [850, 1850, 3200, 5600, 8900],
-                backgroundColor: '#667eea',
-                borderRadius: 4
+                backgroundColor: cssVar('--chart-1')
             }]
         },
         options: {
@@ -720,7 +735,7 @@ function createLTVChart() {
                     beginAtZero: true,
                     ticks: {
                         callback: function(value) {
-                            return '$' + value;
+                            return '$' + value.toLocaleString();
                         }
                     }
                 }
@@ -750,13 +765,11 @@ function createRevenueExpenseChart() {
             datasets: [{
                 label: 'Revenue',
                 data: biData.financial.monthlyData.revenue,
-                backgroundColor: '#667eea',
-                borderRadius: 4
+                backgroundColor: cssVar('--chart-1')
             }, {
                 label: 'Expenses',
                 data: biData.financial.monthlyData.expenses,
-                backgroundColor: '#f5576c',
-                borderRadius: 4
+                backgroundColor: cssVar('--chart-4')
             }]
         },
         options: {
@@ -764,7 +777,8 @@ function createRevenueExpenseChart() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'top'
+                    position: 'top',
+                    align: 'end'
                 }
             },
             scales: {
@@ -798,13 +812,11 @@ function createCashflowChart() {
         data: {
             labels: biData.financial.monthlyData.labels,
             datasets: [{
-                label: 'Net Cash Flow',
+                label: 'Net cash flow',
                 data: cashflowData,
-                borderColor: '#28a745',
-                backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4
+                borderColor: cssVar('--chart-2'),
+                backgroundColor: cssVar('--chart-2'),
+                fill: false
             }]
         },
         options: {

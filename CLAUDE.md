@@ -80,3 +80,11 @@ The `Security` workflow scans the libraries the demo pages load from CDNs for kn
 A finding blocks when it is critical or high with a known fix, or when it is in the CISA Known Exploited Vulnerabilities catalog. A failing nightly run opens or updates one issue labelled `security`.
 
 Exceptions live in `security/vulnerability-exceptions.json` (empty by default). An exception is a deliberate, time-boxed decision to accept a known risk, for example when no fix exists and the affected code cannot be reached. Each entry needs an `id` (GHSA or CVE), a `reason`, an `owner` and an `expires` date (`YYYY-MM-DD`). An expired entry fails the gate until it is renewed or removed. Exception changes are reviewed in a pull request like code.
+
+## Style and typography
+
+- Link `shared/theme.css` first in every page and use its tokens (`var(--accent)`, `var(--border)`, ...) in `styles.css`. One blue accent, status colors only for status, 1px borders instead of shadows, radius 4 or 6px, no gradients.
+- Icons are inline Lucide SVG (ISC), never emoji or icon fonts.
+- Use sentence case for titles, tabs and buttons, and document titles like `Customers | CRM | Westbrook Industries`.
+- Write no em dash, en dash or middle dot (literal, as an HTML entity or as a JavaScript escape) and no emoji anywhere. `node scripts/check-typography.mjs` enforces it in CI.
+- Keep the DOM contract stable: do not rename or remove ids, classes used by scripts, `name` or `data-*` attributes, form field order or table column order, because agentlets and tests locate elements through them.

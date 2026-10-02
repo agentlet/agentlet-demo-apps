@@ -1,15 +1,15 @@
-// Sample expense data based on actual PDF receipts
+// Sample expense data based on the sample PDF receipts in mock/
 const sampleExpenses = {
     pending: [
         {
             id: 1,
-            employee: "Jens W.",
+            employee: "Jonas Weber",
             amount: 2254.00,
             currency: "USD",
             category: "Travel",
             description: "Hotel accommodation - The Palazzo Las Vegas (7-night stay)",
-            date: "2019-12-01",
-            submittedDate: "2024-01-12",
+            date: "2026-09-14",
+            submittedDate: "2026-09-28",
             receipt: "example2.pdf",
             status: "pending",
             priority: "high",
@@ -17,13 +17,13 @@ const sampleExpenses = {
         },
         {
             id: 2,
-            employee: "Jens W.", 
+            employee: "Jonas Weber",
             amount: 86.75,
             currency: "EUR",
             category: "Travel",
             description: "ICE train ticket Hamburg to Bonn (first class)",
-            date: "2017-11-24",
-            submittedDate: "2024-01-13",
+            date: "2026-09-22",
+            submittedDate: "2026-09-29",
             receipt: "example1.pdf",
             status: "pending",
             priority: "medium",
@@ -31,13 +31,13 @@ const sampleExpenses = {
         },
         {
             id: 3,
-            employee: "Jens W.",
+            employee: "Elena Petrova",
             amount: 26.45,
             currency: "PLN", 
             category: "Meals",
             description: "Coffee and beverages - Finest Coffee, Wrocław",
-            date: "2020-02-25",
-            submittedDate: "2024-01-11",
+            date: "2026-09-24",
+            submittedDate: "2026-09-26",
             receipt: "example3.pdf",
             status: "pending",
             priority: "low",
@@ -45,13 +45,13 @@ const sampleExpenses = {
         },
         {
             id: 4,
-            employee: "Jens W.",
+            employee: "Jonas Weber",
             amount: 43.90,
             currency: "EUR",
             category: "Transportation",
             description: "Diesel fuel purchase - 34.87 liters",
-            date: "2021-03-19",
-            submittedDate: "2024-01-14",
+            date: "2026-09-19",
+            submittedDate: "2026-09-30",
             receipt: "example4.pdf",
             status: "pending",
             priority: "low",
@@ -61,46 +61,46 @@ const sampleExpenses = {
     approved: [
         {
             id: 101,
-            employee: "John Smith",
+            employee: "Kwame Mensah",
             amount: 1245.00,
             currency: "USD",
             category: "Travel",
             description: "Business trip to Chicago - Client meetings",
-            date: "2024-01-08",
-            approvedDate: "2024-01-10",
+            date: "2026-09-08",
+            approvedDate: "2026-09-10",
             receipt: "example1.pdf",
             status: "approved",
-            approvedBy: "Sarah Johnson",
+            approvedBy: "Ingrid Solheim",
             comments: "All documentation complete. Valid business purpose."
         },
         {
             id: 102,
-            employee: "Karen Brown", 
+            employee: "Sofia Marchetti",
             amount: 45.50,
             currency: "USD",
-            category: "Office Supplies",
+            category: "Office supplies",
             description: "Printer ink and paper supplies",
-            date: "2024-01-05",
-            approvedDate: "2024-01-06",
+            date: "2026-09-05",
+            approvedDate: "2026-09-06",
             receipt: "example4.pdf",
             status: "approved",
-            approvedBy: "Sarah Johnson",
+            approvedBy: "Ingrid Solheim",
             comments: "Standard office supplies - approved."
         }
     ],
     rejected: [
         {
             id: 201,
-            employee: "Mike Davis",
+            employee: "Rajesh Iyer",
             amount: 89.50,
             currency: "USD",
             category: "Meals",
             description: "Business dinner",
-            date: "2024-01-09",
-            rejectedDate: "2024-01-11",
+            date: "2026-09-09",
+            rejectedDate: "2026-09-11",
             receipt: "example3.pdf",
             status: "rejected",
-            rejectedBy: "Sarah Johnson",
+            rejectedBy: "Ingrid Solheim",
             comments: "Exceeds daily meal allowance limit of $75. Please resubmit with valid amount."
         }
     ]
@@ -126,6 +126,14 @@ function formatCurrencyAmount(amount, currency) {
     return `${symbol}${formatAmount(amount)}`;
 }
 
+// Format an ISO date (2026-09-12) as "Sep 12, 2026" without timezone shifts
+function formatDate(isoDate) {
+    const parts = String(isoDate || '').split('-').map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) return isoDate || '';
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[parts[1] - 1]} ${parts[2]}, ${parts[0]}`;
+}
+
 // Current expense being reviewed
 let currentExpense = null;
 
@@ -140,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    console.log('Nexus Expenses Application Initialized');
+    console.log('Expenses application initialized');
 }
 
 function setupEventListeners() {
@@ -219,6 +227,7 @@ function showTab(tabName) {
         tab.classList.remove('active');
         if (tab.getAttribute('data-tab') === tabName) {
             tab.classList.add('active');
+            document.title = `${tab.textContent.trim()} | Expenses | Westbrook Industries`;
         }
     });
 
@@ -268,7 +277,7 @@ function loadExpensesList(status) {
     
     if (expenses.length === 0) {
         container.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #7f8c8d;">
+            <div class="empty-state">
                 <p>No ${status} expenses found.</p>
             </div>
         `;
@@ -286,10 +295,10 @@ function createExpenseCard(expense, status) {
     card.className = `expense-card ${status}`;
     
     const statusBadge = status === 'pending' ? 
-        `<span class="expense-status ${status}">Pending</span>` :
+        `<span class="expense-status ${status} badge tone-warning">Pending</span>` :
         status === 'approved' ?
-        `<span class="expense-status ${status}">Approved</span>` :
-        `<span class="expense-status ${status}">Rejected</span>`;
+        `<span class="expense-status ${status} badge tone-success">Approved</span>` :
+        `<span class="expense-status ${status} badge tone-danger">Rejected</span>`;
     
     const actions = status === 'pending' ? 
         `<div class="expense-actions">
@@ -297,10 +306,10 @@ function createExpenseCard(expense, status) {
         </div>` : '';
     
     const dateInfo = status === 'approved' ? 
-        `${expense.category} • Approved ${expense.approvedDate}` :
+        `${expense.category}, approved ${formatDate(expense.approvedDate)}` :
         status === 'rejected' ?
-        `${expense.category} • Rejected ${expense.rejectedDate}` :
-        `${expense.category} • Submitted ${expense.submittedDate}`;
+        `${expense.category}, rejected ${formatDate(expense.rejectedDate)}` :
+        `${expense.category}, submitted ${formatDate(expense.submittedDate)}`;
     
     const formattedAmount = formatCurrencyAmount(expense.amount, expense.currency);
     
@@ -311,7 +320,7 @@ function createExpenseCard(expense, status) {
                 <div class="expense-description">${expense.description}</div>
                 <div class="expense-meta">${dateInfo}</div>
             </div>
-            <div class="expense-amount">${formattedAmount}</div>
+            <div class="expense-amount num">${formattedAmount}</div>
             ${statusBadge}
         </div>
         ${actions}
@@ -332,7 +341,7 @@ function reviewExpense(expenseId) {
     document.getElementById('modal-amount').textContent = formatCurrencyAmount(expense.amount, expense.currency);
     
     document.getElementById('modal-category').textContent = expense.category;
-    document.getElementById('modal-date').textContent = expense.date;
+    document.getElementById('modal-date').textContent = formatDate(expense.date);
     document.getElementById('modal-description').textContent = expense.description;
     
     // Setup download receipt button
@@ -380,7 +389,7 @@ function approveExpense() {
         ...currentExpense,
         status: 'approved',
         approvedDate: new Date().toISOString().split('T')[0],
-        approvedBy: 'Sarah Johnson',
+        approvedBy: 'Ingrid Solheim',
         comments: comments || 'Approved after validation review.'
     };
     
@@ -410,7 +419,7 @@ function rejectExpense() {
         ...currentExpense,
         status: 'rejected',
         rejectedDate: new Date().toISOString().split('T')[0],
-        rejectedBy: 'Sarah Johnson',
+        rejectedBy: 'Ingrid Solheim',
         comments: comments
     };
     
@@ -453,35 +462,9 @@ function filterExpenses() {
 }
 
 function showNotification(message, type) {
-    // Simple notification system
+    // Simple notification system, styled by .notification in styles.css
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 8px;
-        color: white;
-        font-weight: 600;
-        z-index: 10000;
-        animation: slideInRight 0.3s ease;
-    `;
-    
-    switch(type) {
-        case 'success':
-            notification.style.background = '#27ae60';
-            break;
-        case 'error':
-            notification.style.background = '#e74c3c';
-            break;
-        case 'info':
-            notification.style.background = '#3498db';
-            break;
-        default:
-            notification.style.background = '#7f8c8d';
-    }
-    
     notification.textContent = message;
     document.body.appendChild(notification);
     
@@ -490,19 +473,3 @@ function showNotification(message, type) {
         notification.remove();
     }, 3000);
 }
-
-// Add CSS for notification animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-`;
-document.head.appendChild(style);

@@ -3,130 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus CRM - Customer Relationship Management</title>
+    <title>Dashboard | CRM | Westbrook Industries</title>
+    <link rel="stylesheet" href="../shared/theme.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
             <div class="header-left">
-                <a href="../" class="back-link">← Back to Portal</a>
-                <div class="app-title">
-                    <span class="logo">⬢</span>
-                    <span>Nexus CRM</span>
-                </div>
+                <div class="logo">Westbrook</div>
+                <div class="app-title">CRM</div>
             </div>
             <div class="header-right">
                 <div class="user-info">
-                    <span class="user-name">John Smith</span>
-                    <span class="user-role">Sales Manager</span>
+                    <span class="user-name">Priya Raman</span>
+                    <span class="user-role">Sales manager</span>
                 </div>
+                <a href="../" class="back-link"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg> Portal</a>
             </div>
         </header>
 
         <nav class="app-nav">
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="dashboard">
-                    <span class="tab-icon">📊</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
                     Dashboard
                 </button>
                 <button class="nav-tab" data-tab="customers">
-                    <span class="tab-icon">👥</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></span>
                     Customers
                 </button>
                 <button class="nav-tab" data-tab="opportunities">
-                    <span class="tab-icon">💼</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></span>
                     Opportunities
                 </button>
                 <button class="nav-tab" data-tab="activities">
-                    <span class="tab-icon">📅</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span>
                     Activities
                 </button>
                 <button class="nav-tab" data-tab="reports">
-                    <span class="tab-icon">📈</span>
+                    <span class="tab-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
                     Reports
                 </button>
             </div>
         </nav>
 
         <main class="app-main">
-            <!-- Dashboard Tab -->
+            <!-- Dashboard tab -->
             <div class="tab-content active" id="dashboard">
                 <div class="dashboard">
-                    <h2>Sales Dashboard</h2>
+                    <div class="page-header">
+                        <h2>Sales dashboard</h2>
+                    </div>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-value">247</div>
-                            <div class="stat-label">Total Customers</div>
+                            <div class="stat-label">Total customers</div>
                             <div class="stat-change positive">+12 this month</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">$1.2M</div>
-                            <div class="stat-label">Pipeline Value</div>
+                            <div class="stat-label">Pipeline value</div>
                             <div class="stat-change positive">+15.3%</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">23</div>
-                            <div class="stat-label">Active Opportunities</div>
+                            <div class="stat-label">Active opportunities</div>
                             <div class="stat-change neutral">+2 this week</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">78%</div>
-                            <div class="stat-label">Conversion Rate</div>
+                            <div class="stat-label">Conversion rate</div>
                             <div class="stat-change positive">+3.2%</div>
                         </div>
                     </div>
-                    
+
                     <div class="dashboard-sections">
                         <div class="recent-activities">
-                            <h3>Recent Activities</h3>
+                            <h3>Recent activities</h3>
                             <div class="activity-list">
                                 <div class="activity-item">
-                                    <span class="activity-icon">📞</span>
+                                    <span class="activity-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg></span>
                                     <div class="activity-details">
-                                        <strong>Call with Acme Corp</strong>
-                                        <span>Discussed Q4 requirements - Follow up needed</span>
+                                        <strong>Call with Harlow Dynamics</strong>
+                                        <span>Discussed Q4 requirements, follow-up needed</span>
                                         <small>2 hours ago</small>
                                     </div>
                                 </div>
                                 <div class="activity-item">
-                                    <span class="activity-icon">✅</span>
+                                    <span class="activity-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
                                     <div class="activity-details">
-                                        <strong>Deal Closed: TechStart Inc</strong>
+                                        <strong>Deal closed: Verity Biosciences</strong>
                                         <span>$45,000 annual contract signed</span>
                                         <small>Yesterday</small>
                                     </div>
                                 </div>
                                 <div class="activity-item">
-                                    <span class="activity-icon">📧</span>
+                                    <span class="activity-icon"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></span>
                                     <div class="activity-details">
-                                        <strong>Proposal Sent: Global Systems</strong>
+                                        <strong>Proposal sent: Kestrel Industrial Systems</strong>
                                         <span>Enterprise package proposal delivered</span>
                                         <small>2 days ago</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="upcoming-tasks">
-                            <h3>Upcoming Tasks</h3>
+                            <h3>Upcoming tasks</h3>
                             <div class="task-list">
                                 <div class="task-item">
-                                    <div class="task-priority high"></div>
+                                    <div class="task-priority high" title="High priority"></div>
                                     <div class="task-details">
-                                        <strong>Follow up with Acme Corp</strong>
+                                        <strong>Follow up with Harlow Dynamics</strong>
                                         <small>Today, 3:00 PM</small>
                                     </div>
                                 </div>
                                 <div class="task-item">
-                                    <div class="task-priority medium"></div>
+                                    <div class="task-priority medium" title="Medium priority"></div>
                                     <div class="task-details">
                                         <strong>Prepare Q4 sales report</strong>
                                         <small>Tomorrow, 10:00 AM</small>
                                     </div>
                                 </div>
                                 <div class="task-item">
-                                    <div class="task-priority low"></div>
+                                    <div class="task-priority low" title="Low priority"></div>
                                     <div class="task-details">
                                         <strong>Team meeting preparation</strong>
                                         <small>Friday, 9:00 AM</small>
@@ -138,24 +139,24 @@
                 </div>
             </div>
 
-            <!-- Customers Tab -->
+            <!-- Customers tab -->
             <div class="tab-content" id="customers">
                 <div class="customers-section">
                     <div class="section-header">
-                        <h2>Customer Management</h2>
-                        <button class="btn-primary" onclick="showAddCustomerForm()">+ Add Customer</button>
+                        <h2>Customer management</h2>
+                        <button class="btn-primary" onclick="showAddCustomerForm()">Add customer</button>
                     </div>
-                    
+
                     <div class="filters-bar">
                         <input type="text" id="customer-search" placeholder="Search customers..." class="search-input">
                         <select class="filter-select">
-                            <option value="">All Status</option>
+                            <option value="">All status</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
                             <option value="prospect">Prospect</option>
                         </select>
                         <select class="filter-select">
-                            <option value="">All Industries</option>
+                            <option value="">All industries</option>
                             <option value="technology">Technology</option>
                             <option value="healthcare">Healthcare</option>
                             <option value="finance">Finance</option>
@@ -168,12 +169,12 @@
                             <thead>
                                 <tr>
                                     <th>Company</th>
-                                    <th>Contact Person</th>
+                                    <th>Contact person</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Industry</th>
                                     <th>Status</th>
-                                    <th>Last Contact</th>
+                                    <th>Last contact</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -181,21 +182,21 @@
                                 <!-- Customer data will be populated by JavaScript -->
                             </tbody>
                         </table>
-                        
-                        <!-- Pagination Controls -->
+
+                        <!-- Pagination controls -->
                         <div class="pagination-container">
                             <div class="pagination-info">
                                 <span id="pagination-info-text">Showing 1-10 of 30 customers</span>
                             </div>
                             <div class="pagination-controls">
                                 <button id="prev-page" class="pagination-btn" disabled>
-                                    <span>← Previous</span>
+                                    <span>Previous</span>
                                 </button>
                                 <div class="pagination-numbers" id="pagination-numbers">
                                     <!-- Page numbers will be populated by JavaScript -->
                                 </div>
                                 <button id="next-page" class="pagination-btn">
-                                    <span>Next →</span>
+                                    <span>Next</span>
                                 </button>
                             </div>
                             <div class="pagination-size">
@@ -212,14 +213,14 @@
                 </div>
             </div>
 
-            <!-- Opportunities Tab -->
+            <!-- Opportunities tab -->
             <div class="tab-content" id="opportunities">
                 <div class="opportunities-section">
                     <div class="section-header">
-                        <h2>Sales Opportunities</h2>
-                        <button class="btn-primary" onclick="showAddOpportunityForm()">+ Add Opportunity</button>
+                        <h2>Sales opportunities</h2>
+                        <button class="btn-primary" onclick="showAddOpportunityForm()">Add opportunity</button>
                     </div>
-                    
+
                     <div class="opportunity-pipeline">
                         <div class="pipeline-stage">
                             <h3>Prospecting</h3>
@@ -243,7 +244,7 @@
                             </div>
                         </div>
                         <div class="pipeline-stage">
-                            <h3>Closed Won</h3>
+                            <h3>Closed won</h3>
                             <div class="stage-value">$125K</div>
                             <div class="opportunity-cards" id="closed-won-cards">
                                 <!-- Opportunity cards will be populated here -->
@@ -253,18 +254,20 @@
                 </div>
             </div>
 
-            <!-- Activities Tab -->
+            <!-- Activities tab -->
             <div class="tab-content" id="activities">
                 <div class="activities-section">
-                    <h2>Activities & Communications</h2>
+                    <div class="page-header">
+                        <h2>Activities & communications</h2>
+                    </div>
                     <div class="activities-content">
                         <div class="activity-form">
-                            <h3>Log New Activity</h3>
+                            <h3>Log new activity</h3>
                             <form class="form-grid">
                                 <div class="form-group">
-                                    <label>Activity Type</label>
+                                    <label>Activity type</label>
                                     <select class="form-control">
-                                        <option>Phone Call</option>
+                                        <option>Phone call</option>
                                         <option>Email</option>
                                         <option>Meeting</option>
                                         <option>Proposal</option>
@@ -274,10 +277,10 @@
                                 <div class="form-group">
                                     <label>Customer</label>
                                     <select class="form-control">
-                                        <option>Select Customer...</option>
-                                        <option>Acme Corporation</option>
-                                        <option>TechStart Inc</option>
-                                        <option>Global Systems</option>
+                                        <option>Select customer...</option>
+                                        <option>Harlow Dynamics</option>
+                                        <option>Brightwater Software</option>
+                                        <option>Kestrel Industrial Systems</option>
                                     </select>
                                 </div>
                                 <div class="form-group span-2">
@@ -293,15 +296,15 @@
                                     <input type="date" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>Follow-up Required</label>
+                                    <label>Follow-up required</label>
                                     <select class="form-control">
                                         <option>No</option>
                                         <option>Yes</option>
                                     </select>
                                 </div>
                                 <div class="form-actions span-2">
-                                    <button type="submit" class="btn-primary">Save Activity</button>
-                                    <button type="button" class="btn-secondary">Clear Form</button>
+                                    <button type="submit" class="btn-primary">Save activity</button>
+                                    <button type="button" class="btn-secondary">Clear form</button>
                                 </div>
                             </form>
                         </div>
@@ -309,30 +312,32 @@
                 </div>
             </div>
 
-            <!-- Reports Tab -->
+            <!-- Reports tab -->
             <div class="tab-content" id="reports">
                 <div class="reports-section">
-                    <h2>Sales Reports & Analytics</h2>
+                    <div class="page-header">
+                        <h2>Sales reports & analytics</h2>
+                    </div>
                     <div class="reports-grid">
                         <div class="report-card">
-                            <h3>Monthly Sales Summary</h3>
-                            <p>Comprehensive overview of sales performance for the current month</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Monthly sales summary</h3>
+                            <p>Sales performance for the current month</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                         <div class="report-card">
-                            <h3>Customer Analysis</h3>
-                            <p>Detailed analysis of customer behavior and segmentation</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Customer analysis</h3>
+                            <p>Customer behavior and segmentation</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                         <div class="report-card">
-                            <h3>Pipeline Forecast</h3>
-                            <p>Sales pipeline forecast and probability analysis</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Pipeline forecast</h3>
+                            <p>Pipeline forecast by stage and probability</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                         <div class="report-card">
-                            <h3>Activity Report</h3>
-                            <p>Summary of all sales activities and communication history</p>
-                            <button class="btn-secondary">Generate Report</button>
+                            <h3>Activity report</h3>
+                            <p>Sales activities and communication history</p>
+                            <button class="btn-secondary">Generate report</button>
                         </div>
                     </div>
                 </div>
@@ -340,17 +345,17 @@
         </main>
     </div>
 
-    <!-- Customer Form Modal -->
+    <!-- Customer form modal -->
     <div id="customer-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Add New Customer</h3>
-                <span class="close" onclick="closeModal('customer-modal')">&times;</span>
+                <h3>Add new customer</h3>
+                <span class="close" onclick="closeModal('customer-modal')" aria-label="Close">&times;</span>
             </div>
             <form class="customer-form">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Company Name *</label>
+                        <label>Company name *</label>
                         <input type="text" name="company" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -364,11 +369,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Contact Person *</label>
+                        <label>Contact person *</label>
                         <input type="text" name="contact" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Job Title</label>
+                        <label>Job title</label>
                         <input type="text" name="jobTitle" class="form-control">
                     </div>
                     <div class="form-group">
@@ -384,11 +389,11 @@
                         <textarea name="address" class="form-control" rows="2"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Annual Revenue</label>
+                        <label>Annual revenue</label>
                         <input type="text" name="revenue" class="form-control" placeholder="$0">
                     </div>
                     <div class="form-group">
-                        <label>Employee Count</label>
+                        <label>Employee count</label>
                         <input type="number" name="employees" class="form-control">
                     </div>
                     <div class="form-group span-2">
@@ -397,7 +402,7 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary">Save Customer</button>
+                    <button type="submit" class="btn-primary">Save customer</button>
                     <button type="button" class="btn-secondary" onclick="closeModal('customer-modal')">Cancel</button>
                 </div>
             </form>
