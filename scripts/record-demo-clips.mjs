@@ -4,9 +4,9 @@
 //   npm run record:demo                  record both clips into reports/demo-clips/
 //   npm run record:demo -- --out <dir>   write the outputs somewhere else
 //   npm run record:demo -- --part 2      record only one clip (1 or 2)
-//   npm run record:demo -- --raw <dir>   also keep the untrimmed recordings and their timings
-//   npm run record:demo -- --raw <dir> --encode-only   encode again from kept recordings
-//   npm run record:demo -- --raw <dir> --no-encode       record and keep the raw clips only
+//   npm run record:demo -- --raw <dir>   also keep the trimmed 1280x720 master of each clip
+//   npm run record:demo -- --raw <dir> --encode-only   encode again from kept masters
+//   npm run record:demo -- --raw <dir> --no-encode       record and keep the masters only
 //
 // Part 1 replays the manual review of one expense. Part 2 injects the expenses
 // agentlet and lets it check the receipts with AI. The AI is replayed, never
@@ -15,6 +15,11 @@
 // request leaves the machine only if it goes to the local server; everything
 // else is blocked.
 //
+// Frames come from the Chrome DevTools screencast of a page rendered at a device
+// scale factor of 2 (2560x1440), not from Playwright's recordVideo, which is
+// too soft for small text. They are placed on a steady 25 fps timeline by
+// timestamp and downscaled once with lanczos into a lossless master.
+//
 // Needs: npm install, npx playwright install chromium, and ffmpeg on the PATH.
 // Output per part: demo-part{N}.webm (VP9), .mp4 (H.264), -still.png (first
 // frame) and .gif (palette optimised, for the README), plus a contact sheet.
@@ -22,6 +27,7 @@
 import { createServer } from 'node:http';
 import { spawnSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, extname, join, normalize, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,6 +39,11 @@ const CORE_DIST = join(ROOT, 'node_modules', 'agentlet-core', 'dist');
 const AGENTLET_SOURCE = join(ROOT, 'agentlets', 'expenses', 'expenses-agentlet.js');
 
 const VIEWPORT = { width: 1280, height: 720 };
+const SCALE = 2;
+const FPS = 25;
+// A clip that runs longer than this is recorded again: a loaded machine stretches the real work.
+const MAX_SECONDS = { 1: 35, 2: 40 };
+const ATTEMPTS = 4;
 const PLACEHOLDER_KEY = 'replayed-for-recording';
 // Artificial latency of each replayed AI answer, per receipt.
 const AI_LATENCY_MS = { 'example1.pdf': 1200, 'example2.pdf': 1400, 'example3.pdf': 1100, 'example4.pdf': 1300 };
@@ -147,7 +158,7 @@ async function renderPdfPages(browser, origin, fixtures, receipt) {
         await new window.AgentletCore.default().init();
         const blob = await fetch(`mock/${name}`).then((response) => response.blob());
         const file = new File([blob], name, { type: 'application/pdf' });
-        return window.agentlet.ai.convertPDFToImages(file, { scale: 1.6, maxPages: 10, format: 'image/png' });
+        return window.agentlet.ai.convertPDFToImages(file, { scale: 2.5, maxPages: 10, format: 'image/png' });
     }, receipt);
     await context.close();
     return pages;
@@ -256,7 +267,7 @@ async function partOne({ page, pointer, pdfPages }) {
 }
 
 async function partTwo({ page, pointer, agentletSource }) {
-    await sleep(900);
+    await sleep(500);
     await pointer.moveTo(760, 470, 800);
     await sleep(300);
 
@@ -270,22 +281,42 @@ async function partTwo({ page, pointer, agentletSource }) {
         window.agentlet.env.set('OPENAI_API_KEY', key);
         window.agentlet.ai.refresh();
     }, PLACEHOLDER_KEY);
-    await sleep(1300);
+    await sleep(1000);
 
     step('run the receipt validation');
-    await pointer.click(action, { duration: 1100 });
-    const approve = page.getByRole('button', { name: /^Approve \d matching expenses$/ });
-    await approve.waitFor({ timeout: 60000 });
-    await sleep(900);
-    const results = page.getByText('Receipt check results');
-    await results.waitFor();
-    await pointer.moveTo(640, 600, 900);
-    await sleep(3200);
+    await pointer.click(action, { duration: 1000 });
+    const precheck = page.getByRole('button', { name: /^Pre-check \d matching expenses$/ });
+    await precheck.waitFor({ timeout: 60000 });
+    await sleep(500);
+    await pointer.moveTo(640, 610, 800);
+    await sleep(2300);
 
-    step('approve the matching expenses');
-    await pointer.click(approve, { duration: 1000 });
-    await page.getByText(/expenses approved, \d left to review/).waitFor({ timeout: 30000 });
-    await sleep(2600);
+    step('review the matching expenses');
+    await pointer.click(precheck, { duration: 800 });
+    // The agentlet opens each matching expense with the receipt and date boxes ticked.
+    // The reviewer ticks the two boxes left to them and approves: slowly on the first
+    // expense, quicker on the next ones.
+    const pace = [{ move: 650, pause: 220, hold: 500 }, { move: 380, pause: 80, hold: 150 }, { move: 380, pause: 80, hold: 150 }];
+    for (const [index, { move, pause, hold }] of pace.entries()) {
+        // Wait for the agentlet to finish: dialog open, two boxes ticked, the other two untouched, comment added.
+        await page.waitForFunction(() => getComputedStyle(document.getElementById('expense-modal')).display !== 'none'
+            && document.getElementById('check-receipt').checked
+            && document.getElementById('check-dates').checked
+            && !document.getElementById('check-policy').checked
+            && !document.getElementById('check-business').checked
+            && document.getElementById('approval-comments').value.length > 0, undefined, { timeout: 15000 });
+        await sleep(index === 0 ? 600 : 100);
+        for (const id of ['check-policy', 'check-business']) {
+            await pointer.click(page.locator(`label.checklist-item:has(#${id})`), { duration: move, dx: -140, before: pause });
+            await sleep(pause);
+        }
+        await sleep(hold);
+        await pointer.click(page.locator('#expense-modal .btn-success'), { duration: move });
+        await page.waitForFunction(() => getComputedStyle(document.getElementById('expense-modal')).display === 'none');
+    }
+    await page.getByText(/approved by you, \d left to review/).waitFor({ timeout: 30000 });
+    await pointer.moveTo(560, 560, 800);
+    await sleep(1800);
 }
 
 // ---------------------------------------------------------------------------
@@ -297,39 +328,108 @@ function ffmpeg(args) {
     if (result.status !== 0) throw new Error(`ffmpeg failed: ${args.join(' ')}`);
 }
 
-function encode({ source, trimStart, duration, outDir, part }) {
-    const base = join(outDir, `demo-part${part}`);
-    const trim = ['-ss', trimStart.toFixed(3), '-t', duration.toFixed(3), '-i', source, '-an'];
+/**
+ * Chrome DevTools screencast: a JPEG frame of the whole page, at full device
+ * resolution, every time the page changes. Frames are written to disk as they
+ * arrive and carry the time at which they were painted.
+ */
+async function startCapture(page, dir) {
+    mkdirSync(dir, { recursive: true });
+    const client = await page.context().newCDPSession(page);
+    const frames = [];
+    const writes = [];
+    let announceFirst;
+    const first = new Promise((resolveFirst) => { announceFirst = resolveFirst; });
+    client.on('Page.screencastFrame', ({ data, metadata, sessionId }) => {
+        const file = join(dir, `${String(frames.length).padStart(6, '0')}.jpg`);
+        frames.push({ time: metadata.timestamp, file });
+        writes.push(writeFile(file, Buffer.from(data, 'base64')));
+        client.send('Page.screencastFrameAck', { sessionId }).catch(() => {});
+        announceFirst();
+    });
+    await client.send('Page.startScreencast', {
+        format: 'jpeg', quality: 100, maxWidth: VIEWPORT.width * SCALE, maxHeight: VIEWPORT.height * SCALE, everyNthFrame: 1,
+    });
+    return {
+        first,
+        async stop() {
+            await client.send('Page.stopScreencast');
+            await Promise.all(writes);
+            return frames;
+        },
+    };
+}
 
-    ffmpeg([...trim, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '37', '-pix_fmt', 'yuv420p',
-        '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2', '-r', '25', `${base}.webm`]);
-    ffmpeg([...trim, '-c:v', 'libx264', '-preset', 'slow', '-crf', '28', '-pix_fmt', 'yuv420p',
-        '-movflags', '+faststart', '-r', '25', `${base}.mp4`]);
-    ffmpeg(['-i', `${base}.mp4`, '-frames:v', '1', `${base}-still.png`]);
+/**
+ * Turn timestamped frames into a steady 25 fps master between two instants:
+ * each frame is held until the next one arrives, so quiet periods repeat the
+ * last frame. The 2560x1440 frames are downscaled once with lanczos into a
+ * lossless 1280x720 master.
+ */
+function buildMaster({ frames, start, end, dir, master }) {
+    let from = frames.findLastIndex((frame) => frame.time <= start);
+    if (from < 0) from = 0;
+    const lines = [];
+    for (let i = from; i < frames.length && frames[i].time < end; i += 1) {
+        const shown = Math.max(frames[i].time, start);
+        const until = i + 1 < frames.length ? Math.min(frames[i + 1].time, end) : end;
+        if (until <= shown) continue;
+        lines.push(`file '${frames[i].file}'`, `duration ${(until - shown).toFixed(4)}`);
+    }
+    // The concat demuxer ignores the duration of the last entry unless the file is repeated.
+    lines.push(lines[lines.length - 2]);
+    const list = join(dir, 'frames.txt');
+    writeFileSync(list, lines.join('\n'));
+    ffmpeg(['-f', 'concat', '-safe', '0', '-i', list, '-an',
+        '-vf', `fps=${FPS},scale=${VIEWPORT.width}:${VIEWPORT.height}:flags=lanczos+accurate_rnd+full_chroma_int,format=yuv444p`,
+        '-c:v', 'ffv1', '-level', '3', master]);
+}
+
+/** Duration of a media file in seconds, read from the ffmpeg banner (ffprobe is not always installed). */
+function durationOf(path) {
+    const banner = spawnSync('ffmpeg', ['-hide_banner', '-i', path], { encoding: 'utf8' }).stderr;
+    const [, h, m, sec] = /Duration: (\d+):(\d+):([\d.]+)/.exec(banner);
+    return Number(h) * 3600 + Number(m) * 60 + Number(sec);
+}
+
+function fileSize(path) {
+    return statSync(path).size;
+}
+
+function encode({ master, outDir, part }) {
+    const base = join(outDir, `demo-part${part}`);
+    const input = ['-i', master, '-an'];
+
+    ffmpeg([...input, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '26', '-pix_fmt', 'yuv420p',
+        '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2', '-g', '250', `${base}.webm`]);
+    ffmpeg([...input, '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-tune', 'stillimage', '-pix_fmt', 'yuv420p',
+        '-movflags', '+faststart', `${base}.mp4`]);
+    ffmpeg([...input, '-frames:v', '1', '-update', '1', `${base}-still.png`]);
+
     // GIF for the README: no dithering keeps flat UI areas clean and the file small.
-    ffmpeg(['-i', `${base}.mp4`, '-vf',
-        'fps=10,scale=880:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=40:stats_mode=diff[p];'
-        + '[b][p]paletteuse=dither=none:diff_mode=rectangle',
-    '-loop', '0', `${base}.gif`]);
+    // Narrower widths are tried until the file fits in 3 MB.
+    for (const width of [960, 880, 800, 720]) {
+        ffmpeg([...input, '-vf',
+            `fps=10,scale=${width}:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];`
+            + '[b][p]paletteuse=dither=none:diff_mode=rectangle',
+        '-loop', '0', `${base}.gif`]);
+        if (fileSize(`${base}.gif`) < 3 * 1024 * 1024) break;
+    }
+
     // Contact sheet for review: one frame every 2 seconds.
-    const rows = Math.ceil(Math.floor(duration / 2) / 4);
-    ffmpeg(['-i', `${base}.mp4`, '-vf', `fps=1/2,scale=640:-1,tile=4x${rows}:padding=6:color=white`, '-frames:v', '1',
-        '-update', '1', `${base}-sheet.png`]);
+    const rows = Math.ceil((Math.floor(durationOf(master) / 2) + 1) / 4);
+    ffmpeg([...input, '-vf', `fps=1/2,scale=640:-1,tile=4x${rows}:padding=6:color=white`, '-frames:v', '1', '-update', '1', `${base}-sheet.png`]);
 }
 
 // ---------------------------------------------------------------------------
 
-async function record(part, { browser, origin, fixtures, outDir, tmp, raw, encode: shouldEncode }) {
+async function recordOnce(part, { browser, origin, fixtures, tmp, pdfPages }) {
     const blocked = [];
-    // Part 1 shows a receipt in a document viewer: render its pages before the camera runs.
-    const pdfPages = part === 1 ? await renderPdfPages(browser, origin, fixtures, 'example2.pdf') : [];
-    const t0 = Date.now();
     const context = await browser.newContext({
         viewport: VIEWPORT,
-        deviceScaleFactor: 1,
+        deviceScaleFactor: SCALE,
         locale: 'en-US',
         colorScheme: 'light',
-        recordVideo: { dir: tmp, size: VIEWPORT },
         acceptDownloads: true,
     });
     await installNetworkPolicy(context, origin, fixtures, blocked);
@@ -340,44 +440,57 @@ async function record(part, { browser, origin, fixtures, outDir, tmp, raw, encod
     page.__origin = origin;
     page.on('download', (download) => download.cancel().catch(() => {}));
     page.on('pageerror', (error) => console.error(`  page error: ${error.message}`));
-    const video = page.video();
 
     const pointer = new Pointer(page);
     await openPendingList(page);
+    const frameDir = join(tmp, `frames-part${part}`);
+    const capture = await startCapture(page, frameDir);
     await pointer.place(VIEWPORT.width / 2 + 160, 520);
+    await capture.first;
+    await sleep(300);
 
-    const started = Date.now();
+    const start = Date.now() / 1000;
     if (part === 1) {
         await partOne({ page, pointer, pdfPages });
     } else {
         await partTwo({ page, pointer, agentletSource: readFileSync(AGENTLET_SOURCE, 'utf8') });
     }
-    const ended = Date.now();
+    const end = Date.now() / 1000;
 
+    const frames = await capture.stop();
     await context.close();
-    const source = await video.path();
     if (blocked.length > 0) console.warn(`  blocked requests: ${[...new Set(blocked)].join(', ')}`);
 
-    // The video starts when the page is created: drop everything before the scenario.
-    const trimStart = (started - t0) / 1000;
-    const duration = (ended - started) / 1000;
+    const master = join(tmp, `part${part}-master.mkv`);
+    buildMaster({ frames, start, end, dir: tmp, master });
+    return { master, seconds: end - start, frameCount: frames.length };
+}
+
+async function record(part, { browser, origin, fixtures, outDir, tmp, raw, encode: shouldEncode }) {
+    // Part 1 shows a receipt in a document viewer: render its pages before the camera runs.
+    const pdfPages = part === 1 ? await renderPdfPages(browser, origin, fixtures, 'example2.pdf') : [];
+    let take;
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt += 1) {
+        take = await recordOnce(part, { browser, origin, fixtures, tmp, pdfPages });
+        if (take.seconds <= MAX_SECONDS[part]) break;
+        console.warn(`  take ${attempt} ran ${take.seconds.toFixed(1)} s (limit ${MAX_SECONDS[part]} s)${attempt < ATTEMPTS ? ', recording again' : ''}`);
+    }
+    const { master } = take;
     if (raw) {
         mkdirSync(raw, { recursive: true });
-        copyFileSync(source, join(raw, `part${part}.webm`));
-        writeFileSync(join(raw, `part${part}.json`), JSON.stringify({ trimStart, duration }));
+        copyFileSync(master, join(raw, `part${part}-master.mkv`));
     }
     if (shouldEncode) {
         mkdirSync(outDir, { recursive: true });
-        encode({ source, trimStart, duration, outDir, part });
+        encode({ master, outDir, part });
     }
-    console.log(`part ${part}: ${duration.toFixed(1)} s recorded`);
+    console.log(`part ${part}: ${take.seconds.toFixed(1)} s recorded from ${take.frameCount} frames`);
 }
 
 function encodeKept(part, { outDir, raw }) {
-    const { trimStart, duration } = JSON.parse(readFileSync(join(raw, `part${part}.json`), 'utf8'));
     mkdirSync(outDir, { recursive: true });
-    encode({ source: join(raw, `part${part}.webm`), trimStart, duration, outDir, part });
-    console.log(`part ${part}: encoded ${duration.toFixed(1)} s`);
+    encode({ master: join(raw, `part${part}-master.mkv`), outDir, part });
+    console.log(`part ${part}: encoded`);
 }
 
 async function main() {
