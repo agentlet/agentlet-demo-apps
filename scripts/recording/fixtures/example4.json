@@ -1,0 +1,11 @@
+{
+  "merchant": "Star Tankstelle, Leipzig",
+  "total": 43.9,
+  "currency": "EUR",
+  "matches": true,
+  "findings": [
+    "Total 43.90 EUR matches the claimed amount",
+    "34.87 litres of diesel at 1.259 EUR per litre",
+    "Card payment, VAT 19% (7.01 EUR) shown on the receipt"
+  ]
+}

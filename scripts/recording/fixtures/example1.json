@@ -1,0 +1,11 @@
+{
+  "merchant": "DB Fernverkehr AG",
+  "total": 86.75,
+  "currency": "EUR",
+  "matches": true,
+  "findings": [
+    "Total 86.75 EUR matches the claimed amount",
+    "ICE Flexpreis ticket, Hamburg Hbf to Bonn Hbf, 1st class",
+    "Order number EN97RX matches the claim notes"
+  ]
+}

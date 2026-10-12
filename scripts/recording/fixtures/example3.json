@@ -1,0 +1,11 @@
+{
+  "merchant": "Amrest Coffee Sp. z o.o.",
+  "total": 26.45,
+  "currency": "PLN",
+  "matches": false,
+  "findings": [
+    "Total 26.45 PLN matches the claimed amount",
+    "Merchant is Amrest Coffee, not Finest Coffee as claimed",
+    "One of the two items is a berry muffin, not a beverage"
+  ]
+}
