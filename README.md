@@ -34,6 +34,32 @@ The portal at `index.html` links to all of them.
 
 The CRM keyboard shortcuts are Alt+1 to Alt+5 for the tabs and Ctrl/Cmd+N to add a customer on the customers tab.
 
+## Expenses agentlet
+
+`agentlets/expenses/expenses-agentlet.js` is a small agentlet for the Expenses app, built on [agentlet-core](https://github.com/agentlet/agentlet-core) 2.5. It adds a side panel with one action, "Validate all receipts with AI". The agentlet reads each receipt PDF with `ai.sendPromptWithPDF` and compares total, currency, date and merchant with the claim. It lists which receipts match and which need review. For the matching expenses it then opens the app's own review dialog with the receipt and date boxes ticked and a comment added, and leaves the policy and business purpose boxes and the approval to the reviewer. It is plain JavaScript with no build step, and it loads agentlet-core itself when the page does not have it.
+
+Paste this in the console of the Expenses page, or in a bookmarklet, after setting `OPENAI_API_KEY` in the agentlet environment variables:
+
+```javascript
+const s = document.createElement('script');
+s.src = 'https://agentlet.github.io/agentlet-demo-apps/agentlets/expenses/expenses-agentlet.js';
+document.head.appendChild(s);
+```
+
+The agentlet relies on three hooks that the Expenses app keeps stable: `data-expense-id`, `data-expense-date` and `data-receipt` on each `.expense-card`.
+
+## Demo clips
+
+The "before and after" clips of the Expenses app are recorded by a script, so they can be redone whenever the UI changes. Part 1 replays the manual review of one expense, part 2 runs the agentlet. The AI is replayed from `scripts/recording/fixtures/`, never called: the OpenAI endpoint is intercepted and every other external request is blocked.
+
+```bash
+npm install
+npx playwright install chromium
+npm run record:demo -- --out clips
+```
+
+This needs ffmpeg on the PATH. Frames come from the Chrome DevTools screencast of a page rendered at 2x (2560x1440) and are downscaled to 1280x720, which keeps small text crisp. For each part it writes `demo-part{1,2}.webm`, `.mp4`, `-still.png` and `.gif`, plus a contact sheet for review. Add `--part 1` or `--part 2` to record only one clip.
+
 ## Look and feel
 
 The apps are meant to look like sober internal business software. They share one stylesheet, `shared/theme.css`, which holds the design tokens (a neutral gray scale, one blue accent, muted status colors, spacing, small radii, the system font stack, tabular numbers) and the common components: header, tab bar, buttons, forms, tables, badges, KPI tiles, panels, modals and pagination. Each app's `styles.css` only adds its own layout on top of those tokens. There are no gradients, no emoji and no build step.

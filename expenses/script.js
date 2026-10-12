@@ -3,13 +3,13 @@ const sampleExpenses = {
     pending: [
         {
             id: 1,
-            employee: "Jonas Weber",
+            employee: "Jens Walter",
             amount: 2254.00,
             currency: "USD",
             category: "Travel",
             description: "Hotel accommodation - The Palazzo Las Vegas (7-night stay)",
-            date: "2026-09-14",
-            submittedDate: "2026-09-28",
+            date: "2019-12-01",
+            submittedDate: "2019-12-09",
             receipt: "example2.pdf",
             status: "pending",
             priority: "high",
@@ -17,13 +17,13 @@ const sampleExpenses = {
         },
         {
             id: 2,
-            employee: "Jonas Weber",
+            employee: "Jens Walter",
             amount: 86.75,
             currency: "EUR",
             category: "Travel",
             description: "ICE train ticket Hamburg to Bonn (first class)",
-            date: "2026-09-22",
-            submittedDate: "2026-09-29",
+            date: "2017-11-24",
+            submittedDate: "2017-11-27",
             receipt: "example1.pdf",
             status: "pending",
             priority: "medium",
@@ -36,8 +36,8 @@ const sampleExpenses = {
             currency: "PLN", 
             category: "Meals",
             description: "Coffee and beverages - Finest Coffee, Wrocław",
-            date: "2026-09-24",
-            submittedDate: "2026-09-26",
+            date: "2020-02-25",
+            submittedDate: "2020-02-27",
             receipt: "example3.pdf",
             status: "pending",
             priority: "low",
@@ -45,13 +45,13 @@ const sampleExpenses = {
         },
         {
             id: 4,
-            employee: "Jonas Weber",
+            employee: "Jens Walter",
             amount: 43.90,
             currency: "EUR",
             category: "Transportation",
             description: "Diesel fuel purchase - 34.87 liters",
-            date: "2026-09-19",
-            submittedDate: "2026-09-30",
+            date: "2021-03-19",
+            submittedDate: "2021-03-22",
             receipt: "example4.pdf",
             status: "pending",
             priority: "low",
@@ -293,6 +293,10 @@ function loadExpensesList(status) {
 function createExpenseCard(expense, status) {
     const card = document.createElement('div');
     card.className = `expense-card ${status}`;
+    // Stable hooks for agentlets: the expense id, its date and its receipt file
+    card.dataset.expenseId = String(expense.id);
+    card.dataset.expenseDate = expense.date;
+    if (expense.receipt) card.dataset.receipt = expense.receipt;
     
     const statusBadge = status === 'pending' ? 
         `<span class="expense-status ${status} badge tone-warning">Pending</span>` :

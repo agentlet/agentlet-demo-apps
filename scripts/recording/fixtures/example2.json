@@ -1,0 +1,12 @@
+{
+  "merchant": "The Venetian | The Palazzo, Las Vegas",
+  "total": 2254.0,
+  "currency": "USD",
+  "date": "2019-12-01",
+  "matches": true,
+  "findings": [
+    "Total 2,254.00 USD and arrival 1 Dec 2019 match the claim",
+    "7 nights at 322.00 each, room, upgrade, resort fee and tax",
+    "Paid in full: deposit 248.30 and card payment 2,005.70"
+  ]
+}
