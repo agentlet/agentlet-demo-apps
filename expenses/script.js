@@ -293,6 +293,9 @@ function loadExpensesList(status) {
 function createExpenseCard(expense, status) {
     const card = document.createElement('div');
     card.className = `expense-card ${status}`;
+    // Stable hooks for agentlets: the expense id and its receipt file
+    card.dataset.expenseId = String(expense.id);
+    if (expense.receipt) card.dataset.receipt = expense.receipt;
     
     const statusBadge = status === 'pending' ? 
         `<span class="expense-status ${status} badge tone-warning">Pending</span>` :
