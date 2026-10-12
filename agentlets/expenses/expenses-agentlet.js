@@ -1,7 +1,8 @@
 // Expenses agentlet for the Westbrook Expenses demo app (expenses/).
 //
 // It adds a side panel with one action: check every pending receipt with AI,
-// then approve the expenses whose receipt matches the claim. It is written as
+// then pre-check the review dialog of each expense whose receipt matches the
+// claim. The reviewer ticks the remaining boxes and approves. It is written as
 // a bookmarklet payload, so it loads agentlet-core itself when the page does
 // not have it yet. Plain modern JavaScript, no build step.
 //
@@ -26,6 +27,7 @@
      * @property {string} description
      * @property {number} amount
      * @property {string} currency ISO code
+     * @property {string} date Claimed expense date, YYYY-MM-DD (data-expense-date on the card)
      * @property {string} receipt Receipt file name (data-receipt on the card)
      */
 
@@ -35,6 +37,7 @@
      * @property {boolean} matches
      * @property {string} merchant
      * @property {number} total
+     * @property {string} date Date printed on the receipt, YYYY-MM-DD
      * @property {string[]} findings
      * @property {string | null} thumbnail Data URL of the first receipt page
      * @property {string | null} error
@@ -84,6 +87,7 @@
                 description: card.querySelector('.expense-description')?.textContent?.trim() ?? '',
                 amount: Number(parsed[2].replace(/,/g, '')),
                 currency: CURRENCY_BY_SYMBOL[parsed[1]],
+                date: card.dataset.expenseDate ?? '',
                 receipt,
             });
         }
@@ -106,11 +110,13 @@
             `Receipt file: ${expense.receipt}`,
             `Claimed description: ${expense.description}`,
             `Claimed amount: ${expense.amount.toFixed(2)} ${expense.currency}`,
+            `Claimed date: ${expense.date}`,
             '',
             'Reply with JSON only, no markdown, in this shape:',
             '{"merchant": "name printed on the receipt", "total": 0.00, "currency": "ISO code",',
+            ' "date": "YYYY-MM-DD printed on the receipt, the arrival date for a stay",',
             ' "matches": true, "findings": ["short sentence", "short sentence"]}',
-            '"matches" is true only when the receipt total, currency, merchant and purchased items fit the claim.',
+            '"matches" is true only when the receipt total, currency, date, merchant and purchased items fit the claim.',
             'Give two or three findings, each under 100 characters.',
         ].join('\n');
         const reply = await window.agentlet.ai.sendPromptWithPDF(prompt, file, {
@@ -123,7 +129,7 @@
     /** Fetch a receipt, render its first page as a thumbnail and check it with AI. */
     async function checkReceipt(expense, onThumbnail) {
         /** @type {ReceiptCheck} */
-        const result = { expense, matches: false, merchant: '', total: 0, findings: [], thumbnail: null, error: null };
+        const result = { expense, matches: false, merchant: '', total: 0, date: '', findings: [], thumbnail: null, error: null };
         try {
             const response = await fetch(new URL(`mock/${expense.receipt}`, location.href));
             if (!response.ok) throw new Error(`Receipt ${expense.receipt} not found`);
@@ -140,18 +146,20 @@
             const answer = await askModel(expense, file);
             result.merchant = String(answer.merchant ?? '');
             result.total = Number(answer.total);
+            result.date = String(answer.date ?? '');
             result.findings = Array.isArray(answer.findings) ? answer.findings.map(String) : [];
-            // Trust the model for wording, not for arithmetic: the total is compared here.
+            // Trust the model for wording, not for arithmetic: total, currency and date are compared here.
             result.matches = answer.matches === true
                 && answer.currency === expense.currency
-                && Math.abs(result.total - expense.amount) < 0.005;
+                && Math.abs(result.total - expense.amount) < 0.005
+                && result.date === expense.date;
         } catch (error) {
             result.error = error instanceof Error ? error.message : String(error);
         }
         return result;
     }
 
-    /** Progress dialog: a live element handed to the fullscreen dialog as custom content. */
+    /** Progress view: a live element that the compact info dialog hosts, updated as receipts are read. */
     function createProgressView(total) {
         const status = el('p', 'xa-progress-status', 'Starting');
         const bar = el('div', 'xa-bar-fill');
@@ -213,22 +221,34 @@
                 ]),
             ]);
         });
-        return el('ul', 'xa-results', undefined, rows);
+        return el('div', undefined, undefined, [
+            el('p', 'xa-lead', 'Pre-checking opens each matching expense with the receipt and date boxes ticked. You tick the rest and approve.'),
+            el('ul', 'xa-results', undefined, rows),
+        ]);
     }
 
-    /** Approve one pending expense through the app's own review dialog. */
-    async function approveThroughUi(expenseId, comment) {
-        const card = document.querySelector(`#pending-expenses .expense-card[data-expense-id="${expenseId}"]`);
-        card?.querySelector('.expense-actions button')?.click();
-        await sleep(450);
-        for (const box of document.querySelectorAll('#expense-modal .checklist-item input[type="checkbox"]')) {
-            box.checked = true;
-            await sleep(110);
+    const pendingCard = (expenseId) => document.querySelector(`#pending-expenses .expense-card[data-expense-id="${expenseId}"]`);
+
+    /** Resolves once the review dialog of the app is closed again. */
+    async function waitForReviewClosed() {
+        const modal = document.getElementById('expense-modal');
+        while (getComputedStyle(modal).display !== 'none') await sleep(150);
+    }
+
+    /**
+     * Open the review dialog of a matching expense and tick only the boxes the
+     * receipt check covers: the receipt and the date. The policy and business
+     * purpose boxes stay with the reviewer, who also approves.
+     */
+    async function preCheckReview(expenseId, comment) {
+        pendingCard(expenseId)?.querySelector('.expense-actions button')?.click();
+        await sleep(400);
+        for (const id of ['check-receipt', 'check-dates']) {
+            document.getElementById(id)?.click();
+            await sleep(200);
         }
         document.getElementById('approval-comments').value = comment;
-        await sleep(350);
-        document.querySelector('#expense-modal .approval-actions .btn-success')?.click();
-        await sleep(600);
+        await sleep(250);
     }
 
     class ExpensesAgentlet extends window.agentlet.Module {
@@ -258,16 +278,17 @@
                 .xa-action:hover { background: #194f8c; }
                 .xa-summary { padding: 10px 12px; border: 1px solid #d8dde4; border-radius: 6px; background: #f6f8fa; font-size: 13px; }
                 .xa-summary[hidden] { display: none; }
-                .xa-progress { min-width: 460px; }
+                .xa-progress { text-align: left; }
                 .xa-progress h4 { margin: 18px 0 10px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #5b6573; }
-                .xa-progress-status { margin: 0 0 12px; font-size: 15px; }
+                .xa-progress-status { margin: 0 0 12px; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
                 .xa-bar { height: 6px; border-radius: 3px; background: #e3e7ec; overflow: hidden; }
                 .xa-bar-fill { width: 0; height: 100%; background: #1f5fa8; transition: width .4s ease; }
-                .xa-thumbs { display: flex; gap: 16px; min-height: 210px; }
+                .xa-thumbs { display: flex; gap: 16px; min-height: 196px; }
                 .xa-thumb { margin: 0; width: 112px; text-align: center; font-size: 13px; color: #5b6573; }
                 .xa-thumb-img { display: block; width: 112px; height: 156px; object-fit: cover; object-position: top;
                     border: 1px solid #d8dde4; border-radius: 4px; background: #fff; margin-bottom: 4px; }
-                .xa-results { list-style: none; margin: -6px 0 0; padding: 0; min-width: 560px; }
+                .xa-lead { margin: -4px 0 4px; font-size: 13px; color: #5b6573; }
+                .xa-results { list-style: none; margin: 0; padding: 0; min-width: 560px; }
                 .xa-result { display: flex; gap: 14px; padding: 7px 0; border-bottom: 1px solid #e3e7ec; }
                 .xa-result:last-child { border-bottom: 0; }
                 .xa-result-thumb { flex: none; width: 44px; height: 60px; border: 1px solid #d8dde4; border-radius: 4px; overflow: hidden; background: #fff; }
@@ -295,7 +316,7 @@
             container.replaceChildren(el('div', 'xa-panel', undefined, [
                 el('div', undefined, undefined, [
                     el('h2', undefined, 'Expense automation'),
-                    el('p', undefined, 'Read each pending receipt, compare it with the claim and approve the ones that match.'),
+                    el('p', undefined, 'Read each pending receipt, compare it with the claim and pre-check the review of the ones that match.'),
                 ]),
                 el('div', undefined, undefined, [el('h3', undefined, 'Receipts'), action]),
                 this.summary,
@@ -316,16 +337,18 @@
 
             let cancelled = false;
             const progress = createProgressView(expenses.length);
-            Dialog.show('fullscreen', {
+            Dialog.show('info', {
                 title: 'Checking receipts',
                 icon: '',
-                customContent: progress.root,
-                showHeaderCloseButton: false,
-                closeOnOverlay: false,
+                allowHtml: true,
+                message: '<div data-xa-progress-host></div>',
+                width: '640px',
+                maxWidth: '640px',
                 buttons: [{ text: 'Cancel', value: 'cancel' }],
             }, (value) => {
                 if (value === 'cancel') cancelled = true;
             });
+            Dialog.getRoot().querySelector('[data-xa-progress-host]')?.appendChild(progress.root);
 
             /** @type {ReceiptCheck[]} */
             const results = [];
@@ -336,7 +359,7 @@
             }
             if (cancelled) return;
             progress.done();
-            await sleep(500);
+            await sleep(400);
             Dialog.hide();
             this.showResults(results);
         }
@@ -344,33 +367,41 @@
         showResults(results) {
             const matching = results.filter((result) => result.matches);
             const review = results.length - matching.length;
-            if (this.summary) {
-                this.summary.hidden = false;
-                this.summary.textContent = `${matching.length} of ${results.length} receipts match their claim, ${review} to review.`;
-            }
+            this.setSummary(`${matching.length} of ${results.length} receipts match their claim, ${review} to review.`);
 
-            const body = createResultsView(results);
             const buttons = [{ text: 'Close', value: 'close' }];
             if (matching.length > 0) {
-                buttons.unshift({ text: `Approve ${matching.length} matching expenses`, value: 'approve', primary: true });
+                buttons.unshift({ text: `Pre-check ${matching.length} matching expenses`, value: 'precheck', primary: true });
             }
             Dialog.show('fullscreen', {
                 title: 'Receipt check results',
                 icon: '',
-                customContent: body,
+                customContent: createResultsView(results),
                 buttons,
             }, (value) => {
-                if (value === 'approve') this.approveMatching(matching);
+                if (value === 'precheck') this.reviewMatching(matching);
             });
         }
 
-        async approveMatching(matching) {
-            for (const result of matching) {
-                await approveThroughUi(result.expense.id, 'Receipt checked with AI: total and merchant match the claim.');
+        /** Walk the reviewer through the matching expenses, one pre-checked review dialog at a time. */
+        async reviewMatching(matching) {
+            let approved = 0;
+            for (const [index, result] of matching.entries()) {
+                this.setSummary(`Reviewing expense ${index + 1} of ${matching.length}, approve it to continue.`);
+                await preCheckReview(result.expense.id, 'Receipt checked with AI: total, date and merchant match the claim.');
+                await waitForReviewClosed();
+                // A card that is still pending means the reviewer cancelled: stop the walk-through.
+                if (pendingCard(result.expense.id)) break;
+                approved += 1;
+                await sleep(350);
             }
-            if (this.summary) {
-                this.summary.textContent = `${matching.length} expenses approved, ${readPendingExpenses().length} left to review.`;
-            }
+            this.setSummary(`${approved} approved by you, ${readPendingExpenses().length} left to review.`);
+        }
+
+        setSummary(text) {
+            if (!this.summary) return;
+            this.summary.hidden = false;
+            this.summary.textContent = text;
         }
     }
 

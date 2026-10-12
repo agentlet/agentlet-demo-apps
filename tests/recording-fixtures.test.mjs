@@ -11,30 +11,33 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fixture = (n) => JSON.parse(readFileSync(join(ROOT, 'scripts', 'recording', 'fixtures', `example${n}.json`), 'utf8'));
 
-// Receipt file, claimed currency and amount in expenses/script.js, total printed on the PDF.
+// Receipt file, claimed currency, amount and date in expenses/script.js, as printed on the PDF.
 const RECEIPTS = [
-  { n: 1, currency: 'EUR', amount: 86.75, matches: true },
-  { n: 2, currency: 'USD', amount: 2254.0, matches: true },
-  { n: 3, currency: 'PLN', amount: 26.45, matches: false },
-  { n: 4, currency: 'EUR', amount: 43.9, matches: true },
+  { n: 1, currency: 'EUR', amount: 86.75, date: '2017-11-24', employee: 'Jens Walter', matches: true },
+  { n: 2, currency: 'USD', amount: 2254.0, date: '2019-12-01', employee: 'Jens Walter', matches: true },
+  { n: 3, currency: 'PLN', amount: 26.45, date: '2020-02-25', employee: 'Elena Petrova', matches: false },
+  { n: 4, currency: 'EUR', amount: 43.9, date: '2021-03-19', employee: 'Jens Walter', matches: true },
 ];
 
-for (const { n, currency, amount, matches } of RECEIPTS) {
+for (const { n, currency, amount, date, matches } of RECEIPTS) {
   test(`fixture for example${n}.pdf has the answer shape the agentlet reads`, () => {
     const answer = fixture(n);
     assert.equal(typeof answer.merchant, 'string');
     assert.equal(answer.currency, currency);
     assert.equal(answer.total, amount);
+    assert.equal(answer.date, date);
     assert.equal(answer.matches, matches);
     assert.ok(Array.isArray(answer.findings) && answer.findings.length >= 2);
     assert.ok(answer.findings.every((finding) => typeof finding === 'string' && finding.length < 100));
   });
 }
 
-test('the claimed amounts in the fixtures test match the app data', () => {
+test('the claims in this test match the app data', () => {
   const source = readFileSync(join(ROOT, 'expenses', 'script.js'), 'utf8');
-  for (const { n, currency, amount } of RECEIPTS) {
-    const block = new RegExp(`amount: ${amount.toFixed(2)},\\s*currency: "${currency}"[\\s\\S]*?receipt: "example${n}\\.pdf"`);
+  for (const { n, currency, amount, date, employee } of RECEIPTS) {
+    const block = new RegExp(
+      `employee: "${employee}",\\s*amount: ${amount.toFixed(2)},\\s*currency: "${currency}"[^}]*?date: "${date}"[^}]*?receipt: "example${n}\\.pdf"`,
+    );
     assert.match(source, block, `example${n}.pdf claim in expenses/script.js`);
   }
 });
